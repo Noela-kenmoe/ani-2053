@@ -18,7 +18,7 @@ il existe **05 chaines de compilations** parmis lesquelles host-clang, host-gcc,
 
 ## elements justificatifs obtenus apres avoir tapé jenga info
 
-```test
+```
 Location: C:\Users\NOELA\Desktop\Nkentseu
 Entry file: C:\Users\NOELA\Desktop\Nkentseu\Nkentseu.jenga
 Configurations: Debug, Release
