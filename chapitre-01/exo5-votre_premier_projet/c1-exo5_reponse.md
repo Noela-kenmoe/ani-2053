@@ -49,27 +49,27 @@ Name                         Kind          Language   Test   External
 __Unitest__                  StaticLib     C++        No     No
 NKPlatform                   StaticLib     C++        No     Yes
 NKPlatform_Tests             TestSuite     C++        Yes    Yes
-NKCore                       StaticLib     C++        No     Yes
 NKCore_Tests                 TestSuite     C++        Yes    Yes
+NKCore                       StaticLib     C++        No     Yes
 NKLogger                     StaticLib     C++        No     Yes
 NKLogger_Tests               TestSuite     C++        Yes    Yes
-NKMath_Tests                 TestSuite     C++        Yes    Yes
 NKMath                       StaticLib     C++        No     Yes
-NKMemory                     StaticLib     C++        No     Yes
+NKMath_Tests                 TestSuite     C++        Yes    Yes
 NKMemory_Tests               TestSuite     C++        Yes    Yes
-NKContainers_Tests           TestSuite     C++        Yes    Yes
+NKMemory                     StaticLib     C++        No     Yes
 NKContainers                 StaticLib     C++        No     Yes
+NKContainers_Tests           TestSuite     C++        Yes    Yes
 NKImage                      StaticLib     C++        No     Yes
 NKImage_Tests                TestSuite     C++        Yes    Yes
 NKFont_Tests                 TestSuite     C++        Yes    Yes
 NKFont                       StaticLib     C++        No     Yes
-NKAudio                      StaticLib     C++        No     Yes
 NKAudio_Tests                TestSuite     C++        Yes    Yes
+NKAudio                      StaticLib     C++        No     Yes
 NKMedia                      StaticLib     C++        No     Yes
-NKTime                       StaticLib     C++        No     Yes
 NKTime_Tests                 TestSuite     C++        Yes    Yes
-NKStream                     StaticLib     C++        No     Yes
+NKTime                       StaticLib     C++        No     Yes
 NKStream_Tests               TestSuite     C++        Yes    Yes
+NKStream                     StaticLib     C++        No     Yes
 NKThreading                  StaticLib     C++        No     Yes
 NKThreading_Tests            TestSuite     C++        Yes    Yes
 NKFileSystem                 StaticLib     C++        No     Yes
@@ -78,8 +78,8 @@ NKReflection_Tests           TestSuite     C++        Yes    Yes
 NKReflection                 StaticLib     C++        No     Yes
 NKNetwork_Tests              TestSuite     C++        Yes    Yes
 NKNetwork                    StaticLib     C++        No     Yes
-NKSerialization_Tests        TestSuite     C++        Yes    Yes
 NKSerialization              StaticLib     C++        No     Yes
+NKSerialization_Tests        TestSuite     C++        Yes    Yes
 NKGlad                       StaticLib     C          No     Yes
 NKGLSlang                    StaticLib     C++        No     Yes
 NKSPIRVCross                 StaticLib     C++        No     Yes
@@ -87,8 +87,8 @@ NKMbedTLS                    StaticLib     C          No     Yes
 pybind11                     StaticLib     C++        No     Yes
 NKEvent                      StaticLib     C++        No     Yes
 NKEvent_Tests                TestSuite     C++        Yes    Yes
-NKWindow_Tests               TestSuite     C++        Yes    Yes
 NKWindow                     StaticLib     C++        No     Yes
+NKWindow_Tests               TestSuite     C++        Yes    Yes
 NKSL                         StaticLib     C++        No     Yes
 NKCanvas_Tests               TestSuite     C++        Yes    Yes
 NKCanvas                     StaticLib     C++        No     Yes
@@ -96,10 +96,12 @@ NKRHI                        StaticLib     C++        No     Yes
 NKRHI_Tests                  TestSuite     C++        Yes    Yes
 NKUI_Tests                   TestSuite     C++        Yes    Yes
 NKUI                         StaticLib     C++        No     Yes
-MonEssai                     ConsoleApp    C++        No     Yes
+MonEssai                     StaticLib     C++        No     Yes
+App                          ConsoleApp    C++        No     Yes
 ```
 # le resultat obtenu après avoir construit mon projet est le suivant
 ```
+
 
 ╔══════════════════════════════════════════════════════════════════╗
 ║                                                                  ║
@@ -136,7 +138,7 @@ Build Order (2 projects):
 ✓ Built: Build\Lib\Debug-Windows\MonEssai\MonEssai.lib
 
 ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
-│  ✓ Build Successful                                                             Time: 0.79s  │
+│  ✓ Build Successful                                                             Time: 0.34s  │
 └──────────────────────────────────────────────────────────────────────────────────────────────┘
 
 ╔══════════════════════════════════════════════════════════════════════════════════════════════╗
@@ -144,19 +146,19 @@ Build Order (2 projects):
 ╚══════════════════════════════════════════════════════════════════════════════════════════════╝
 
 ℹ Found 1 source file(s)
-✓   [1/1] Compiled: app.cpp
+✓ All files up to date
 ℹ Linking...
 ✓ Built: Build\Bin\Debug-Windows\App\App.exe
 
 ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
-│  ✓ Build Successful                                                             Time: 1.55s  │
+│  ✓ Build Successful                                                             Time: 0.43s  │
 └──────────────────────────────────────────────────────────────────────────────────────────────┘
 
 ════════════════════════════════════════════════════════════════════════════════
                                 BUILD COMPLETED                                 
 ════════════════════════════════════════════════════════════════════════════════
 Projects Built:  2/2
-Time:           2.34s
+Time:           0.77s
 Status:         ✓ SUCCESS
 ════════════════════════════════════════════════════════════════════════════════
 ```
