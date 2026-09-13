@@ -7,7 +7,7 @@
 |**test**|107  |
 
 ## Le nombre de ligne est : 2123987 lignes
-## les resultats obtenue sont différents de ceux présent dans le chapitre 
+## les resultats obtenue sont différents de ceux présent dans le chapitre ce qui explique cette diffénce est la date de clonage ainsi que la machine utilisée
 
 ## La commande utilisé pour ontenir le nombre de fichier est 
 ```
@@ -15,11 +15,12 @@
 ```
 ## la commande utilisée pour avoir le nombre de fichier .cpp est 
 ```
-(Get-ChildItem -Recurse -File -Filter "test_*.cpp").Count 
+
+ (Get-ChildItem -Recurse -File -Filter *.cpp).Count     
 ```
 ## La commande utilisée pour avoir le nombre de fichier .h est :
 ```
-(Get-ChildItem -Recurse -File -Include *.cpp, *.h).Count 
+ (Get-ChildItem -Recurse -File -Filter *.h).Count 
 ```
 ## La commande utilisée pour avoir le nombre de ligne de code est :
 ```
