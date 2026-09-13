@@ -1,4 +1,4 @@
-## Le nombre de fichiers par type est :
+## Le nombre de projets par type est :
 |type|nombre|
 |----|------|
 |Staticlib|60|
