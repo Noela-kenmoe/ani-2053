@@ -5,10 +5,11 @@
 |TestSuite|60|
 |ConsoleApp|98|
 |WindowedApp|55|
+|TOTAL| 273|
 
 
 ## Le nombre de chaine de compilation :
-il existe **05 chaines de compilations** parmis lesquelles host-clang, host-gcc, clang-mingw, clang-cross-linux,mingw
+il existe **5 chaines de compilations** parmis lesquelles host-clang, host-gcc, clang-mingw, clang-cross-linux,mingw
 
 ## Le projet de démarrage est :
 **Sandbox**
