@@ -1,5 +1,5 @@
 # la ligne de code ou jenga désactive les test est la ligne 451 et 453
-```cpp
+```
   dutc(enable=True)
 
     dute(enable=True)
@@ -271,3 +271,4 @@ Running tests for NKWindow_Tests...
 ✅ Tous les tests sont réussis !
 
 All tests passed for NKWindow_Tests.
+# il y a 7 suite de tests et les 7 ont réussis
