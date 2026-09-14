@@ -1,10 +1,9 @@
 # le contenu de mon fichier main.cpp est le suivant:
 ```cpp
-#include <iostream>
+#include "app.h"
 
-int main () {
-    std::cout<<"Hello wordl";
-    return 0 ;
+float add(int a, int b) {
+    return a+b;
 }
 ```
 # le contenu de mon fichier .jenga est le suivant :
