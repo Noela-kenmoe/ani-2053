@@ -12,7 +12,7 @@
 jenga build --target NKMath
 ```
 # le resultat de la compilation me montre que jenga commence par compiler le projet qui a le moins de dépendances et finit par celui qui a le plus de dépendances de plus pour un projet ciblé seules les dépendances directes et indirectes sont construites , les projets complètement indépendants sont ignorés,
-# entre deuc projets indépendants : il n'existe aucun ordre logique imposé l'outil choisi l'ordre selon les critères secondaires (ordre de déclaration, ordre alphabétique) ou les exécutables en parrallèle
+# entre deux projets indépendants : il n'existe aucun ordre logique imposé l'outil choisi l'ordre selon les critères secondaires (ordre de déclaration, ordre alphabétique) ou les exécutables en parrallèle
 
 
 
