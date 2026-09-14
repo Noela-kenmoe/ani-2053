@@ -7,7 +7,13 @@
 |NKContainers|
 |NKPlatform|
 
-# le resultat de la compilation me montre que jenga commence par compiler le projet qui a le moins de dépendances et finit par celui qui a le plus de dépendances
+# la commande utilisee est  :
+```
+jenga build --target NKMath
+```
+# le resultat de la compilation me montre que jenga commence par compiler le projet qui a le moins de dépendances et finit par celui qui a le plus de dépendances de plus pour un projet ciblé seules les dépendances directes et indirectes sont construites , les projets complètement indépendants sont ignorés,
+# entre deuc projets indépendants : il n'existe aucun ordre logique imposé l'outil choisi l'ordre selon les critères secondaires (ordre de déclaration, ordre alphabétique) ou les exécutables en parrallèle
+
 
 
 ```cpp
@@ -203,4 +209,41 @@ Status:         ✗ FAILURE
 
 Echecs (1) — a corriger :
   ✗ NKMath
+```
+# le temps mis pour la construction de NKMath est : 20.34s
+# la remise en état du fichier est : 
+```cpp
+          switch (i % 6) {
+				case 0:
+					cr = v;
+					cg = t;
+					cb = p;
+					break;
+				case 1:
+					cr = q;
+					cg = v;
+					cb = p;
+					break;
+				case 2:
+					cr = p;
+					cg = v;
+					cb = t;
+					break;
+				case 3:
+					cr = p;
+					cg = q;
+					cb = v;
+					break;
+				case 4:
+					cr = t;
+					cg = p;
+					cb = v;
+					break;
+				case 5:
+					cr = v;
+					cg = p;
+					cb = q;
+					break;
+			}
+
 ```
