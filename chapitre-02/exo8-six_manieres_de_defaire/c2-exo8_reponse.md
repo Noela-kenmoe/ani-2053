@@ -307,3 +307,24 @@ Git confirme le retour du commit avec la commande et son résultat:
  git reset --hard d051e5d
 HEAD is now at d051e5d resoudre l'exercice 8
 ```
+### TABLEAU DE COMPARAISON
+|Récupérable|Perdu pour de bon|
+|-----------|-----------------|
+|un add de trop (git restore --staged)|Une modifcation non voulu(git restore test.cpp)|
+|un commit de trop (git reset HEAD~1)|un travail en court qu'il faut mettre de coté (git stash -u / git stash)|
+|un commit poussé (git revert HEAD --no-edit )||
+|un commit perdu (reflog)||
+
+#### Pour reponde a la question "ou va ce qui est réellement perdu"
+lorsque l'on modifie un fichier dans notre éditeur de code et que l'on tape **git --restore main.cpp par exemple** sans avoir fait de commit, le fichier n'a jamais existé sur Git il existe seulement dans notre éditeur de code
+
+Lorsque l'on tape un **git restore**, Git va prendre la dernière version connu dans sa base de donnée et la reécrire par dessus notre fichier actuel(l'écraser) et comme il n'ya pas de corbeille dans git, ce code est détruit définitivement
+ le **reflog** es un simple registre de déplacement du pointeur HEAD donc a chaque fois quéon fait un **commit**,***un checkout**, un **resert**, ou un **stash** Git crée un ficher objet dans sa mémoire caché **.git/objects** et note cette action dans le **reflog**.
+
+Concrètement si l'on n'a pas fait de commit, git ne crée aucun objet dans sa base de donnée, il n'y a dont aucun identifiant a inscrire dans le **reflog**
+ 
+ Parmis les six situations seule la situation 4 reécrit un histoire déja publiée, ele est différente des autres car annulé un commit ne doit jamis se faire par une suppression ou un mascage d'historique (reset) mais l'ajout d'une nouvelle modification d'une modifiction explicita via **git revert** pour garder l'intégrité de la chronologie partagée sans modifier le passé du serveur
+
+ - Ce qui se passe pour un collègue qui avait deja récupérer le commit :
+
+ En tapant la commande **git revert** le collègue recoit simplement un nouveau commit d'annulation lors de son prochain **git pull** ce qui mets a jour son code sans créer un conflit
