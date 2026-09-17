@@ -33,14 +33,24 @@ après avoir tapé la commande :
 git commit -m "
 ```
 ```cpp
-On branch main
-Your branch is ahead of 'origin/main' by 1 commit.
-  (use "git push" to publish your local commits)
-
-nothing to commit, working tree clean
-```cpp
 git commit -m "modification du fichier m.cpp
 >> 
 >> cette modification est l'ajout de la variable mn afin de résoudre l'exercice 1  
 >> Le resultat de cette modification est visible après avoir tapé la commande git status"
 ```
+### LA DIFFERENCE ENTRE LES TROIS RESULTATS
+-Après la modification : le fichier est modifié uniquement sur mon ordinateur mais Git ne l'a pas encore enregistré d'ou le message
+```cpp
+ modified:   m.cpp
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+-Après avoir tapé **git add** :  le fichier est placé dans la zone de préparation et les modifications sont pretes a etre enregistrées, d'ou le message :
+```cpp
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   m.cpp
+````
+
+-Après avoir tapé **git commit -m** : les modifications sont définitivement enregistréées dans l historique local de mon projet
