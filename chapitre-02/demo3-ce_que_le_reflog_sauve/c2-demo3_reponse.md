@@ -74,7 +74,8 @@ je repère mon commit supprimé puis je tape la commande :
 git reset --hard  12d2525    
 HEAD is now at 12d2525 modification du fichier nb.cpp
 ```
-Les modifications ont été restaurées et pour vérifier je tape la commande 
+Les modifications ont été restaurées et pour vérifier je tape la commande :
+```
 PS C:\Users\NOELA\Desktop\clone> cat nb.cpp
 #include <iostream>
 #include <cstdlib>
