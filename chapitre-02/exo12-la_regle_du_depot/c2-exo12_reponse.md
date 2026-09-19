@@ -26,11 +26,10 @@ Chaque commit doit représenté une seule modification logique, vérifier systé
 3. RELECTURE DE CODE
 - Pour chaque PR, au moins 1 membres de l'équipe (autre que l'auteur) doit relire et approuver le code 
 - L'approbateur teste le code localement 
-```
-git checkout <branche> + compilation/tests et vérifie la qualité.
+
 - Le **pull request** ne peut etre fusionnée dans **main** que si elle a recu au moins 1 approbation d'un coéquiper, le code compile sans erreur et passe tous les tests
 - Interdiction de **push** directement sur **main** : tout changement doit passer par une Pull Request (PR) ou Merge Request (MR)
-```
+
 
 4. PRATIQUES INTERDIT 
 
