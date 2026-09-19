@@ -29,7 +29,19 @@ Chaque commit doit représenté une seule modification logique, vérifier systé
 
 - Le **pull request** ne peut etre fusionnée dans **main** que si elle a recu au moins 1 approbation d'un coéquiper, le code compile sans erreur et passe tous les tests
 - Interdiction de **push** directement sur **main** : tout changement doit passer par une Pull Request (PR) ou Merge Request (MR)
-
+- Si personne ne relit : en attribuant un délait de 24h par exemple, en cas de dépacement il y a :
+1. une relance active : l'auteur de la PR relance l'équipe sur le canal de discussion du groupe en identifiant un coequipier disponible (@tag)
+2. Passage outre (**Bypass exceptionnel) : si aucune réponse n'est obtenu au bout de 24h et qu'une dépendance bloque le reste de l'équipe : 
+- L'auteur peut fusionner sa propre Pr UNIQUEMENTsi le code compile parfaitement et que tous les test unitaires/ d'intégrations passent sans avertissement (0 **error**, 0**warning**)
+- L'auteur doit laisser un message sur la PR : exemple 
+```
+Fusion automatique après délai de 24h dépassé - À vérifier a posteriori par [Nom]"
+```
+## QUOI VERIFIER
+La liste des éléments à vérifiés
+- Compilation et test (local) : lz projet compile t'il sur la machine du relecteur sans erreurs ?
+- La qualité et la lisibilité du code : il vérifie la clarté de la logique, le respect des conventions de nommage du projet et la présence de commentaires sur les passages complexes
+- Le respect du périmètre : il controle que les modifications apportées répondent uniqument au sujet de la branche, sans ajouts hors-sujets ni fichier parasite
 
 4. PRATIQUES INTERDIT 
 
