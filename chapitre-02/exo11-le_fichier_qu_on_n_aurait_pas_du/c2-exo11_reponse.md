@@ -46,3 +46,9 @@ Après avoir valider la suppression du fichier **precis de chimie.pdf** avec un 
 Cependant la mesure du dossier .git indique il occupe toujours une taille de **10,135666847229** cela s'explique par le fait que lors du premier commit Git enregistre le contenu du fichier sous forme d'un fichier binaire (blob) dans sa base de donnée interne **.git/objects**
 
 Le second commit enregistre seulement la modification de l'arborescence mais il ne supprime pas l'objet blob dans l'historique. Cela est fait pour que l'utilisateur puisse revenir a l'état ultérieure et restaurer le fichier dans l'état d'origine
+
+- Lorsque un collaborateur va cloner le dépot, il recevra tout le contenu de .git contenu dans l'historique de la dernière version visible des fichiers (le working directory). Comme le fichier de 10 Mo a fait un commit dans le passé, il fait partie intégrante de l'historique meme s'il est éfface par la suite il sera donc téléchargé lui aussi par le collaborateur
+- Combien de fois faudra t'il retélécharger ces dix mégaoctets dans la vie du projet : a chaque fois qu'une personne clonera le dépot, et à chaque fois qu'un environnement de CI/CD ou un nouveau serveur téléchargera le projet, dans une &quipe de 4 personnes, si on travaille sur 02 Pc par exemple ou que l'on réinitiale le depot, les 10 Mo du fichier seront téléchargés des dizaines de fois
+- A quel moment aurait-il fallu agir pour que cela n'arrive pas, quel est le fichier qui sert eaxctement à cela :
+
+Il fallait agir avant le **git add/git commit** du fichier. le fichier qui sert exactement à éviter ce problème est le **.gitignore** dès la création du projet car Git ignore complètement le fichier et refuse de le suivre (track), le fichier reste sur notre ordinateur local mais n'est jamais envoyé sur le dépot, évitant ainsi d'imprimer d"finitivement ces 10 Mo dans l'historique de Git 
