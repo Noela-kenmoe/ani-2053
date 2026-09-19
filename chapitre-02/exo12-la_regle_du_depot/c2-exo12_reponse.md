@@ -14,6 +14,11 @@ Les règles pour une bonne collaboration sur github sont :
 |**Docs**|Ajouter une mise a jour de la documentation|
 |**refactor**|Reconstruction, nettoyage et réorganisation du code sans en modifier le comportement ou une nouvelle fonction|
 
+## EXEMPLE DE BRANCHE :
+```
+git checkout -b feat/noela/ecran-connexion-frontend
+```
+
 2. CONTENU DU COMMIT
 
 Chaque commit doit représenté une seule modification logique, vérifier systématiquement le contenu réel des commits avec les commandes **git diff** ou **git show** , ne pas mélangé la correction d'un bug et l'ajout d'une fonctionnalité dans un meme commit
@@ -25,6 +30,7 @@ Chaque commit doit représenté une seule modification logique, vérifier systé
 git checkout <branche> + compilation/tests et vérifie la qualité.
 - Le **pull request** ne peut etre fusionnée dans **main** que si elle a recu au moins 1 approbation d'un coéquiper, le code compile sans erreur et passe tous les tests
 - Interdiction de **push** directement sur **main** : tout changement doit passer par une Pull Request (PR) ou Merge Request (MR)
+```
 
 4. PRATIQUES INTERDIT 
 
@@ -49,6 +55,17 @@ Créer un commit d'annulation explicite :
 git revert <hash_du_commit_fautif>
 git push origin main
 ```
+
+-Pourquoi il est important de ne pas pousser sur la branche main :
+- Garantire la stabilité du code : la branche main contient la version officielle et focntionnell du projet, Poussé directement sur cette branche risque d'intégrer un code qui ne compile pas ou qui plante, ce qui bloque toute l'équipe
+- Conserver un historique propre: cela évute de polluer l'historique de **main** avec des commits de travils temporiaires (corrections, tests)
+-Faciliter la gestion des erreurs : en cas de problème, il est beaucoup plus simple d'annuler ou de corriger une branche isolée que de réparer la branche principale
+- Les règles pour empecher de pousser directement sur main 
+1. Activation des **Branch Protection Rules** sur github (les etapes sont : Setting- Branches- Add rule sur main)
+
+2. L'**option Require a pull request before merging**: le bouton push sur main est physiquement bloqué par gihub pour tous les membres
+
+3. **Option Require approvals : réglées sur 1 approbation minimum, la fusion (merge) est bloquée et impossible à cliquer tant qu'un coéquiper n'a pas validé la PR
 
 **REMARQUE** : il est toujours conseillé d'utiliser **git revert** à **git reset --hard**
 - Post-mortem rapide : l'auteur du commit et le relecteur corrigent le problème sur une branche **fix** dédiée avant de réintégrer le code via une nouvelle PR (Pull request)
