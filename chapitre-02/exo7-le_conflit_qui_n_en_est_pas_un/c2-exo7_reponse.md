@@ -37,7 +37,7 @@ Lorsque je tape la commande :
 ```
 git push
 ```
-Un conflit apparait son résultat est le suivant
+Lorsque je tape la commande git push, Git refuse la publication (push rejection) son résultat est le suivant
 ```
 
 To https://github.com/Noela-kenmoe/test.git
@@ -49,7 +49,7 @@ hint: the same ref. If you want to integrate the remote changes, use
 hint: 'git pull' before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 ```
-## COMMENT RESOUDRE LE CONFLIT
+## RECUPERATION DES MODIFICATIONS DISTINCTES
 Pour resoudre ce conflit je commence par tapé la commande :
 ```
  git pull origin main --no-rebase
@@ -100,7 +100,9 @@ int echange (int *a, int *b)
         return 0;
      }
 ```
-## NOUS VOYONS BIEN QUE LA VARIABLE **NOMBRE** CREE DANS LE PREMIER DEPOT EST DESORMAIS AUSSI DANS LE DEUXIEME DEPOT !!!!
+### La commande git pull a éffectué une fusion automatique (auto-merging ) sans ausun conflit car les modifications portaient sur des lignes différentes. Le fichiers contient maintenat les deux rajouts 
+ 
+
 
 
 
