@@ -2,7 +2,7 @@
 Les règles pour une bonne collaboration sur github sont :
 1. NOMMAGE DES BRANCHES
 - La branche principale main: celle-ci on la maintient et personne ne travail dessus
-- La branch **devops** : intégration des fonctionnalités en cours 
+- La branche **devops** : intégration des fonctionnalités en cours 
 
 - Les types de branches définis
 
@@ -30,12 +30,12 @@ Chaque commit doit représenté une seule modification logique, vérifier systé
 - Le **pull request** ne peut etre fusionnée dans **main** que si elle a recu au moins 1 approbation d'un coéquiper, le code compile sans erreur et passe tous les tests
 - Interdiction de **push** directement sur **main** : tout changement doit passer par une Pull Request (PR) ou Merge Request (MR)
 - Si personne ne relit (délai de 24h dépassé) : en attribuant un délait de 24h par exemple, en cas de dépacement il y a :
-1. une relance active : l'auteur de la PR relance l'équipe sur le canal de discussion du groupe en identifiant un coequipier disponible (@tag)
-2. Passage outre (**Bypass exceptionnel**) : si aucune réponse n'est obtenu au bout de 24h et qu'une dépendance bloque le reste de l'équipe : 
+   1. une relance active : l'auteur de la PR relance l'équipe sur le canal de discussion du groupe en identifiant un coequipier disponible (@tag)
+   2. Passage outre (**Bypass exceptionnel**) : si aucune réponse n'est obtenu au bout de 24h et qu'une dépendance bloque le reste de l'équipe : 
 - L'auteur peut fusionner sa propre Pr UNIQUEMENTsi le code compile parfaitement et que tous les test unitaires/ d'intégrations passent sans avertissement (0 **error**, 0 **warning**)
 - L'auteur doit laisser un message sur la PR : exemple 
 ```
-Fusion automatique après délai de 24h dépassé - À vérifier a posteriori par [Nom]"
+Fusion automatique après délai de 24h dépassé - À vérifier a posteriori par [Nom]
 ```
 ## QUOI VERIFIER
 La liste des éléments à vérifiés
@@ -53,7 +53,7 @@ git push --force
 - Déposer des identifiants/ clés d'accès/ secrets dans les commits
 - Faire des commits **fourre-tout** : exemple (le type "update","wip","fix stuff")
 
-5. PROCEDURE D'URGENCE : Que faire si **main**  est cassées?
+5. PROCEDURE D'URGENCE : Que faire si **main**  est cassées ?
 Si un code défectueux est poussé et arrive sur **main** (erreurs de compilation, crash) :
 - Alerter immediatement l'équipe : signaler le problème sur le canal de discussion du groupe
 - Geler les fusions : plus personne ne fusionne de PR sur **main** tant que le problème n'est pas résolu 
