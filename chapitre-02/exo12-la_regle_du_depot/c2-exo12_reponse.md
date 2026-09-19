@@ -4,7 +4,7 @@ Les règles pour une bonne collaboration sur github sont :
 - La branche principale main: celle-ci on la maintient et personne ne travail dessus
 - La branche **devops** : intégration des fonctionnalités en cours 
 
-- Les types de branches définis
+- Les types de branches autorisées sont : 
 
 
 |type|Role|
@@ -13,7 +13,10 @@ Les règles pour une bonne collaboration sur github sont :
 |**Fix**|correction d'un bug ou d'une erreur|
 |**Docs**|Ajouter une mise a jour de la documentation|
 |**refactor**|Reconstruction, nettoyage et réorganisation du code sans en modifier le comportement ou une nouvelle fonction|
-
+ - Une nouvelle branche doit avoir la structure suivante : 
+ ```
+<type>/<prenom-auteur>/<description-succincte>
+```
 ## EXEMPLE DE BRANCHE :
 ```
 git checkout -b feat/noela/ecran-connexion-frontend
