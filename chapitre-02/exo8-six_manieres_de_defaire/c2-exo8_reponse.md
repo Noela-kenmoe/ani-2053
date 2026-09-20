@@ -328,3 +328,10 @@ Concrètement si l'on n'a pas fait de commit, git ne crée aucun objet dans sa b
  - Ce qui se passe pour un collègue qui avait deja récupérer le commit :
 
  En tapant la commande **git revert** le collègue recoit simplement un nouveau commit d'annulation lors de son prochain **git pull** ce qui mets a jour son code sans créer un conflit
+
+ Prenez position, en trois lignes, et appuyez-vous sur une situation concrète. Par exemple : dans six mois, vous cherchez quel changement a introduit un défaut. Lequel des deux graphes vous aide le plus ? Ou bien : vous voulez savoir ce que chaque membre de l'équipe a fait cette semaine. Lequel le montre ?
+
+**Les deux réponses se défendent**, et c'est pour cela que la question est posée :
+
+- la fusion **conserve la trace de ce qui s'est réellement passé**, avec ses branches et ses dates ;
+- le rejeu **raconte une histoire plus simple** que ce qui a eu lieu, et c'est à la fois son intérêt et son défaut.

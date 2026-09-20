@@ -101,3 +101,8 @@ PS C:\Users\NOELA\Desktop\test> git log --graph --oneline --all
 ### LA DIFFERENCE ENTRE LES DEUX GRAPHE
 - Le graphe de la fusion: tout d'abord il n'est pas linéaire, on observe deux branche parrall-le qui se sépare du commit initial puis qui se rejoignent a travers ne commit de fusion dédié(merge branch test) 
 - le graphe par **rebase** : il a une structure lineaire et les commits de la branche test sont au dessus de ceus de la branche main, les modifications apparaissent les unes sur les autres sur un seul fil et il n'y a pas de commit de merge intermédiaire
+
+### MON CHOIX
+mon choix se porte sur le graphe donné par **rebase** car celui-ci est plus facile a lire et permet de se répérer faiclement lorques l'on consultera le fichier une seconde fois et je gagnerai en temps 
+
+

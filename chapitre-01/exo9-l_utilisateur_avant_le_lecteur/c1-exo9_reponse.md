@@ -6,9 +6,9 @@
 |3. de dessiner une zone rectangulaire|
 |4.peut changer de thème(sombre/clair)|
 |5.Annuler un trait(action)|
-|5.effacer tout| 
-|6. Dessiner sur les images| 
-|7.ajouter plusieurs images|
+|6.effacer tout| 
+|7. Dessiner sur les images| 
+|8.ajouter plusieurs images|
 
 
 

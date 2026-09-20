@@ -2,7 +2,7 @@
 ## Le nombre par type sont :
 |type|effectifs|
 |----|---------|
-|**.cpp**| 1609|
+|**.cpp**| 1611|
 |**.h**|2728   |
 |**test**|107  |
 

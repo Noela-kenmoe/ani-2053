@@ -271,4 +271,6 @@ Running tests for NKWindow_Tests...
 ✅ Tous les tests sont réussis !
 
 All tests passed for NKWindow_Tests.
+
+# il ya un projet de type **TEST SUITE**
 # il y a 7 suite de tests et les 7 ont réussis

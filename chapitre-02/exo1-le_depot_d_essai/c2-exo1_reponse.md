@@ -11,7 +11,10 @@ git add test.cpp
 
 après avoir tapé la commande **git log --oneline**
 ```cpp
-46f5d63 (HEAD -> main, origin/main, origin/HEAD) Ajouter du troisieme fichier qui est test.cpp 0d69dac Ajouter du second fichier qui est g.cpp b3c6f60 Ajouter du premier fichier qui est m.cpp
+46f5d63 (HEAD -> main, origin/main, origin/HEAD)
+Ajouter du troisieme fichier qui est test.cpp 0d69dac 
+Ajouter du second fichier qui est g.cpp b3c6f60 
+Ajouter du premier fichier qui est m.cpp
 5cf527e Initial commit
 ```
 ## LE GRAPHE CORRESPONDANT 

@@ -1,8 +1,8 @@
 # le temps mis pour chaque compilation est :
 |N° de compilation| temps |
 |-----------------|-------|
-|1ere compilation | 4.04s |
-|2eme compilation | 0.02s |
+|1ere compilation | 4.67s |
+|2eme compilation | 0.04s |
 # cet écart entre les deux compilation s'explique par le fait que le compilateur peut utiliser des fichiers déja générés au lieu de tout refaire, jenga utilise les dates et vérifie si les fichiers .cpp et .h ont été modifier avant de lancer une nouvelle compilation si aucun fichier n'a été modifier jenga ne les compile plus
 
 #résultat de la première compilation

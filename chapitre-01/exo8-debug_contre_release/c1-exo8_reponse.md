@@ -65,8 +65,8 @@ Status:         ✓ SUCCESS
 ════════════════════════════════════════════════════════════════════════════════
 ```
 # la taille et le temps de compilation dans la configuration release est
-**temps** : 143 Ko (146 994 octets)
-**taille** : 1.55s
+**temps** : 1.55s
+**taille** : 143 Ko (146 994 octets) 
 
 # le resultat de la sortie est le suivant :
 ```cpp

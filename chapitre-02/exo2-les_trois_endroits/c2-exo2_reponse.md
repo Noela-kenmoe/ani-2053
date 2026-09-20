@@ -38,6 +38,9 @@ git commit -m "modification du fichier m.cpp
 >> cette modification est l'ajout de la variable mn afin de résoudre l'exercice 1  
 >> Le resultat de cette modification est visible après avoir tapé la commande git status"
 ```
+Ensuite je tape git status 
+```text
+```
 ### LA DIFFERENCE ENTRE LES TROIS RESULTATS
 -Après la modification : le fichier est modifié uniquement sur mon ordinateur mais Git ne l'a pas encore enregistré d'ou le message
 ```cpp

@@ -1,7 +1,7 @@
 # EXERCICE 12
-Les règles pour une bonne collaboration sur github sont :
+Les règles pour une bonne collaboration sur Github sont :
 1. NOMMAGE DES BRANCHES
-- La branche principale main: celle-ci on la maintient et personne ne travail dessus
+- La branche principale main: celle-ci on la maintient et personne ne travaille dessus
 - La branche **devops** : intégration des fonctionnalités en cours 
 
 - Les types de branches autorisées sont : 
@@ -10,8 +10,8 @@ Les règles pour une bonne collaboration sur github sont :
 |type|Role|
 |----|----|
 |**feat**|développement d'une nouvelle fonctionnalité|
-|**Fix**|correction d'un bug ou d'une erreur|
-|**Docs**|Ajouter une mise a jour de la documentation|
+|**fix**|correction d'un bug ou d'une erreur|
+|**docs**|Ajouter une mise à jour de la documentation|
 |**refactor**|Reconstruction, nettoyage et réorganisation du code sans en modifier le comportement ou une nouvelle fonction|
  - Une nouvelle branche doit avoir la structure suivante : 
  ```
@@ -24,39 +24,39 @@ git checkout -b feat/noela/ecran-connexion-frontend
 
 2. CONTENU DU COMMIT
 
-Chaque commit doit représenté une seule modification logique, vérifier systématiquement le contenu réel des commits avec les commandes **git diff** ou **git show** , ne pas mélanger la correction d'un bug et l'ajout d'une fonctionnalité dans un meme commit
+Chaque commit doit représenter une seule modification logique, vérifier systématiquement le contenu réel des commits avec les commandes **git diff** ou **git show** , ne pas mélanger la correction d'un bug et l'ajout d'une fonctionnalité dans un même commit
 
 3. RELECTURE DE CODE
-- Pour chaque PR, au moins 2 membres de l'équipe (autre que l'auteur) doit relire et approuver le code 
+- Pour chaque PR, au moins 2 membres de l'équipe (autre que l'auteur) doivent relire et approuver le code 
 - L'approbateur teste le code localement 
 
-- Le **pull request** ne peut etre fusionnée dans **main** que si elle a recu au moins 1 approbation d'un coéquiper, le code compile sans erreur et passe tous les tests
+- La **Pull request** ne peut etre fusionnée dans **main** que si elle a recu au moins 2 approbations d'un coéquipier, le code compile sans erreur et passe tous les tests
 - Interdiction de **push** directement sur **main** : tout changement doit passer par une Pull Request (PR) ou Merge Request (MR)
-- Si personne ne relit (délai de 24h dépassé) : en attribuant un délait de 24h par exemple, en cas de dépacement il y a :
-   1. une relance active : l'auteur de la PR relance l'équipe sur le canal de discussion du groupe en identifiant un coequipier disponible (@tag)
+- Si personne ne relit: en attribuant un délai de 24h par exemple, en cas de dépassement il y a :
+   1. une relance active : l'auteur de la PR relance l'équipe sur le canal de discussion du groupe en identifiant un coéquipier disponible (@tag)
    2. Passage outre (**Bypass exceptionnel**) : si aucune réponse n'est obtenu au bout de 24h et qu'une dépendance bloque le reste de l'équipe : 
-- L'auteur peut fusionner sa propre Pr UNIQUEMENTsi le code compile parfaitement et que tous les test unitaires/ d'intégrations passent sans avertissement (0 **error**, 0 **warning**)
+- L'auteur peut fusionner sa propre PR uniquement si le code compile parfaitement et que tous les tests unitaires/ d'intégration passent sans avertissement (0 **error**, 0 **warning**)
 - L'auteur doit laisser un message sur la PR : exemple 
 ```
 Fusion automatique après délai de 24h dépassé - À vérifier a posteriori par [Nom]
 ```
 ## QUOI VERIFIER
-La liste des éléments à vérifiés
-- Compilation et test (local) : le projet compile t-il sur la machine du relecteur sans erreurs ?
+La liste des éléments à vérifier
+- Compilation et test (local) : le projet compile-t-il sur la machine du relecteur sans erreurs ?
 - La qualité et la lisibilité du code : il vérifie la clarté de la logique, le respect des conventions de nommage du projet et la présence de commentaires sur les passages complexes
-- Le respect du périmètre : il controle que les modifications apportées répondent uniqument au sujet de la branche, sans ajouts hors-sujets ni fichier parasite
+- Le respect du périmètre : il controle que les modifications apportées répondent uniquement au sujet de la branche, sans ajouts hors-sujet ni fichier parasite
 
-4. PRATIQUES INTERDIT 
+4. PRATIQUES INTERDITS 
 
-- Interdit de taper la commande sur la branche **main** ou **develop**
+- Interdit de taper la commande sur la branche **main** ou **devops**
 ```
 git push --force
 ```
-- Commiter des fichiers temporaires ou générés (binaires, .exe) et les dossiers (.vs/, .idea, build/, fichier de configuration locale)
+- Commiter des fichiers temporaires ou générés (binaires, .exe) et les dossiers (.vs/, .idea, build/, fichiers de configuration locale)
 - Déposer des identifiants/ clés d'accès/ secrets dans les commits
 - Faire des commits **fourre-tout** : exemple (le type "update","wip","fix stuff")
 
-5. PROCEDURE D'URGENCE : Que faire si **main**  est cassées ?
+5. PROCEDURE D'URGENCE : Que faire si **main**  est cassée ?
 Si un code défectueux est poussé et arrive sur **main** (erreurs de compilation, crash) :
 - Alerter immediatement l'équipe : signaler le problème sur le canal de discussion du groupe
 - Geler les fusions : plus personne ne fusionne de PR sur **main** tant que le problème n'est pas résolu 
@@ -71,15 +71,15 @@ git push origin main
 ```
 
 - Pourquoi il est important de ne pas pousser sur la branche main :
-- Garantir la stabilité du code : la branche main contient la version officielle et focntionnell du projet, Poussé directement sur cette branche risque d'intégrer un code qui ne compile pas ou qui plante, ce qui bloque toute l'équipe
-- Conserver un historique propre: cela évite de polluer l'historique de **main** avec des commits de travaux temporiaires (corrections, tests)
--Faciliter la gestion des erreurs : en cas de problème, il est beaucoup plus simple d'annuler ou de corriger une branche isolée que de réparer la branche principale
+- Garantir la stabilité du code : la branche main contient la version officielle et fonctionnelle du projet, pousser directement sur cette branche risque d'intégrer un code qui ne compile pas ou qui plante, ce qui bloque toute l'équipe
+- Conserver un historique propre: cela évite de polluer l'historique de **main** avec des commits de travaux temporaires (corrections, tests)
+- Faciliter la gestion des erreurs : en cas de problème, il est beaucoup plus simple d'annuler ou de corriger une branche isolée que de réparer la branche principale
 - Les règles pour empecher de pousser directement sur main 
-1. Activation des **Branch Protection Rules** sur github (les etapes sont : Setting- Branches- Add rule sur main)
+1. Activation des **Branch Protection Rules** sur Github (les etapes sont : Setting- Branches- Add rule sur main)
 
-2. L'**option Require a pull request before merging**: le bouton push sur main est physiquement bloqué par gihub pour tous les membres
+2. L'**option Require a pull request before merging**: le bouton push sur main est physiquement bloqué par Github pour tous les membres
 
-3. **Option Require approvals** : réglées sur 1 approbation minimum, la fusion (merge) est bloquée et impossible à cliquer tant qu'un coéquiper n'a pas validé la PR
+3. **Option Require approvals** : réglées sur 2 approbations minimum, la fusion (merge) est bloquée et impossible à cliquer tant qu'un coéquipier n'a pas validé la PR
 
-**REMARQUE** : il est toujours conseillé d'utiliser **git revert** à **git reset --hard**
+**REMARQUE** :  Utiliser **git revert** (ne jamais utiliser **git reset --hard** sur une branche partagée comme main) car git reset --hard efface définitivement l'historique partagé, ce qui écrase le travail déjà récupéré par vos coéquipiers et crée un chaos absolu sur le dépôt.
 - Post-mortem rapide : l'auteur du commit et le relecteur corrigent le problème sur une branche **fix** dédiée avant de réintégrer le code via une nouvelle PR (Pull request)

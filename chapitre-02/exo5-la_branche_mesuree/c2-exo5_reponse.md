@@ -62,3 +62,8 @@ le résultat de la commande est :
 ```
 ##### EXPLICATION
 Lorsqu'on éffectue les trois modifications et qu'on fait trois commits, Git crée trois types objets compréses (blobs,trees,commits) dans un dossier caché nommée **.git/objets**, Comme Git fonctionne en ajout uniquement et ne supprime jamais les anciennes versions des fichiers, la taille du dossier .git augmente sur le disque après les trois commits.
+Après modification : Le fichier est modifié uniquement sur votre ordinateur, mais Git ne l'a pas encore préparé pour l'enregistrement.
+
+
+
+
