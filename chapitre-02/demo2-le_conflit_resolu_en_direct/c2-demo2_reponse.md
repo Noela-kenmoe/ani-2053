@@ -126,7 +126,7 @@ int main ( ){
 }
 
 ```
-11. je fais un **git add* puis je vérifie avec un **git status**
+11. je fais un **git add** puis je vérifie avec un **git status**
 ```
 git status
 On branch main
