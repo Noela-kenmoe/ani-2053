@@ -152,3 +152,32 @@ La liste des DLL copiees a cote de NKCode.exe etait tenue A LA MAIN, alors que
 ```
 
 -Le sujet : 01 sujet **la validation automatisée des dépendances DLL lors de la livraison du binaire.**
+## Le commit le plus faible :
+Le commit le plus faible est le deuxième commit car un commit est évalué sous trois critères notamment : la longueur/titre, la lisibilité du corps, les vérifications postérieurs.
+
+- Dans  deuxième commit le titre n'est pas centré sur l'action techinque il est plus philosophique on ne sait pas directement ou la modification a eu lieu 
+```
+NkTraits : demander a la primitive si elle existe, pas au compilateur qui il est
+```
+Un bon titre aurait été : 
+```
+NkTraits : passer a la detection de primitives (__has_builtin) pour corriger g++ 12
+```
+- La visibilité du corps : le corps est visible mais comparé aux autres le code contient trop de blocs de code ou une phrase explicative aurait suffit
+```
+#if defined(__clang__) || defined(__GNUC__) || defined(_MSC_VER)
+
+
+        NkIsTriviallyDestructible = true      <- pour TOUT type, destructeur compris
+        NkIsBaseOf                : NkFalseType
+        NkIsPolymorphic           : NkFalseType
+        NkIsEmpty                 : sizeof(T) == 1
+```
+
+Il pert le lecteur dans l'historique des compilateurs qui masque l'action principale
+```
+il porte ces intrinseques depuis VS2015
+    mais n'a __has_builtin que depuis VS2022, et repondrait « non » a des primitives
+    qu'il possede. zig c++ EST clang, il suit clang sans rien de special.
+```
+- Les modifications postérieures : bien qu'on voit (13/13 juste ), cette preuve est a la fin du texte, la validation apportée en fin de message parait déconnectée de l'intention initiale annoncée par le titre car le titre n'invoquait ni g++ 12 ni le problème d'incompatibilité de build
