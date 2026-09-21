@@ -51,6 +51,8 @@ Date:   Sat Mar 21 03:25:48 2026 +0100
 (END)
 ```
 1. SA CREATION
+
+
 le fichier a été crée le 21 mars 2026 a l'occasion d'un correctif de bugs sur plusieurs API graphiques (vulkan, openGL, software, dx11). Le message annonce un correctif global, tandis que le diff montre la céation initiale de la structure avec 108 lignes de codes  
 
 
