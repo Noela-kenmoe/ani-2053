@@ -132,7 +132,11 @@ Auto-merging fon.cpp
 CONFLICT (content): Merge conflict in fon.cpp
 Automatic merge failed; fix conflicts and then commit the result.
 ```
- ## Le conflit ce voit dans ce resultat
+ ## Le conflit ce voit dans ce resultat suivant
+ Après avoir taper la commande :
+ ```
+git merge test
+ ```
  ```
 #include<iostream>
  int echange(int *a, int *b);
