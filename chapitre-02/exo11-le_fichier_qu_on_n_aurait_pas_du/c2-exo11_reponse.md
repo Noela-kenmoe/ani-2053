@@ -59,7 +59,7 @@ nothing to commit, working tree clean
 
 **Taille Conservée = Taille après supression - Taille initiale**
 ```
-AN: 10.13 MB-0.08 MB = 10.05 MB
+AN: 10.13 MB-0.03 MB = 10.1 MB
 ```
 Après avoir valider la suppression du fichier **precis de chimie.pdf** avec un second commit, le fichier n'apparait plus dans le repertoire de travail.
 
