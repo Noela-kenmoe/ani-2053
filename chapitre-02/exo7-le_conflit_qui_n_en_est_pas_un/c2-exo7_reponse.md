@@ -102,53 +102,70 @@ int echange (int *a, int *b)
 ```
 
 ## Modification de deux ligne séparées d'une ligne 
-Première modification 
+Première modification après avoir tapé les commandes **git add** et **git commit**
 ```
- git add .                                      
-PS C:\Users\NOELA\Desktop\test> git commit -m "première modification"          
-[main 2437ca3] première modification
- 1 file changed, 1 insertion(+)
-PS C:\Users\NOELA\Desktop\test> git push origin main
-git: 'credential-manager' is not a git command. See 'git --help'.
-git: 'credential-manager' is not a git command. See 'git --help'.
-Enumerating objects: 5, done.
-Counting objects: 100% (5/5), done.
-Delta compression using up to 4 threads
-Compressing objects: 100% (3/3), done.
-Writing objects: 100% (3/3), 299 bytes | 49.00 KiB/s, done.
-Total 3 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
-remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
-To https://github.com/Noela-kenmoe/test.git
-   a74a368..2437ca3  main -> main
+git swit
+Switched to branch 'test'
+PS C:\Users\NOELA\Desktop\test> git add fon.cpp         
+[test cbbd62c] modification sur la branche test
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+Switched to branch 'main'
+Your branch is ahead of 'origin/main' by 3 commits.
+  (use "git push" to publish your local commits)
 ```
-- Deuxième modification
+## Modification sur la bracnhe main 
+je tape la commande 
 ```
-git add fon.cpp                              
-PS C:\Users\NOELA\Desktop\projet\test> git commit -m " deuxième modification"       
-[main f3b50cb]  deuxième modification
- 1 file changed, 1 insertion(+)
-PS C:\Users\NOELA\Desktop\projet\test> git push                                     
-git: 'credential-manager' is not a git command. See 'git --help'.
-To https://github.com/Noela-kenmoe/test.git
- ! [rejected]        main -> main (fetch first)
-error: failed to push some refs to 'https://github.com/Noela-kenmoe/test.git'
-hint: Updates were rejected because the remote contains work that you do not
-hint: have locally. This is usually caused by another repository pushing to
-hint: the same ref. If you want to integrate the remote changes, use
-hint: 'git pull' before pushing again.
-hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-PS C:\Users\NOELA\Desktop\projet\test> git pull origin main --no-rebase
-remote: Enumerating objects: 5, done.
-remote: Counting objects: 100% (5/5), done.
-remote: Compressing objects: 100% (1/1), done.
-remote: Total 3 (delta 2), reused 3 (delta 2), pack-reused 0 (from 0)
-Unpacking objects: 100% (3/3), 279 bytes | 9.00 KiB/s, done.
-From https://github.com/Noela-kenmoe/test
- * branch            main       -> FETCH_HEAD
-   a74a368..2437ca3  main       -> origin/main
+git switch main
+```
+Puis j'éffectue la modification, j'enregistre et je fais un commit
+```
+PS C:\Users\NOELA\Desktop\test> git add fon.cpp         
+PS C:\Users\NOELA\Desktop\test> git commit -m "modification sur la branche main"
+[main 945d570] modification sur la branche main
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+Toujours que la branche main j'essaie de faire une fusion
+```
+PS C:\Users\NOELA\Desktop\test> git merge test 
 Auto-merging fon.cpp
-Merge made by the 'ort' strategy.
- fon.cpp | 1 +
- 1 file changed, 1 insertion(+)
+CONFLICT (content): Merge conflict in fon.cpp
+Automatic merge failed; fix conflicts and then commit the result.
 ```
-### La commande git pull a éffectué une fusion automatique (auto-merging ) sans ausun conflit car les modifications portaient sur des lignes différentes. Le fichiers contient maintenat les deux rajouts, lorque deux utilisateurs ne  modifient pas la meme ligne exacte, le conflit de fusion est déclarée des que les modifications se situent dans la meme zone de texte au dela de cette distance la fusion déeffectue automatiquement
+ ## Le conflit ce voit dans ce resultat
+ ```
+#include<iostream>
+ int echange(int *a, int *b);
+
+int main(){
+   int nombre;
+    bool test;
+    int z=10;
+    int y, c ,d;
+    //appel des deux nombres
+    std::cout<<"entrer les deux premiers nombres :";
+    std::cin>> c >> d;
+    std::cout<<"avant l'appel:"<< c << d;
+    //appel de la fonction echange
+    y =echange(&c,&d);
+<<<<<<< HEAD
+     std::cout<<"apres l'appel :"<< c << y ;
+     std::cout<<" la verification de l'appel est :";
+=======
+     std::cout<<"apres l'appel on a  :"<< c << y ;
+     std::cout<<"verification de l'appel";
+>>>>>>> test
+     return 0;
+     
+}
+int echange (int *a, int *b)
+     { 
+      
+        int x;
+        *a = x;
+        *a = *b;
+        *b = x;
+        return 0;
+     }
+```
+### On peut conclure que les outils de gestion de version (Git) ne comparent pas les fichiers ligne par ligne de manière isol"e, mais par **blocs de contexte**. Si des lignes inchangées séparent deux modifications, l'algorithme de fusion automatique (3-way merge) parvient à combiner les deux versions sans ambiguité. En revanche, dès que deux modifications se chevauchent ou touchent des lignes contiguës, l'absence de ligne tampon empêche l'outil de déterminer l'ordre d'intégration souhaité, ce qui déclenche un conflit pour vous laisser trancher
