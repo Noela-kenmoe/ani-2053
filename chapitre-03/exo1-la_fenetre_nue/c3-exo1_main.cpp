@@ -11,6 +11,12 @@ int nkmain(const nkentseu::NkEntryState &state) {
         cfg.height = 720 ;
 
     nkentseu::NkWindow window(cfg);
+
+    if (!window.Create(cfg)) {
+        logger.Error("[app] creation fenetre echouee");
+        return -1;
+    }
+    
     bool running = true;
     while (running) {
         while (auto* event = nkentseu::NkEvents().PollEvent()) {
