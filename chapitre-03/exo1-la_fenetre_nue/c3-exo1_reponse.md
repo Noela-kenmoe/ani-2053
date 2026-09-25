@@ -86,11 +86,12 @@ Le resultat est :
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 L'affichage de la fenetre nue
+
 <img src="image1.jpeg" alt="" width = 600>
 ## Explication du code ligne par ligne 
 
 Mon code a **18 lignes** au total
-## Les lignes similaires a celles du chapitre sont :
+
 Le programme minimal du chapitre est le suivant : 
 ```
 #include "NKWindow/NKWindow.h"
@@ -131,9 +132,10 @@ int nkmain(const NkEntryState& state) {
     return 0;
 }
 ```
-|TABLEAU DE CORRESPONDANCE|        |       |
-|-------------------------|--------|-------|
+## TABLEAU DE CORRESPONDANCE
+
 |lignes de mon code|Lignes du code du chapitre|Explications|
+|------------------|--------------------------|------------|
 | L1 (#include "NKWindow/NKMain.h")| L1 (#include "NKWindow/NKWindow.h")|Identiques|
 |L2 (#include "NKWindow/NKWindow.h")|L2 (#include "NKWindow/NKMain.h")|Identiques. Inclusion du module fenêtre|
 |OMIS|L4 (using namespace nkentseu;)|éviter d'importer tout l'espace de nommage dans la portée globale|
