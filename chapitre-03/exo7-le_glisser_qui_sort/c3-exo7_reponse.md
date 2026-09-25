@@ -140,13 +140,19 @@ je lance l'exécution du programme
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 Le résultat est le suivant :
+
 <img src="image2.jpeg" alt="fenetre" width="600">
+
 On voit bien le titre rotation avec capture
 
 Maintenant on teste la capture
+
 <img src="image1.jpeg" alt="déplacement hors de la fenètre" width="600">
+
 Meme hors de la fenetre les coordonnées changent
+
 <img src="image3.jpeg" alt="déplacement hors de la fenètre" width="600">
+
 ## Pour le glisser sans capture
 Cette partie est faite dans le dossier FirtsWindow.Le code est le suivant :
 ```
@@ -280,8 +286,11 @@ PS C:\Users\NOELA\Desktop\jen\FirstWindow> jenga run
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 Le resultat est :
+
 <img src="image7.jpeg" alt="fenetre" width="600">
+
 Lorsque l'on sort de la fenetre les coordonnées ne change plus peu importe ou se trouve la souris 
+
 <img src="image4.jpeg" alt="fenetre" width="600">
 
 <img src="image6.jpeg" alt="fenetre" width="600">
