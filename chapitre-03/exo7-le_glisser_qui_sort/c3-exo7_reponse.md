@@ -116,7 +116,28 @@ Status:         ✓ SUCCESS
 ```
 je lance l'exécution du programme
 ```
+(venv) PS C:\Users\NOELA\Desktop\ani-2053\chapitre-03\exo7-le_glisser_qui_sort> jenga run
 
+╔══════════════════════════════════════════════════════════════════╗
+║                                                                  ║
+║                ██╗███████╗███╗   ██╗ ██████╗  █████╗             ║
+║                ██║██╔════╝████╗  ██║██╔════╝ ██╔══██╗            ║
+║                ██║█████╗  ██╔██╗ ██║██║  ███╗███████║            ║
+║           ██   ██║██╔══╝  ██║╚██╗██║██║   ██║██╔══██║            ║
+║           ╚█████╔╝███████╗██║ ╚████║╚██████╔╝██║  ██║            ║
+║            ╚════╝ ╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝            ║
+║                                                                  ║
+║             Multi-platform C/C++ Build System v2.8.0             ║
+║                                                                  ║
+╚══════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ▶  EXECUTION  —  exercice7.exe
+     C:\Users\NOELA\Desktop\ani-2053\chapitre-03\exo7-le_glisser_qui_sort\B
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ◀  FIN D'EXECUTION  —  termine normalement  (39.18s)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 Le résultat est le suivant :
 <img src="image2.jpeg" alt="fenetre" width="600">
@@ -124,8 +145,10 @@ On voit bien le titre rotation avec capture
 
 Maintenant on teste la capture
 <img src="image1.jpeg" alt="déplacement hors de la fenètre" width="600">
+Meme hors de la fenetre les coordonnées changent
+<img src="image3.jpeg" alt="déplacement hors de la fenètre" width="600">
 ## Pour le glisser sans capture
-Le code est le suivant :
+Cette partie est faite dans le dossier FirtsWindow.Le code est le suivant :
 ```
 #include "NKWindow/NKMain.h"
 #include "NKWindow/NKWindow.h"
@@ -226,31 +249,8 @@ Time:           3.91s
 Status:         ✓ SUCCESS
 ════════════════════════════════════════════════════════════════════════════════
 
-(venv) PS C:\Users\NOELA\Desktop\jen\FirstWindow> jenga run   
-
-╔══════════════════════════════════════════════════════════════════╗
-║                                                                  ║
-║                ██╗███████╗███╗   ██╗ ██████╗  █████╗             ║
-║                ██║██╔════╝████╗  ██║██╔════╝ ██╔══██╗            ║
-║                ██║█████╗  ██╔██╗ ██║██║  ███╗███████║            ║
-║           ██   ██║██╔══╝  ██║╚██╗██║██║   ██║██╔══██║            ║
-║           ╚█████╔╝███████╗██║ ╚████║╚██████╔╝██║  ██║            ║
-║            ╚════╝ ╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝            ║
-║                                                                  ║
-║             Multi-platform C/C++ Build System v2.8.0             ║
-║                                                                  ║
-╚══════════════════════════════════════════════════════════════════╝
-
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  ▶  EXECUTION  —  window.exe
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  ◀  FIN D'EXECUTION  —  termine normalement  (3.20s)
 ```
-Ce test a été éffectué dans un autre fichier 
+
 J'éxécute 
 ```
 PS C:\Users\NOELA\Desktop\jen\FirstWindow> jenga run
@@ -286,10 +286,11 @@ Lorsque l'on sort de la fenetre les coordonnées ne change plus peu importe ou s
 
 <img src="image6.jpeg" alt="fenetre" width="600">
 
-<img src="image2.jpeg" alt="fenetre" width="600">
-
 <img src="image5.jpeg" alt="fenetre" width="600">
 
 ## La différence entre un glissé qui commence dans la fentre et continue a l'exterieur, sans capture et avec capture
 - **Sans la capture** : si l'utilisateur maintient le clic droit, sort de la fenetre et relache le bouton à l'extérieur, la fenetre ne détecte pas le relachement. Conséquence en réentrant dans la fenetre, le jeu pense que le clic droit est toujours enfoncé, ce qui crée un sentiment de dysfonctionnement
 -  **Avec capture** : c'est le comportement utilisé dans les jeux (FPS, 3D) et les logiciels de modélisation 3D (Bkender, Unity, Unreal Engine). Tous les mouvements de la souris sont envoyés exclusivement à la fenetre meme si physiquement le curseur dépasse les limites de celle-ci. L'utilisateur peut faire tourner la caméra à 360 degré sans etre bloqué par les bords. Peu importe ou se trouve la souris au moment ou l'utilisateur relache le bouton droit, la fenetre recevra obligatoirement l'évènement. Il n'y a pas de pertubations extérieures, l'utilisateur ne risque pas de cliquer accidentellement sur le bureau ou sur une autre fenetre pendant qu'il controle sa caméra
+
+## REMARQUE
+la méthode Rotate de la structure Camera est vide pour cet exercice car la mise à jour du titre de la fenêtre secfait  avec Dx et Dy qui servent de témoin visuel pour valider la réception des événements.
