@@ -52,8 +52,6 @@ Time:           3.90s
 Status:         ✓ SUCCESS
 ════════════════════════════════════════════════════════════════════════════════
 
-(venv) PS C:\Users\NOELA\Desktop\ani-2053\chapitre-03\exo1-la_fenetre_nue> jenga run
-
 ```
 Ensuite je lance l'exécution avec la commande :
 ```
@@ -87,40 +85,11 @@ Le resultat est :
   ◀  FIN D'EXECUTION  —  termine normalement  (3.84s)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
+L'affichage de la fenetre nue
+<img src="image1.jpeg" alt="" width = 600>
 ## Explication du code ligne par ligne 
 
-Mon code a **27 lignes** au total
-Voici mon code annoté :
-```
-// inclusion des bibliothèques
-#include "NKWindow/NKMain.h" // inclusion de la 
-#include "NKWindow/NKWindow.h" // onclusion de la classe
-#include "NKEvent/NkWindowEvent.h" // inclusion de la gestion des évènements liées a la fenetre
-
-NKENTSEU_DEFINE_APP_DATA(([]() { return nkentseu::NkAppData{}; })()); // elle définie et initiale les données globales de l'application
-
-int nkmain(const nkentseu::NkEntryState &state) { // le point d'entrée ou la fonction principale du progamme
-    nkentseu::NkWindowConfig cfg ; // Définir les param-tres initiales de la fenetre tel que son nom, sa taille.
-        cfg.title  = "Ma fenetre";
-        cfg.width  = 1280 ;
-        cfg.height = 720 ;
-
-    nkentseu::NkWindow window(cfg);
-
-    if (!window.Create(cfg)) {
-        logger.Error("[app] creation fenetre echouee");
-        return -1;
-    }
-
-    bool running = true;   // déclaration de la variable utilisée pour la boucle principale 
-    while (running) { //Boucle d'évènement
-        while (auto* event = nkentseu::NkEvents().PollEvent()) {
-            if (event->Is<nkentseu::NkWindowCloseEvent>()) running = false;
-        }
-    }
-    return 0;
-}
-```
+Mon code a **18 lignes** au total
 ## Les lignes similaires a celles du chapitre sont :
 Le programme minimal du chapitre est le suivant : 
 ```
@@ -162,56 +131,21 @@ int nkmain(const NkEntryState& state) {
     return 0;
 }
 ```
-- l'inclusion des bibliothèques 
-```
-#include "NKWindow/NKWindow.h"
-#include "NKWindow/NKMain.h"
-```
-- cette ligne n'est pas présente dans mon code minimal
-```
-using namespace nkentseu;
-```
-- Les métadonnées de l'application lue par le runtime
-```
-NKENTSEU_DEFINE_APP_DATA(([]() {
-    NkAppData d{};
-    d.appName    = "MonJeu";
-    d.appVersion = "0.1.0";
-    return d;
-})());
-```
-- Le point d'entré du programme
-```
-int nkmain(const NkEntryState &state) {
-```
-
-- Crée un objet de configuration appartenant a la fentre : 
-```
-    NkWindowConfig cfg;
-```
-- Crée la fenetre et tester la création de la fenetre
-```
-NkWindow window;
-    if (!window.Create(cfg)) {
-        return -1;   // échec de création
-    }
-```
-- Définir les paramètres de configuration de la fentre
-```
-    cfg.title  = "Ma fenetre";
-    cfg.width  = 1280;
-    cfg.height = 720;
-``` 
-- La boucle principale
-```
-while (window.IsOpen()) {
-        while (NkEvent* ev = NkEvents().PollEvent()) {
-            // traiter les entrées — détaillé dans le guide NKEvent
-        }
-```
-- Fin du programme 
-```
- return 0 ;
-```
+|TABLEAU DE CORRESPONDANCE|        |       |
+|-------------------------|--------|-------|
+|lignes de mon code|Lignes du code du chapitre|Explications|
+| L1 (#include "NKWindow/NKMain.h")| L1 (#include "NKWindow/NKWindow.h")|Identiques|
+|L2 (#include "NKWindow/NKWindow.h")|L2 (#include "NKWindow/NKMain.h")|Identiques. Inclusion du module fenêtre|
+|OMIS|L4 (using namespace nkentseu;)|éviter d'importer tout l'espace de nommage dans la portée globale|
+|OMIS|L8 à 13 (NKENTSEU_DEFINE_APP_DATA(([]() {.....)|Supprimer car les métadonnées par défaut du runtime sont utilisées automatiquement, pour avoir le strict minimum.|
+|L4 (int nkmain(...))|L16 (int nkmain(...))|Les memes. Point d'entrée de l'application|
+|OMIS|L18 à 21 (NkWindowConfig cfg;...)|Supprimer Utilisation de la configuration par défaut du constructeur de NkWindow.|
+|OMIS|L24 (NkWindow window;)|Le constructeur par défaut initialise et crée directement la fenêtre à .Create(cfg).|
+|OMIS| L25 à 27 (if (!window.Create(cfg)) {...)|Évite la double création de fenêtre car l'état d'ouverture est géré par window.IsOpen()|
+|L9 (while (window.IsOpen()) {)|L30 (while (window.IsOpen()) {)|Condition de la boucle principale|
+|L10 (while (NkEvent* ev = NkEvents().PollEvent()) {)|L31 (while (NkEvent* ev = NkEvents().PollEvent()) {)|trdjdfct|
+|L11 à L13 (if (event->Is<nkentseu::NkWindowCloseEvent>())...)|OMIS|traitement de la fermeture de fenêtre avec window.Close()|
+|L14 à 15 ({})| L34 à 36|Fermeture de la boucle d'évènement|
+|L17 (return 0;)|L38 (return 0;)|Fin normale du programme|
 
 

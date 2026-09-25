@@ -23,7 +23,7 @@ with workspace("exo1-la_fenetre_nue"):
     #     u.Precompiled()
     
    
-    with project("exercice 1"):
+    with project("exercice1"):
          windowedapp()         
          language("C++")
          files(["./**.cpp"])

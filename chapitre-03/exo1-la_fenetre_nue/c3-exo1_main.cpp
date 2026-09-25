@@ -1,27 +1,19 @@
 #include "NKWindow/NKMain.h"
 #include "NKWindow/NKWindow.h"
-#include "NKEvent/NkWindowEvent.h"
-
-NKENTSEU_DEFINE_APP_DATA(([]() { return nkentseu::NkAppData{}; })());
 
 int nkmain(const nkentseu::NkEntryState &state) {
-    nkentseu::NkWindowConfig cfg ;
-        cfg.title  = "Ma fenetre";
-        cfg.width  = 1280 ;
-        cfg.height = 720 ;
+    // 1. Création unique de la fenêtre (utilise la config par défaut pour réduire le code)
+    nkentseu::NkWindow window;
 
-    nkentseu::NkWindow window(cfg);
-
-    if (!window.Create(cfg)) {
-        logger.Error("[app] creation fenetre echouee");
-        return -1;
-    }
-    
-    bool running = true;
-    while (running) {
+    // 2. Boucle principale basée sur l'état de la fenêtre (sans drapeau superflu)
+    while (window.IsOpen()) {
         while (auto* event = nkentseu::NkEvents().PollEvent()) {
-            if (event->Is<nkentseu::NkWindowCloseEvent>()) running = false;
+            if (event->Is<nkentseu::NkWindowCloseEvent>()) {
+                window.Close(); // Ferme proprement la fenêtre
+            }
         }
     }
+
     return 0;
 }
+
