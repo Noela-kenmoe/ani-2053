@@ -1,9 +1,22 @@
 # EXERCICE 4 
 Dans cet exercice il est question de affichez cote à cote le taille rendue par la fenetre, celle rendue par la cible de rendu, et le facteur d'échelle.
 
-Pour cela je commence par créer une fentre avec le code minimal suivant :
+Pour cela je commence par créer une fentre ensuite je récupère les grandeurs physiques et logiques :
 ```
-
+ nkentseu::math::NkVec2u windowSize = window.GetSize();        
+    nkentseu::math::NkVec2u renderTargetSize = window.GetDisplaySize(); 
+    nkentseu::float32 dpiScale = window.GetDpiScale(); 
+```
+je calcule le facteur S
+```    
+    float calculatedScale = (windowSize.x > 0) ? static_cast<float>(renderTargetSize.x) / static_cast<float>(windowSize.x) : 0.0f;
+```
+J'affiche les résultats
+```  
+       std::cout << "Fenetre: " << windowSize.x << "x" << windowSize.y << " | "
+          << "Cible de rendu: " << renderTargetSize.x << "x" << renderTargetSize.y << " | "
+          << "Echelle DPI: " << dpiScale 
+          <<"le resultat de S est :"<< calculatedScale << std::endl;
 ```
 La formule du facteur d'échelle est :
 - Facteur d'échelle : **S**
@@ -20,52 +33,7 @@ void SetTitle(const NkString &title);
 ```
 j'ajoutant ces varibles a des instruction de sortie et je compile
 ```
-PS C:\Users\NOELA\Desktop\ani-2053\chapitre-03\exo4-le_facteur_d_echelle> jenga build
 
-╔══════════════════════════════════════════════════════════════════╗
-║                                                                  ║
-║                ██╗███████╗███╗   ██╗ ██████╗  █████╗             ║
-║                ██║██╔════╝████╗  ██║██╔════╝ ██╔══██╗            ║
-║                ██║█████╗  ██╔██╗ ██║██║  ███╗███████║            ║
-║           ██   ██║██╔══╝  ██║╚██╗██║██║   ██║██╔══██║            ║
-║           ╚█████╔╝███████╗██║ ╚████║╚██████╔╝██║  ██║            ║
-║            ╚════╝ ╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝            ║
-║                                                                  ║
-║             Multi-platform C/C++ Build System v2.8.0             ║
-║                                                                  ║
-╚══════════════════════════════════════════════════════════════════╝
-
-Loading workspace...
-
-Configuration: Debug
-Target:        Windows x86_64
-Toolchain:     clang-mingw
-
-Build Order (1 projects):
-  1. exercice 4 [WINDOWED_APP]
-
-
-╔══════════════════════════════════════════════════════════════════════════════════════════════╗
-║  Project: exercice 4                                                     Kind: WINDOWED_APP  ║
-╚══════════════════════════════════════════════════════════════════════════════════════════════╝
-
-ℹ Found 1 source file(s)
-✓   [1/1] Compiled: c3-exo4_main.cpp
-ℹ Linking...
-✓ Built: Build\Bin\Debug-Windows\exercice 4\exercice 4.exe
-
-┌──────────────────────────────────────────────────────────────────────────────────────────────┐
-│  ✓ Build Successful                                                             Time: 4.86s  │
-└──────────────────────────────────────────────────────────────────────────────────────────────┘
-════════════════════════════════════════════════════════════════════════════════
-                                BUILD COMPLETED                                 
-════════════════════════════════════════════════════════════════════════════════
-Projects Built:  1/1
-Time:           4.87s
-Status:         ✓ SUCCESS
-════════════════════════════════════════════════════════════════════════════════
-```
-Je lance ensuite l'exécution et j'obtient :
 ```
 PS C:\Users\NOELA\Desktop\ani-2053\chapitre-03\exo4-le_facteur_d_echelle> jenga run
 

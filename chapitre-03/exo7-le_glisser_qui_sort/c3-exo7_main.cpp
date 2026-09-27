@@ -20,6 +20,7 @@ int nkmain(const nkentseu::NkEntryState &state) {
     cfg.title = "Rotation Camera avec Capture";
     cfg.width = 1280;
     cfg.height = 720;
+    
 
     NkWindow window(cfg);
     Camera camera;

@@ -67,3 +67,14 @@ vcpkg_installed/
 # test output & cache
 Testing/
 .cache/
+
+
+Build/
+*.exe
+*.lib
+*.dll
+*.o
+*.obj
+NkentseuKit/
+**/NkentseuKit/
+**/include/NKentseuKit/

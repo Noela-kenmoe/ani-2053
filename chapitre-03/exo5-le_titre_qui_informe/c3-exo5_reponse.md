@@ -130,8 +130,9 @@ jenga run
 ```
 J'éffectue la première modification en appuyant sur n'importe quelle touche du clavier. On obtient le résultat : 
 <img src="image2.png" alt="Texte alternatif" width="600">
-- En étirant ou en réduisant la fentre a la souris on obtient :
+- En étirant la fentre a la souris on obtient :
 <img src="image3.png" alt="Etirement" width="600">
+- En réduisant la taille de la fenetre
 <img src="image4.png" alt="réduire" width="600">
 - Sauvegarde du document avec **Ctrl+S**, le résultat est :
 <img src="image5.jpeg" alt="sauvegarde" width="300">

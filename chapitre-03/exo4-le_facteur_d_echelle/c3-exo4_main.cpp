@@ -8,10 +8,11 @@ NKENTSEU_DEFINE_APP_DATA(([]() { return nkentseu::NkAppData{}; })());
 int nkmain(const nkentseu::NkEntryState &state) {
     nkentseu::NkWindowConfig cfg ;
         cfg.title  = "Ma fenetre";
-        /*cfg.width  = 1280 ;
-        cfg.height = 720 ;*/
+        cfg.width  = 1280 ;
+        cfg.height = 720 ;
         cfg.minHeight = 50;
         cfg.minWidth = 100;
+        
 
     nkentseu::NkWindow window(cfg);
     if (!window.Create(cfg)) {
@@ -21,13 +22,15 @@ int nkmain(const nkentseu::NkEntryState &state) {
 
     nkentseu::math::NkVec2u windowSize = window.GetSize();        
     nkentseu::math::NkVec2u renderTargetSize = window.GetDisplaySize(); 
-    nkentseu::float32 dpiScale = window.GetDpiScale();             
+    nkentseu::float32 dpiScale = window.GetDpiScale();      
+    
+    float calculatedScale = (windowSize.x > 0) ? static_cast<float>(renderTargetSize.x) / static_cast<float>(windowSize.x) : 0.0f;
 
      
        std::cout << "Fenetre: " << windowSize.x << "x" << windowSize.y << " | "
           << "Cible de rendu: " << renderTargetSize.x << "x" << renderTargetSize.y << " | "
-          << "Echelle DPI: " << dpiScale << std::endl;
-
+          << "Echelle DPI: " << dpiScale << "|"
+          <<"le resultat de S est :"<< calculatedScale << std::endl;
     bool running = true;
     while (running) {
         while (auto* event = nkentseu::NkEvents().PollEvent()) {
