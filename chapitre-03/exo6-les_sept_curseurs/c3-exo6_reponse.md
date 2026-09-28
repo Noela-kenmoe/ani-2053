@@ -129,4 +129,6 @@ curseur sur la zone6-> nouveau curseur
 ```
 Le resultat est :
 
-<video src="./curseur.mp4)" controls width="100%"></video>
+<video controls width=600>
+<source src="./curseur.mp4" controls width="100%">
+</video>
