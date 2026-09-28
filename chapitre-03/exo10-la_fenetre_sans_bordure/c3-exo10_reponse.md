@@ -1,51 +1,104 @@
-# EXERCICE 6
-Dans cet exercice je dois faire apparaitre seot zones dans une fentre et change la forme du curseur selon la zone survolée.
+Le code qui permet d'éffectuer ces modifications sans **frame** est :
+```
+#include "NKWindow/NKMain.h"
+#include "NKWindow/NKWindow.h"
+#include "NKEvent/NkEventSystem.h"
+#include "NKEvent/NkWindowEvent.h"
+#include "NKEvent/NkMouseEvent.h"
+#include <string>
 
-Pour cela dans mon code je déclare une structure pour les différents types de curseurs
-```
- const NkWindow::NkCursorType zones[7] = {
-        NkWindow::NkCursorType::Arrow,	
-		NkWindow::NkCursorType::TextInput,	
-		NkWindow::NkCursorType::Hand,		
-		NkWindow::NkCursorType::ResizeNS,	
-		NkWindow::NkCursorType::ResizeWE,	
-		NkWindow::NkCursorType::ResizeNWSE, 
-		NkWindow::NkCursorType::ResizeNESW	
-    };
-```
-Puis je déclare une variable qui va représenter la zone survolée
-```
-int currentZoneIndex = -1;
-```
-Ensuite des structures de controle je :
-- recupère la largeur de la fenetre
-```
-float windowWidth = static_cast<float>(window.GetSize().x);
-```
-Ensuite je divise la largeur de la fenetre par 7
-```
-float zone = windowWidth / 7.0f;
-```
-Je définit la zone de survol pour chaque curseur
-```
-if(zoneindex < 0) zoneindex=0;
-if(zoneindex > 6) zoneindex = 6;
-```
+NKENTSEU_DEFINE_APP_DATA(([]() { return nkentseu::NkAppData{}; })());
 
-Pour finir j'applique les curseur sur chaque zone en utilisant l'énumération définit plus haut pour changer les curseurs en fonction de la zone survolée
-```
-if(zoneindex != currentZoneIndex){
-                currentZoneIndex = zoneindex;
+using namespace nkentseu;
 
-                window.SetCursor(zones[currentZoneIndex]);
-        
-                std::cout<<"curseur sur la zone" << currentZoneIndex <<"-> nouveau curseur "<<std::endl;
-              }
-        
+int nkmain(const nkentseu::NkEntryState &state) {
+    NkWindowConfig cfg;
+    cfg.title = "Rotation Camera (Sans Capture)";
+    cfg.width = 1280;
+    cfg.height = 720;
+    cfg.frame = false;
+   
+    NkWindow window(cfg);
+   
+    bool running = true;
+    while (running && window.IsOpen()) {
+        while (NkEvent* ev = NkEvents().PollEvent()) {
+
+            // Fermeture via signal OS (ex: Alt+F4)
+            if (ev->Is<NkWindowCloseEvent>()) {
+                window.Close();
+                running = false;
+            }
+
+            if (auto* press = ev->As<NkMouseButtonPressEvent>()) {
+                if (press->IsLeft()) {
+                    float x = press->GetX();
+                    float y = press->GetY();
+                    float winWidth = static_cast<float>(window.GetSize().x);
+
+
+                    if (y >= 0 && y <= 40) {
+                        // BOUTON RÉDUIRE (zone relative au bord droit)
+                        if (x >= winWidth - 150 && x < winWidth - 100) {
+                            window.Minimize();
+                            ev->MarkHandled();
+                        }
+                        // BOUTON MAXIMISER / RESTAURER
+                        else if (x >= winWidth - 100 && x < winWidth - 50) {
+                            if (window.IsMaximized()) {
+                                window.Restore();
+                            } else {
+                                window.Maximize();
+                            }
+                            ev->MarkHandled();
+                        }
+                        // BOUTON FERMER
+                        else if (x >= winWidth - 50 && x <= winWidth) {
+                            window.Close(); // Ferme réellement la fenêtre
+                            running = false;
+                            ev->MarkHandled();
+                        }
+                        // BARRE DE TITRE (Déplacement)
+                        else {
+                            window.BeginDragMove();
+                            ev->MarkHandled();
+                        }
+                    }
+                }
+            }
+
+          
+            if (auto* dbl = ev->As<NkMouseDoubleClickEvent>()) {
+                if (dbl->IsLeft()) {
+                    float x = dbl->GetX();
+                    float y = dbl->GetY();
+                
+                    float winWidth = static_cast<float>(window.GetSize().x);
+
+                    if (y >= 0 && y <= 40 && x < winWidth - 150) {
+                        if (window.IsMaximized()) {
+                            window.Restore();
+                        } else {
+                            window.Maximize();
+                        }
+                        ev->MarkHandled();
+                    }
+                }
+            }
+
+            if (auto* release = ev->As<NkMouseButtonReleaseEvent>()) {
+                if (release->IsLeft()) {
+                    ev->MarkHandled();
+                }
+            }
+        }
+    }
+    return 0;
+}
 ```
-Je compile ensuite
+Je compile
 ```
-PS C:\Users\NOELA\Desktop\ani-2053\chapitre-03\exo6-les_sept_curseurs> jenga build
+jenga build                                                               
 
 ╔══════════════════════════════════════════════════════════════════╗
 ║                                                                  ║
@@ -67,33 +120,32 @@ Target:        Windows x86_64
 Toolchain:     clang-mingw
 
 Build Order (1 projects):
-  1. exercice6 [WINDOWED_APP]
+  1. window [WINDOWED_APP]
+
 
 ╔══════════════════════════════════════════════════════════════════════════════════════════════╗
-║  Project: exercice6                                                      Kind: WINDOWED_APP  ║
+║  Project: window                                                         Kind: WINDOWED_APP  ║
 ╚══════════════════════════════════════════════════════════════════════════════════════════════╝
 
 ℹ Found 1 source file(s)
-✓   [1/1] Compiled: c3-exo6_main.cpp
+✓   [1/1] Compiled: main.cpp
 ℹ Linking...
-✓ Built: Build\Bin\Debug-Windows\exercice6\exercice6.exe
+✓ Built: Build\Bin\Debug-Windows\window\window.exe
 
 ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
-│  ✓ Build Successful                                                             Time: 4.92s  │
+│  ✓ Build Successful                                                             Time: 4.52s  │
 └──────────────────────────────────────────────────────────────────────────────────────────────┘
-
 ════════════════════════════════════════════════════════════════════════════════
                                 BUILD COMPLETED                                 
 ════════════════════════════════════════════════════════════════════════════════
 Projects Built:  1/1
-Time:           4.93s
+Time:           4.52s
 Status:         ✓ SUCCESS
 ════════════════════════════════════════════════════════════════════════════════
-
 ```
-J'exécute 
+Puis j'execute
 ```
-PS C:\Users\NOELA\Desktop\ani-2053\chapitre-03\exo6-les_sept_curseurs> jenga run
+jenga run
 
 ╔══════════════════════════════════════════════════════════════════╗
 ║                                                                  ║
@@ -110,23 +162,23 @@ PS C:\Users\NOELA\Desktop\ani-2053\chapitre-03\exo6-les_sept_curseurs> jenga run
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  ▶  EXECUTION  —  exercice6.exe
-     C:\Users\NOELA\Desktop\ani-2053\chapitre-03\exo6-les_sept_curseurs\Build\Bin\Debug-Windows\exercice6\exercice6.exe
+  ▶  EXECUTION  —  window.exe
+     C:\Users\NOELA\Desktop\jen\FirstWindow\Build\Bin\Debug-Windows\window\window.exe
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-curseur sur la zone1-> nouveau curseur 
-curseur sur la zone0-> nouveau curseur 
-curseur sur la zone1-> nouveau curseur 
-curseur sur la zone2-> nouveau curseur 
-curseur sur la zone3-> nouveau curseur 
-curseur sur la zone4-> nouveau curseur 
-curseur sur la zone5-> nouveau curseur 
-curseur sur la zone6-> nouveau curseur 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  ◀  FIN D'EXECUTION  —  termine normalement  (32.50s)
+  ◀  FIN D'EXECUTION  —  termine normalement  (62.29s)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
-Le resultat est :
+- J'essai d'agrandir la fenetre :
 
-<video src="./curseur.mp4)" controls width="100%"></video>
+<img src="img4.png" alt="" width= 600>
+
+- Je bouge la fenetre 
+
+<img src="img3.png" alt="" width=600>
+
+- Je peux réduire la fenetre
+
+<img src="img2.png" alt="" width=600>
