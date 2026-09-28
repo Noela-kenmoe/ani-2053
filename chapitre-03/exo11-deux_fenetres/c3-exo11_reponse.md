@@ -83,6 +83,42 @@ Nous voyons alors bien deux fenetres s'affichées
 <img src="cap1.png" alt="les deux fenetres" width=600>
 
 1. Lorsque j'effectue un clic les systèmes d'exploitation (Windows, Linux, macOS) attribuent un identifinat natif unique (handle) a chaque fenetre crée et c'est la fenetre qui se trouve sous le curseur qui recoit le clic. Celle qui est derriere ne recoit pas le clic
+
+En utilisant les identifiants des fenetres et loggers ont peut voir quelle fenetre recoit le clic 
+```
+PS C:\Users\NOELA\Desktop\ani-2053\chapitre-03\exo11-deux_fenetres> jenga run
+
+╔══════════════════════════════════════════════════════════════════╗
+║                                                                  ║
+║                ██╗███████╗███╗   ██╗ ██████╗  █████╗             ║
+║                ██║██╔════╝████╗  ██║██╔════╝ ██╔══██╗            ║
+║                ██║█████╗  ██╔██╗ ██║██║  ███╗███████║            ║
+║           ██   ██║██╔══╝  ██║╚██╗██║██║   ██║██╔══██║            ║
+║           ╚█████╔╝███████╗██║ ╚████║╚██████╔╝██║  ██║            ║
+║            ╚════╝ ╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝            ║
+║                                                                  ║
+║             Multi-platform C/C++ Build System v2.8.0             ║
+║                                                                  ║
+╚══════════════════════════════════════════════════════════════════╝
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ▶  EXECUTION  —  exercice11.exe
+     C:\Users\NOELA\Desktop\ani-2053\chapitre-03\exo11-deux_fenetres\Build\Bin\Debug-Windows\exercice11\exercice11.exe
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[2026-09-28 15:53:56.760] [INF] [default] [c3-exo11_main.cpp:76 in nkmain] -> clic sur la premiere fenetre
+[2026-09-28 15:53:56.762] [INF] [default] [c3-exo11_main.cpp:79 in nkmain] -> clic sur la premiere fenetre
+[2026-09-28 15:54:00.530] [INF] [default] [c3-exo11_main.cpp:76 in nkmain] -> clic sur la premiere fenetre
+[2026-09-28 15:54:00.531] [INF] [default] [c3-exo11_main.cpp:79 in nkmain] -> clic sur la premiere fenetre
+[2026-09-28 15:54:01.807] [INF] [default] [c3-exo11_main.cpp:82 in nkmain] -> clic sur la deuxieme fenetre
+[2026-09-28 15:54:03.846] [INF] [default] [c3-exo11_main.cpp:64 in nkmain] -> fermeture de la seconde fenetre
+[2026-09-28 15:54:11.523] [INF] [default] [c3-exo11_main.cpp:60 in nkmain] -> fermeture de la premiere fenetre
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ◀  FIN D'EXECUTION  —  termine normalement  (19.69s)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
 2. Ce qui manquerait pour dessiner dans les deux est :
 * un contexte graphique: chaque fenetre doit etre liée à une API de rendu (OpenGL, Vulkan, DirectX)
 * un gestionnaire de pipelin de rendu : pour définir la zone d'affichage adapté à la taille de chaque fenetre, effacer l'ecran (clear) et éxecuter les comandes d'affichage spécifiques à chacune

@@ -70,7 +70,18 @@ int nkmain(const nkentseu::NkEntryState &state) {
                }
                
             }
-         
+            
+            if(auto* clic = event->As<nkentseu::NkMouseButtonPressEvent>()){
+                   if(clic->GetWindowId() == fen1.GetId()){
+                   logger.Info("clic sur la première fenetre");
+            }
+            if(clic->GetWindowId() == fen1.GetId()){
+                logger.Info("clic sur la première fenetre");
+
+            }else if (clic->GetWindowId()== fen2.GetId()){
+                logger.Info("clic sur la deuxième fenetre");
+             }
+            }
             
               if (auto* keyEvent = event->As<nkentseu::NkKeyPressEvent>()){
                 if (keyEvent->GetKey() == nkentseu::NkKey::NK_ESCAPE) {
