@@ -30,7 +30,7 @@ int main (){
 
         long long zoom = static_cast<long long>(std::ceil(100.0/g));
         if(zoom <= 100){
-            std::cout<< r << " " << n << "" <<ecart <<" " << zoom << " VISIBLE \n";
+            std::cout<< r << " " << n << " " <<ecart <<" " << zoom << " VISIBLE \n";
             ++visibles;
         }else {
             std::cout<< r <<" "<< n << " " <<ecart <<" "<< zoom << " INVISIBLE \n";
