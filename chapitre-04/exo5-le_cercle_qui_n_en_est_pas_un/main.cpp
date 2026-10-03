@@ -23,7 +23,7 @@ int main (){
 
         double g = static_cast<double>(r)*(1.0-std::cos(pi/ static_cast<double>(n)));
         if(g== 0.0){
-            std::cout<< r << " " << n << "0 JAMAIS\n";
+            std::cout<< r << " " << n << " 0 JAMAIS\n";
             continue;
         }
         long long ecart = static_cast<long long>(std::floor(g*1000.0));
