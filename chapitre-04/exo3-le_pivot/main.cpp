@@ -17,7 +17,7 @@ int main (){
         std::cin>> nom >> w>>h >>px >> py >> ox >> oy >> sx>> sy>> angle;
 
         if (angle % 90 != 0){
-            std::cout<< nom<< "ANGLE REFUSE \n";
+            std::cout<< nom<< " ANGLE REFUSE \n";
             ++refus;
             continue;
         }
@@ -27,18 +27,18 @@ int main (){
             angleNormalise += 360;
 
         }
-          int cos= 0;
-          int sin = 0;
+          int cos;
+          int sin;
           if (angleNormalise == 0){
             cos = 1;
             sin = 0;
           }else if (angleNormalise == 90){
-            cos = -1;
-            sin = 0;
+            cos = 0;
+            sin = 1;
           }else if (angleNormalise == 180){
             cos = -1;
             sin = 0;
-          }else if(angleNormalise == 270){
+          }else {
             cos = 0;
             sin = -1;
           }
