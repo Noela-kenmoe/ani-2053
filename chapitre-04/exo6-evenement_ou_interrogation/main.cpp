@@ -58,7 +58,7 @@ int main (){
             
         }
         std::cout<<"SAUTS EVENEMENTS "<<sautsEvenements <<"\n";
-        std::cout<<"SAUTS INTERROGATIONS "<< sautsInterrogations<< "\n";
+        std::cout<<"SAUTS INTERROGATION "<< sautsInterrogations<< "\n";
         std::cout<<"MANQUES "<<manques<<"\n";
         return 0;
 }
