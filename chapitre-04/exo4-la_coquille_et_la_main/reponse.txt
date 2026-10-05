@@ -1,7 +1,7 @@
-Ce que la coquille me donne  :
+Ce que la coquille me donne:
 La coquille (NkCanvasApp) me fournit une architecture applicative clé en main qui masque toute la boucle d'exécution principale (while). Dans mon code pour le carré rouge, elle gère automatiquement l'ouverture de la fenêtre de 800x600, la création du contexte de rendu, le calcul précis du deltaTime passé à OnUpdate(deltaTime), ainsi que l'effacement de l'écran (target.Clear) et le rafraîchissement d'affichage autour de OnRender(target).
 Ce qu'elle me prend:
 La coquille me retire le contrôle direct sur la boucle de rendu et sur l'ordonnancement explicite des instructions. Je ne contrôle plus la boucle while ni le moment exact où les événements sont dépilés, car le framework m'impose de découper mon code dans les méthodes virtuelles surchargées (OnInit, OnUpdate, OnRender) d'une classe dérivée.elle masque le fonctionnement interne du moteur, ce qui rend plus difficile la gestion fine de plusieurs fenêtres simultanées ou la personnalisation avancée du rendu. 
 
-Quand je choisirais la main :
+Quand je choisirais la main:
 Je choisirais la boucle écrite à la main lorsque j'ai besoin d'un contrôle total sur le flux d'exécution, par exemple pour concevoir un moteur de jeu sur mesure, gérer simultanément plusieurs fenêtres, appliquer un pas de temps fixe pour la physique, ou personnaliser l'ordre précis de dépilement des événements.

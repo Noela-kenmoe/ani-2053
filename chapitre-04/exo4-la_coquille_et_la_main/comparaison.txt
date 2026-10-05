@@ -1,2 +1,2 @@
- coquille : 42 main: 61 rapport :145.23
+ coquille : 42, main: 61, rapport :145
  

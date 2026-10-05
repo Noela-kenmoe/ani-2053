@@ -61,7 +61,7 @@ int nkmain(const nkentseu::NkEntryState &state){
                 running = false;
             }
          }
-         posX += 100.0f; 
+         posX += 100.0f *dt; 
          if (posX > 800.0f){
             posX = -50.0f;
          }
