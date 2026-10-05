@@ -1,7 +1,7 @@
 EXERCICE 1
-Dans cet exercice il est question de crée une fenetre nue avec une couleur de fon a partir d'un code minimal.
-Pour cela j'utilise la coquille de NkCanvas. La coquille de NkCanvas s'occupe de crée et de gérer la fenetre, de preparer la boucle principale de l'application et de gérer les évènements de base, comme la fermeture de la fenetre avec la croix. Elle prend en charge une grande partie du travail necessaire au fonctionnement de la fenetre. On peut dire qu'elle remplace en quelque sorte toute la gestion de fenetre que nous aurions normalement du écrire nous-memes.
-- Ce qui se passe si je configure dans OnInit:
+Ce que la coquille fait a ma place :
+La coquille de NkCanvas s'occupe de crée et de gérer la fenetre, de preparer la boucle principale de l'application et de gérer les évènements de base, comme la fermeture de la fenetre avec la croix. Elle prend en charge une grande partie du travail necessaire au fonctionnement de la fenetre. On peut dire qu'elle remplace en quelque sorte toute la gestion de fenetre que nous aurions normalement du écrire nous-memes.
+Ce qui se passe si je configure dans OnInit:
 Si je configure le titre, le taille ou la couleur de fond dans OnInit au lieu du constructeur, la configuration est faite pendant l'initialisation de l'application. Le comportement peut alors etre différent de celui attendu par l'exercice, le constructeur est l"endroit demandé pour définir ces paramètres avant le lancement de l'application.
-- Ce qui se passe sans NKMain.h
+Ce qui se passe sans NKMain.h :
 Sans NKMain.h, la déclaration et les éléments nécessaires au point d'entrée nkmain ne sont pas disponibles.Le programme ne peut donc pas etre construit correctement avec le point d'entrée attendu paar NKCanvas. NKMain.h permet notamment d'utiliser nkmain et d'appeler NkCanvasApp::Run pour lancer correctement l'application 
