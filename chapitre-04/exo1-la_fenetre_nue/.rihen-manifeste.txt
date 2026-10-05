@@ -1,0 +1,47 @@
+]633;E;for f in fenetre.cpp mesure.txt reponse.txt\x3b do if [ -f $f ]\x3b then echo FICHIER $f $(wc -c < $f)\x3b else echo FICHIER $f ABSENT\x3b fi\x3b done > .rihen-manifeste.txt\x3b for f in fenetre.cpp mesure.txt reponse.txt\x3b do echo --- $f >> .rihen-manifeste.txt\x3b cat $f >> .rihen-manifeste.txt 2>/dev/null\x3b echo >> .rihen-manifeste.txt\x3b done\x3b printf '#!/bin/sh\\ncat .rihen-manifeste.txt\\n' > programme\x3b chmod +x programme;1c4ebe0c-5cbe-4490-8214-e5cf29b4b838]633;CFICHIER fenetre.cpp 1033
+FICHIER mesure.txt ABSENT
+FICHIER reponse.txt 0
+--- fenetre.cpp
+#include "NKWindow/Core/NkWindow.h"
+#include "NKCanvas/Renderer/Targets/NkRenderWindow.h"
+#include "NKCanvas/Core/NkContextDesc.h"
+#include "NKCanvas/Core/NkGraphicsApi.h"
+
+using namespace nkentseu;
+using namespace nkentseu::renderer;
+
+class fenetre : public NKCanvasApp{
+    public :
+       fenetre()
+       {
+        config().title= "fenetre nue";
+        config().width= 900;
+        config().height= 500;
+        config().clearColor = NkColor2D(18,18,24,255);
+       }
+};
+
+int nkmain(const NkEntryState& state) {
+   
+    /*NkWindow window;
+    NkWindowConfig cfg;
+    cfg.title  = "Hello NKCanvas";
+    cfg.width  = 1280;
+    cfg.height = 720;
+    if (!window.Create(cfg)) return -1;
+
+    // 2) Choisir le backend graphique.
+    NkContextDesc desc;
+    desc.api = NkGraphicsApi::NK_GFX_API_OPENGL;   // OpenGL ici
+
+    
+    NkRenderWindow target(window, desc);
+    if (!target.IsValid()) return -1;*/
+
+    // ... boucle de rendu (section 3) ...
+    return NKCanvasApp::Run<fenetre>(state);
+}
+--- mesure.txt
+
+--- reponse.txt
+
