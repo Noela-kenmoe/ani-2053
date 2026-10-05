@@ -1,0 +1,7 @@
+Ce que fait la barre sans ResetView :
+Sans l'appel à ResetView(), la barre d'interface utilisateur défile vers la gauche en même temps que le reste du monde et finit par sortir de l'écran. Au lieu de rester fixe en haut de la fenêtre, elle se déplace comme si elle appartenait au monde du jeu.
+Pourquoi :
+La fonction SetView(worldView) applique une transformation globale à toutes les commandes de rendu qui la suivent. Sans réinitialisation de la vue, la barre est dessinée dans le système de coordonnées du monde dont le centre avance continuellement avec le delta-time, au lieu d'être dessinée dans le repère par défaut de la fenêtre.
+
+Ou placer l'appel :
+L'appel ResetView() doit être placé juste après le dessin des éléments du monde (la rangée de carrés) et juste avant le dessin de l'interface utilisateur (la barre supérieure). Cela garantit que la vue personnalisée ne s'applique qu'au monde et que le HUD est dessiné dans les coordonnées écran.
