@@ -1,11 +1,11 @@
 #include <iostream>
 #include <string>
-#include <cstdint>
+//#include <cstdint>
 #include <vector>
 #include <cctype>
 #include <algorithm>
-#include <unordered_map>
-#include <unordered_set>
+//#include <unordered_map>
+//#include <unordered_set>
 
 int main (){
     std::ios_base::sync_with_stdio(false);
@@ -45,10 +45,14 @@ int main (){
        }else if (octets.size() >= 8 && octets.substr(0, 8) == "762F3101"){
          format = "EXR";
       }else if (octets.size() >= 4 && octets.substr(0, 2) == "50" && octets[2] >= '1' && octets[2] <= '6' ){
-    char v = octets[2];
+    /*char v = octets[2];
     if (v == '1' || v == '4') format = "PBM";
     else if (v == '2' || v == '5') format = "PGM";
-    else if (v== '3' || v == '6') format = "PPM";
+    else if (v== '3' || v == '6') format = "PPM";*/
+       std::string b1 = octets.substr(2, 2);
+            if (b1 == "31" || b1 == "34") format = "PBM";
+            else if (b1 == "32" || b1 == "35") format = "PGM";
+            else if (b1 == "33" || b1 == "36") format = "PPM";
 
    }else if ( taille >= 18 && octets.size() >= 6){
         std::string b2 = octets.substr(4, 2);
@@ -139,9 +143,9 @@ int main (){
         }
     } 
 
- std::cout<< " LUS "<< lus<<"\n";
- std::cout<< " MENSONGES "<< mensonges<<"\n";
- std::cout<< " REFUSES "<< refuses<<"\n";
+ std::cout<< "LUS "<< lus<<"\n";
+ std::cout<< "MENSONGES "<< mensonges<<"\n";
+ std::cout<< "REFUSES "<< refuses<<"\n";
 
 return 0;
 }
