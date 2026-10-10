@@ -8,6 +8,8 @@
 #include <unordered_set>
 
 int main (){
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
    int N;
    if (!(std::cin>> N)) return 0;
     int lus = 0;
