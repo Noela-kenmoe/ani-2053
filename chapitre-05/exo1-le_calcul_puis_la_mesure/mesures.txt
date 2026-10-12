@@ -1,0 +1,5 @@
+image : screenshot.png, calcul : 1048576, mesure : 1048, fichier : 4719267
+image : facebook.png, calcul : 4719267, mesure : 4 664, fichier : 1048576
+image : dessin.png, calcul : 4544400, mesure : 4 424, fichier : 4544400
+image : photo1.jpg, calcul : 24883200, mesure : 23 936, fichier : 24883200
+image : photo2.jpg, calcul :  1555200, mesure 1 800: , fichier : 1555200
