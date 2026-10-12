@@ -1,0 +1,3 @@
+Ce que le refus m'apprend : le lecteur n'a pas réussi à ouvrir le fichier comme une vidéo lisible.La sonde peut néamoins reconnaitre le conteneur et certaines pistes
+Ce qu'il ne m'apprend pas : le refus ne donne pas toujours la cause exacte de l'échec. Il ne prouve pas à lui seul que le fichier est corompu ou que le codec est incompatible
+Comment j'ai trouvé la cause : pour trouver la cause, j'ai comparé la vidéo originale, sa copie coupée à la moitéi et le fichier texte renommé en MP4.J'ai ensuite comparé le resultat de Open avec les informations fournies par Probefile pour mieux comprendre chaque refus.

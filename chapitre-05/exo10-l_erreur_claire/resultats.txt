@@ -1,0 +1,6 @@
+fichier: vid1.mp4, ouvert: oui
+images: 148, sonde : MP4
+fichier: vid2.mp4, ouvert: oui
+images: 70, sonde : MP4
+fichier: test.mp4, ouvert: non
+images: 0, sonde : inconnu
