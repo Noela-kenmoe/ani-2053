@@ -1,0 +1,1 @@
+taille : 18, glyphes : 189, texture : 512 512, perdu : 60

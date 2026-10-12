@@ -1,0 +1,6 @@
+Pourquoi une seule texture :
+Il y a une suele texture car cela permet d'envoyer l'ensemble des glyphes en une seule fois à la carte graphique (GPU), ce qui évite de multiplier les changements de texture et optimise considérablement les performances de rendu
+Ce que change la taille :
+Une taille de police plus grande comme 48 augmente la résolution des glyphes, ce qui nécessite une texture beaucoup plus grande comme par exemple (1024*1024 ou plus encore)et augmente l'espace vide perdu
+A quoi sert la marge entre glyphes :
+la marge empeche les glyphes adjacents de se déborder ou de se mélanger lors du filtrage des textures (interpolation linéaire, mipmap), évitant ainsi des artefacts visuels indésirables sur les caractères à l'écran
