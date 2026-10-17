@@ -1,0 +1,14 @@
+Types complets : [taille mesurée] octets
+
+Quantifié : [taille mesurée] octets
+
+Écart maximal :
+État : [écart mesuré]
+Numéro : [écart mesuré]
+Position X : [écart mesuré]
+Position Y : [écart mesuré]
+Angle : [écart mesuré]
+Santé : [écart mesuré]
+
+Ce que le joueur verrait :
+[Expliquer les effets des écarts réellement mesurés.]
