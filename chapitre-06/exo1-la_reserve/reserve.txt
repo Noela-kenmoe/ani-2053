@@ -1,0 +1,7 @@
+Réserve : 0.87ms, 0.87ms, 0.87ms
+Fils : 23.89ms, 23.89ms, 23.89ms
+Ouvriers : 4
+Tache longue :
+réserve : 17.38 ms, Fils : 38.35 ms
+Pourquoi : 
+Pour la téche courte, la création et la destructionrépétées de 200 threads systèmes distincts génèrent un surcout d'allocation et de gestion très lourde, alors que la réserve (thread pool) réutilise ses 4 ouvriers déja créés, ce qui rend l'exécution presque instantanée. Lorsque la tache devient 100 fois plus longue (100000 itérations), le temps de calcul brut devient prédominant devant le cout fixe de création des threads.
