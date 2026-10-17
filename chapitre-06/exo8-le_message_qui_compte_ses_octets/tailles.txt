@@ -1,14 +1,6 @@
-Types complets : [taille mesurée] octets
+Types complets : 18 octets Quantifié : 8 octets
 
-Quantifié : [taille mesurée] octets
-
-Écart maximal :
-État : [écart mesuré]
-Numéro : [écart mesuré]
-Position X : [écart mesuré]
-Position Y : [écart mesuré]
-Angle : [écart mesuré]
-Santé : [écart mesuré]
+Écart maximal : etat : 0, numéro : 0, position X : 0, position Y : 2.67029e-05, angle :0; sante : 0 
 
 Ce que le joueur verrait :
-[Expliquer les effets des écarts réellement mesurés.]
+Le joueur ne verait aucunes différence perceptible dans cet exemple. Les positions et l'angle sont conservés avec une précision suffisante pour un jeu en temps réel. La quantification réduit la taille du paquet de 18 à 8 octets, soit une économie de 10 octets.
