@@ -1,0 +1,24 @@
+Dix totaux :
+2197817
+3750255
+2362523
+2130918
+4816666
+3138716
+2151514
+2399078
+2345764
+3447529
+
+Un seul fil : 1000000
+
+Release :
+2836629
+2349487
+3440982
+
+Pourquoi :
+Lorsque plusieurs fils exécutent l'incrémentation en meme temps sans mécanisme de synchronisation, l'opération n'est pas atomique, elle est découpée en plusieurs micor-étapes par le processeur. Un fil peut lire une valeur, se faire interrompre pendant qu'un autre fils modifie cette valeur, ce qui entraine un écrasement des données e une perte d'incrémentation (course ou data race). La version Release se comprte différement car les optimisations poussées du compilateur modifient l'exécution et la vitesse des instructions machine, ce qui change la fréquence des conflits d'accès en mémoire.
+
+
+
