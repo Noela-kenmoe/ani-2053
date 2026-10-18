@@ -1,0 +1,6 @@
+Sans protection : 2348132   26.593 ms 
+Mutex : 8000000     200.501 ms  
+Atomic : 8000000     144.01 ms   
+Local : 8000000 5.6072 ms
+La moins chère : Local
+Pourquoi : La version locale ne subit aucunes contention ni synchronisation entre les threads pendant l'incrémentation car chacun threads travaille exclusivement sur sa propre variable. La synchronisation ne s'effectue qu'une seule fois a la fin lors de l'addition des totaux
