@@ -1,32 +1,3 @@
-/*#include "NKWindow/NKMain.h"
-#include "NKThreading/NkThreadingApi.h"
-#include "NKThreading/NkThreadPool.h"
-#include "NKLogger/Sinks/NkAsyncSink.h"
-#include <iostream>
-#include <vector>
-
-
-int nkmain(const nkentseu::NkEntryState &state) {
-    long long compteur = 0;
-    nkentseu::NkChrono chrono;
-    chrono.BeginPreciseTiming();
-    std::vector<nkentseu::threading::NkThread*> threads(kNumThreads);
-    for(int i= 0; i< kNumThreads; i++){
-         threads[i] = new nkentseu::threading::NkThread([&](auto&&...){
-            for (int i = 0; i < 1000000; ++i) {
-             compteur += 1; 
-            }
-         });
-    }
-    for(int i=0; i< kNumThreads; ++i){
-         threads[i]->Join();
-         delete threads[i];
-    }
-    double tempsMs = chrono.GetElapsedMilliseconds();
-    std::cout<<"Sans protection -> Total : "<< compteur << "| Temps :"<<tempsMs<<" ms"<<std::endl;
-    }
-}*/
-
 #include <iostream>
 #include <vector>
 #include "NKWindow/NKMain.h"
