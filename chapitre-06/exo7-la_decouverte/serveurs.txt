@@ -1,0 +1,10 @@
+Liste :
+Nom : MonServeurLocal  Adresse : 10.10.10.10:10  Joueurs max : 4
+Nom : MonServeurLocal  Adresse : 10.10.10.10:10  Joueurs max : 4
+Nom : MonServeurLocal  Adresse : 10.10.10.10:10  Joueurs max : 4
+Apparitions :
+Le serveur a été détecté et  afficher à trois reprises successives lors de la fenetre d'écoute de 6 secondes
+Pourquoi :
+Cela est du au fait que le thread serveur émet un paquet de diffusion (broadcast) toutes les deux secondes, et que la fonction d'écoute (Listen) du client intercepte chaque paquet recu en les stockant un par un dans le vecteur de resultats
+Machines : 
+L'exercice a été fait entièrement en local sur une machine, simulant simultanément le client et le serveur par le biais de threads parallèles
