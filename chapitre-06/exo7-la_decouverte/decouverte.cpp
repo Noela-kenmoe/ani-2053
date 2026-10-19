@@ -9,7 +9,6 @@
 using namespace nkentseu;
 using namespace net;
 
-// Fonction exécutée en arrière-plan pour simuler le serveur qui diffuse
 void RunServerTask(bool& keepRunning) {
     NkDiscovery::ServerInfo info{};
     std::strncpy(info.name, "MonServeurLocal", sizeof(info.name) - 1);
