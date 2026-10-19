@@ -12,7 +12,6 @@
 using namespace nkentseu;
 using namespace net;
 
-// 1. Fonction exécutant le serveur en arrière-plan (mode écho)
 void RunServerTask(bool& keepRunning, uint16 port) {
     NkConnectionManager serverManager;
     if (serverManager.StartServer(port, 4) != NkNetResult::NK_NET_OK) {
@@ -23,7 +22,6 @@ void RunServerTask(bool& keepRunning, uint16 port) {
         NkVector<NkReceiveMsg> serverMsgs;
         serverManager.DrainAll(serverMsgs);
         for (usize m = 0; m < serverMsgs.Size(); ++m) {
-            // Écho : renvoyer immédiatement le message reçu à l'expéditeur
             (void)serverManager.SendTo(serverMsgs[m].from, serverMsgs[m].data, serverMsgs[m].size, serverMsgs[m].channel);
         }
         NkChrono::SleepMilliseconds(1);
@@ -36,17 +34,10 @@ int nkmain(const nkentseu::NkEntryState &state) {
 
     constexpr uint16 kPort = 7777;
     bool serverRunning = true;
-
-    // 2. Démarrage du serveur dans un thread séparé
     std::thread serverThread(RunServerTask, std::ref(serverRunning), kPort);
-
-    // Petite pause pour laisser le serveur s'initialiser
     NkChrono::SleepMilliseconds(100);
 
-    // 3. Partie Client
     NkConnectionManager connectionManager;
-
-    // Attente de l'établissement de la connexion (handshake)
     NkPeerId serverPeer {};
     connectionManager.onPeerConnected = [&](NkPeerId peerId){
         serverPeer = peerId;
@@ -86,16 +77,12 @@ int nkmain(const nkentseu::NkEntryState &state) {
     double srtt = 100.0; 
     double alpha = 0.125;
 
-    // Boucle pour effectuer 100 allers-retours, un message à la fois
     for (int i = 0; i < 100; ++i) {
         NkChrono chrono;
         chrono.BeginPreciseTiming();
-
-        // 1. Envoyer le message numéroté i
         uint32 messageId = static_cast<uint32>(i);
         (void)connectionManager.SendTo(serverPeer, reinterpret_cast<const uint8*>(&messageId), sizeof(messageId), NkNetChannel::NK_NET_CHANNEL_RELIABLE_ORDERED);
 
-        // 2. Attendre le retour du même numéro en vidant la file par DrainAll
         bool recu = false;
         for (int timeout = 0; timeout < 1000 && !recu; ++timeout) {
             NkVector<NkReceiveMsg> messages;
@@ -113,18 +100,12 @@ int nkmain(const nkentseu::NkEntryState &state) {
                 NkChrono::SleepMilliseconds(1);
             }
         }
-
-        // 3. Mesurer le temps écoulé si le message est bien revenu
         if (recu) {
             double R = chrono.Elapsed().milliseconds;
             mesures.push_back(R);
-
-            // 4. Calculer la valeur lissée : SRTT
             srtt = (1.0 - alpha) * srtt + alpha * R;
         }
     }
-
-    // Calculs statistiques
     if (!mesures.empty()) {
         double somme = std::accumulate(mesures.begin(), mesures.end(), 0.0);
         double moyenne = somme / mesures.size();
@@ -139,8 +120,6 @@ int nkmain(const nkentseu::NkEntryState &state) {
         moteurR = stats.rttMs;
     }
     std::cout<< "Moteur : "<<moteurR<< "ms "<<std::endl;
-
-    // Nettoyage propre
     connectionManager.Shutdown();
     serverRunning = false;
     if (serverThread.joinable()) {
