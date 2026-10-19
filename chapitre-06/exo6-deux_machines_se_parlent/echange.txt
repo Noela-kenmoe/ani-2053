@@ -1,0 +1,9 @@
+serveur : 
+[SERVEUR] Pair connecte ! ID value = 12302622222293830721
+Client :
+[CLIENT] Connecte au serveur ! ID value du pair = 
+1
+Pairs : 
+Au niveau du serveur : 12302622222293830721 cet identifiant désigne le client distant connecté. Au niveau du client , l'identifiant (1) désigne le serveur distant auquel il est relié
+Machines : 
+Une seule machine utilisée (localhost), en employant l'adrresse IP 127.0.0.7 et le port 7777 pour faire communiquer le client et le serveur au sein du meme processus via deux fils d'éxécution distincts
