@@ -1,0 +1,7 @@
+Moyenne : 256.814 ms
+Minimum : 216.411 ms
+Maximum : 597.398 ms
+Lissée : 250.5 ms
+Moteur : 18.453 ms
+Écart :
+Les mesures applicatives(256.814) prend en compte le temps total de votre boucle, incluant les micro-pauses(SleepMilliseconds), le traitement séquentiel et le vidage de la file. Le moteur (18.453 ms) reflète la latence des paquets gérés en arrière-plan par la boucle réseau(NetThreadLoop) indépendement des temps d'attente du script.

@@ -105,6 +105,9 @@ int nkmain(const nkentseu::NkEntryState &state) {
             mesures.push_back(R);
             srtt = (1.0 - alpha) * srtt + alpha * R;
         }
+        for(usize i = 0; i < mesures.size() && i<100 ; i++){
+            std::cout<< mesures[i] << std::endl;
+        }
     }
     if (!mesures.empty()) {
         double somme = std::accumulate(mesures.begin(), mesures.end(), 0.0);
