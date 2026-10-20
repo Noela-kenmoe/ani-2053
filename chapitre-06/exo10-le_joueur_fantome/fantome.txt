@@ -1,0 +1,5 @@
+Coupure : pas de coupure 
+Fermeture propre : 2 ms 
+Raison  : En cas de coupure brute , la raison recu correspond a un dépassement de délai(timeout) ou une perte de liason. Lors d'une fermeture prore, la raison recue indique un arret volontaire du pair 
+Table : Avant la déconnexion, la table (playerTable) a enregistré et maintenu l'identifiant unique du joueur connecté (ID :19864196782684253 ) ainsi que son dernier message. Après la déconnexion, l'entrée a été retrouvée et effacée de la structure via playerTable.erase(it) pour nettoyer la table.
+Fils : C'est le fil réseau asynchrone de la bibliothèque (géré par la boucle NetThreadLoop visible dans les logs) qui appelle onPeerDisconnected[span_3](start_span)[span_3](end_span). Cela impose d'utiliser un mutex (NkMutex) et un verrou (NkScopedLock) pour protéger l'accès concurrentiel à la table des joueurs.
