@@ -1,0 +1,4 @@
+Constat : Le programme se fige complètement que je lance.La console N'affiche aucuns messages d'erreur ni rapport de crash , car les deux fils s'attendent mutuellement indéfiniment.
+Pause : Le fils A est bloqué en attente du mutex m2 (à la ligne ou j'ai mis m2 après les 100ms). Le fil B est bloqué lui aussi en attente du mutex m1 (à la ligne ou j'ai mis m1 après les 100ms). Chacun détient le mutex que l'autre veut.
+Correction : Pour cela, j'ai modifier l'ordre d'acquisition des mutex pour que tous les fils acquièrent les verrous dans le meme ordre strict(par exemple, toujours m1 ensuite m2), ce qui élimine la condition circulaire d'attente.
+Règle : Pour éviter tout blocage -deadlock dans un programme, tous les fils doivent toujours acquèrir les ressources partagées(mutex) dans le meme ordre global et prédéfini.
