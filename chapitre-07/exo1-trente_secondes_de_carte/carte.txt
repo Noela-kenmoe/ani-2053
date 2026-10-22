@@ -1,0 +1,17 @@
+Module : NKLogger
+D'après le projet : 
+Le module contient 5 dépendances parmis lesquelles NKContainers,NKCore, NKMemory, NKPlatform, NKThreading. 
+Le module a lui meme est un système de journalisation qui permet donc d'envoyer des
+messages comme (les informations, des avertissements ou des erreurs),de tracer en temps réel
+ce que fait un programme tels que l'établissement d'une connexion reseau, l'envoie de paquets, 
+de classifier les messages selon leur importance pour garder une console lisible 
+Après l'entete : 
+Après la lecture de l'entete "NKLogger/Sinks/NkLogger.h" le module NkLogger est la classe principale du système de logging avec support multi-sonk. C'est le point d'entré central pour émettre des messages de log vers une ou plusieurs destinations configurables. Ces fonctionnalités sont  : 
+-L'envoie simultané vers console, fichier, reseau
+-Patterns style splog ou formatage positionnel NkFormat
+-Capture automatique de fichier/ligne/fonctionnalités
+- Synchronisation interne pour usage concurrent
+- Control granulaire de la verbosité
+Mes erreurs :
+Le module NkLogger ne permet pas seulement l'envoie des messages mais aussi le nettoyage UTF-8
+ pour sécuriser les outputs, le controle granulaire de la verbosité.
