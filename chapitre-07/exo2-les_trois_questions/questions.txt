@@ -1,0 +1,13 @@
+Ce qu'il possède : 
+Il possède 8 chose une position(mPosition), une rotation(mRotation), une échelle(mScale), une origine(mOrigin),
+les données misent a part sont : mCachedTransform, mCachedInverse, mDirty, mInverseDirty. Elles ont mise à part
+par ce qu'elles ne sont de simples données de cache dérivées et optionnelles et ne constituent pas l'état fondamental de l'objet.
+
+Qui l'appelle : 
+Il est appelé dans toutes les classes drawable qui veulent etre positionnables ou animées
+
+Ce qu'il promet : il promet de faire tourner un objet autour d'un axe de rotation par rapport a un angle et a son origin en
+ appliquant une echelle et peut retourner l'inverse de la transformations
+
+Ce que je n'ai pas lu :
+Avant d'ouvrir le module je savait deja qu'il permettait de transformer un objet soit de le déplacer ou l'agrandir
