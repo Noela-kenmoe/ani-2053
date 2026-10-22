@@ -1,17 +1,19 @@
 Module : NKLogger
+
 D'après le projet : 
-Le module contient 5 dépendances parmis lesquelles NKContainers,NKCore, NKMemory, NKPlatform, NKThreading. 
-Le module a lui meme est un système de journalisation qui permet donc d'envoyer des
-messages comme (les informations, des avertissements ou des erreurs),de tracer en temps réel
-ce que fait un programme tels que l'établissement d'une connexion reseau, l'envoie de paquets, 
-de classifier les messages selon leur importance pour garder une console lisible 
-Après l'entete : 
-Après la lecture de l'entete "NKLogger/Sinks/NkLogger.h" le module NkLogger est la classe principale du système de logging avec support multi-sonk. C'est le point d'entré central pour émettre des messages de log vers une ou plusieurs destinations configurables. Ces fonctionnalités sont  : 
+Le module contient 5 dépendances parmis lesquelles NKContainers,NKCore, NKMemory, NKPlatform, NKThreading. NKContainers contient un ensemble de structures de données qui permettent de stocker
+des données sous des formes précises(NkVector,NkRectangle), NKCore permet de d'utiliser les types et les conteneurs pour les données, NKMemory permet la gestion de l'allocation mémoire, NKPlatform
+quant a lui est le gestionnaire de backend qui permet au système de détecter les plateformes sur lesquels il est utilisé(linux, windows, Android)et pour finir NKThreading qui gère les fils d'exécution
+du programme. En gros le module permet d'envoyer des messagessous plusieurs types de données et prend en peut se faire sous différentes plateformes et a travers plusieurs fils d'exécution. Il ne contient 
+pas de fenetre ni de geston d'image et ne permet donc pas d'afficher un rendu visuel tout se passe dans le terminal.
+
+Après l'en-tête : 
+Après la lecture de l'entete "NKLogger/NkLogger.h" le module NkLogger est la classe principale du système de logging avec support multi-sonk. C'est le point d'entré central pour émettre des messages de log vers une ou plusieurs destinations configurables. Ces fonctionnalités sont  : 
 -L'envoie simultané vers console, fichier, reseau
 -Patterns style splog ou formatage positionnel NkFormat
 -Capture automatique de fichier/ligne/fonctionnalités
 - Synchronisation interne pour usage concurrent
 - Control granulaire de la verbosité
+
 Mes erreurs :
-Le module NkLogger ne permet pas seulement l'envoie des messages mais aussi le nettoyage UTF-8
- pour sécuriser les outputs, le controle granulaire de la verbosité.
+Le module me faisait croire qu'il servait juste a envoyer des messages d'erreurs ou de confirmation dans le terminal lors de l'exécution d'un programme avec les (logger.Info), alors qu'il possède d'autres fonctionnalitées ttoutes aussi importantes
