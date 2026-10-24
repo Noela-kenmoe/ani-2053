@@ -1,13 +1,14 @@
 Ce qu'il possède : 
-Il possède 8 chose une position(mPosition), une rotation(mRotation), une échelle(mScale), une origine(mOrigin),
+Il possède 4 choses une position(mPosition), une rotation(mRotation), une échelle(mScale), une origine(mOrigin),
 les données misent a part sont : mCachedTransform, mCachedInverse, mDirty, mInverseDirty. Elles ont mise à part
 par ce qu'elles ne sont de simples données de cache dérivées et optionnelles et ne constituent pas l'état fondamental de l'objet.
 
 Qui l'appelle : 
-Il est appelé dans toutes les classes drawable qui veulent etre positionnables ou animées
+Il est appelé dans toutes les fichiers suivants : NkDrawable.h, NkSprite.h, NkLineShape.h,
+NkRectangleShape.h, NkShape.h. La classe NkSprite par exemple l'utilise dans sa définition comme un membre publique, ainsi que la classe NkText
 
-Ce qu'il promet : il promet de faire tourner un objet autour d'un axe de rotation par rapport a un angle et a son origin en
- appliquant une echelle et peut retourner l'inverse de la transformations
+Ce qu'il promet : il promet de trouver la position d'un objet aisni que son origine puis d'appliquer un angle de rotation a partir de se point d'origine
+fixer l'echelle et un point de rotation, enregistrer la position et l'angle de rotation puis effectuer les différente transformation tels que le déplacement, la rotaion, l'agrandissement et l'inverse de la transformation 
 
 Ce que je n'ai pas lu :
-Avant d'ouvrir le module je savait deja qu'il permettait de transformer un objet soit de le déplacer ou l'agrandir
+Je n'ai pas eu besoin d'ouvrir pour connaitre ce que promettait le contenu de ce fichier 
