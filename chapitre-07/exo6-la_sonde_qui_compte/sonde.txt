@@ -1,0 +1,15 @@
+Plafond 60 :
+Passage : 599 Temps : 10.004s
+
+Sans plafond : 
+Passage : 604 Temps : 10.0062s
+
+Sans la ligne : 
+A 60FPS :   600 paasages en 10.0136 secondes.
+A 0 FPS :  605 paasages en 10.0161 secondes.
+
+Les carts : 
+A 60 FPS, la prommesse theorique est 60*10 = 600 passages ce qui est très proche du resultat obtenu(599)
+a 60 FPS comme  0 FPS, les nombres de passages sont très proches et l'écart est très peu significatif et reste bloqué à 600 passages en 10 secondes ce qui peut etre caus par le pilote ou autre.
+L'ajout de la ligne de journal cree un goulet d'etranglement ce qui ralentit vraiment la boucle de rendu a chaque tour de la boucle, lorsque l'on la retire, la cadence augmente car le processeur n'est plus freiner.
+
