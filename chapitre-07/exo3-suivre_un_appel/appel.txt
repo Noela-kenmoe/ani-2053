@@ -1,7 +1,12 @@
 Les sauts :
-1. Fichier include/NKCanvas/app/NkCanvasApp.h , il contient le point de dpart avec la methode virtuelle de rendu ou l'on retrouve la cible de rendu (target) qui est de type NkRenderWindow
-2. Fichier include/NKCanvas/Renderer/Targets/NkRenderWindow.h; il contient la surchage (override) de la mthode Clear pour l'implmentation de la fenetre (void Clear(const NkColor2D &color = NkColor2D::Black) override;)
-3. Fichier onclude/NKCanvas/Renderer/Targets/NkRenderTarget, il contient la fonction virtuelle (�virtual void Clear(const NkColor2D &color = NkColor2D::Black) = 0;) pure qui definit l'interface de nettoyage de la fenetre
+1. Fichier include/NKCanvas/app/NkCanvasApp.h , 
+il contient le point de départ avec la methode virtuelle de rendu ou l'on retrouve la cible de rendu (target) qui est de type NkRenderWindow
+2. Fichier include/NKCanvas/Renderer/Targets/NkRenderWindow.h;
+On decend dans ce fichier pour vérifier le spécialisation concrète de la fenetre et trouver la d"claration de la méthode Clear (void Clear(const NkColor2D &color = NkColor2D::Black) override;). 
+A cet endroit, on remarque qu'il s-agit uniquemen d'une déclaration  avec le mot clé override, et que le corps (l'implmentation effective) n'est pas définit ici. Je n'ai pas cherhcer dans les 
+fichiers sources du module pour voir ou se trouve réellemnt le code exécuté de cette méthode Clear, par conséquent on ne peut pas affirmer que cela transmet directement la commande au GPU simplement avec la lecture des en-têtes.
+3. Fichier include/NKCanvas/Renderer/Targets/NkRenderTarget.h, 
+Ons'arrete ici car il contient la fonction virtuelle (virtual void Clear(const NkColor2D &color = NkColor2D::Black) = 0;) pure qui definit l'interface abstraite parente qui définit le contrat général  de nettoyage de la fenetre.      
 
 Arrêt :
 virtual void Clear(const NkColor2D &color = NkColor2D::Black) = 0;
@@ -10,6 +15,6 @@ Pourquoi là :
 Par ce qu'il s'agit d'une fonction virtuelle pure(fin de la hirarchie)
 
 Ce que je sais maintenant :
-Ces differents sauts à travers les en-t�tes m'ont permis de comprendre les méthodes et classes sont relis aux objets concrets de rendu. OnRender recoit une reférence sur la fenetre de rendu(target) et l'appel de target.Cleardemande
+Ces differents sauts à travers les en-têtes m'ont permis de comprendre les méthodes et classes sont relis aux objets concrets de rendu. OnRender recoit une reférence sur la fenetre de rendu(target) et l'appel de target.Cleardemande
 à l'interface de NkRenderTarget d'effacer le buffet avec la couleur spécifier
 Je suppose que la méthode Clear traduit la couleur passée en paramètre et lance la commande d'effacement directement sur le GPU 
