@@ -1,0 +1,14 @@
+Question : comment la classe NkDirectory gère t-elle la création de répertoires et quel est son comportement si le dossier parent n'existe pas ?
+heure de début : 20h10 , heure de fin : 21h8
+
+Les endroits : NKFileSytem/NkDirectory.h, la classe NkDirectory 
+
+Les surprises : 
+Constater l'existence d'une méthode séparée CreateRecursive() spécifiquement conçue pour créer automatiquement toute l'arborescence des repertoires parents maquants.
+Contater que la méthode Empty() renvoie true si le repertoire n'existe pas (il est considéré comme vide )
+La fonction MoveToTrash() gère la corbeille selon la platefrome (SHFileOperation, FOF_ALLOWUNDO). Linux : specfreedesktop (~/.local/share/Trash). macOS : ~/.Trash. au lieu de faire une suppression définitive.
+Constater que la fonction Move() échoue si les répertoires source et la destination se trouve dans des disques différents
+
+Les questions ouvertes :
+comment la méthode CreateRecursive() gère t-elle les échecs de permissions au milieu du parcours  de l'arborescence? (26 octobre 2026)
+Les mensonges : aucun 
