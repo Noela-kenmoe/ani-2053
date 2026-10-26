@@ -1,13 +1,11 @@
-Module : "include/NkCore/Logger/NKLogger.h"
+Module : NKLogger
 
 D'après le projet : 
-Le module contient 5 dépendances parmis lesquelles NKContainers,NKCore, NKMemory, NKPlatform, NKThreading. NKContainers contient un ensemble de structures de données qui permettent de stocker
-des données sous des formes précises, NKCore permet de d'utiliser les types et les conteneurs pour les données, NKMemory permet la gestion de l'allocation mémoire, NKPlatform
-quant a lui est le gestionnaire de backend qui permet au système de détecter les plateformes utilisés et pour finir NKThreading qui gère les fils d'exécution du programme. En gros le module permet d'envoyer des messages sous plusieurs types de données et prend en peut se faire sous différentes plateformes et a travers plusieurs fils d'exécution. Il ne contient 
-pas de fenetre ni de geston d'image et ne permet donc pas d'afficher un rendu visuel tout se passe dans le terminal.
+Le module utilise les bases du moteur (pour la mémoire, les textes et les actions en parallèlle) afin de pouvoir envoyer les messages
+sur plusieurs ordinateur sans avoir besoins d'afficher une fenetre ou un écran graphique tout se passe dans le terminal.
 
 Après l'en-tête : 
-Après la lecture de l'entete "NKLogger/NkLogger.h" le module NkLogger est la classe principale du système de logging avec support multi-sonk. C'est le point d'entré central pour émettre des messages de log vers une ou plusieurs destinations configurables. Ces fonctionnalités sont  : 
+Après la lecture de l'entete "include/NkCore/Logger/NKLogger.h" le module NkLogger est la classe principale du système de logging avec support multi-sonk. C'est le point d'entré central pour émettre des messages de log vers une ou plusieurs destinations configurables. Ces fonctionnalités sont  : 
 -L'envoie simultané vers console, fichier, reseau
 -Patterns style splog ou formatage positionnel NkFormat
 -Capture automatique de fichier/ligne/fonctionnalités
