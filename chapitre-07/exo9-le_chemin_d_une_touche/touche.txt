@@ -10,7 +10,7 @@ virtual bool OnKeyPress(const NkKeyPressEvent &event) {
 	(void)event;
 	return false;
 }
-5. Mon application il s'agit de la classe dérivée de NkCanvasAppet de la méthode OnKeyPressque je veisnde code dans mon fichier touche.cpp
+5. Mon application il s'agit de la classe dérivée de NkCanvasAppet de la méthode OnKeyPressque je veins de code dans mon fichier touche.cpp
 
 Ou je me suis arrété :
 Je me suis arrèté au niveau du système d'exploitation Windows et de sa fonction de gestion des messages natofs (WMKEYDOWN), car le code source bas niveau de l'OS est fermé et ne figure pas dans les fihciers d'en-tete du kit fournis
