@@ -8,8 +8,14 @@ Sans la ligne :
 A 60FPS :   600 paasages en 10.0136 secondes.
 A 0 FPS :  605 paasages en 10.0161 secondes.
 
-Les carts : 
-A 60 FPS, la prommesse theorique est 60*10 = 600 passages ce qui est très proche du resultat obtenu(599)
-a 60 FPS comme  0 FPS, les nombres de passages sont très proches et l'écart est très peu significatif et reste bloqué à 600 passages en 10 secondes ce qui peut etre caus par le pilote ou autre.
-L'ajout de la ligne de journal cree un goulet d'etranglement ce qui ralentit vraiment la boucle de rendu a chaque tour de la boucle, lorsque l'on la retire, la cadence augmente car le processeur n'est plus freiner.
+Les écarts : 
+La fréquence de l’écran est de 60 Hz 
+(la cible théorique de 60 images par seconde, soit 60 * 10 = 600 passages pour 10 secondes).
+Obtenir 605 passages en mode sans plafond montre que le moteur dépasse légèrement la fréquence
+physique de rafraîchissement du moniteur lorsque le limiteur est désactivé. En comparant les
+chiffres, on mesure précisément l’impact de chaque paramètre : d’une part, passer du mode plafonné
+ au mode libre ajoute systématiquement 5 passages (de 599 à 604 avec journal, et de 600 à 605 sans journal) ;
+d’autre part, la présence de la ligne de journal fait perdre exactement 1 seul passage sur 10 secondes 
+(599 vs 600, et 604 vs 605). Ce coût de 1 passage montre que la ligne de journal a un impact minime et mesurable, 
+mais ne constitue pas un goulet d’étranglement majeur.
 
