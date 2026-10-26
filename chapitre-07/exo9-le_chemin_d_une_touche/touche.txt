@@ -1,0 +1,19 @@
+Les couches :
+1. Sytème Windows , message brut WMKEYDOWN
+2. NKCanvas/Core/NkWindow.h, c'est la classe NkWindow qui gère la facade et la gestion de la fenetre
+3. NKCanvas/NKEvent/NkEvent.h, la classe NkKeyPressEvent  qui gère l'encapsulation  de l'évènement , le lien entre les deux couche est  :
+// La saisie est ensuite délivrée par le système d'évènements :
+//   - NkTextInputEvent  pour chaque caractère Unicode (via GetUtf8/GetCodepoint) ;
+//   - NkKeyPressEvent/NkKeyReleaseEvent pour NK_BACK (retour arrière),
+4. NKCanvas/NkCanvasApp.h, la classe NkCanvasApp gère la propagation et le routage vers l'application, le lien entre les deux couches est : 
+virtual bool OnKeyPress(const NkKeyPressEvent &event) {
+	(void)event;
+	return false;
+}
+5. Mon application il s'agit de la classe dérivée de NkCanvasAppet de la méthode OnKeyPressque je veisnde code dans mon fichier touche.cpp
+
+Ou je me suis arrété :
+Je me suis arrèté au niveau du système d'exploitation Windows et de sa fonction de gestion des messages natofs (WMKEYDOWN), car le code source bas niveau de l'OS est fermé et ne figure pas dans les fihciers d'en-tete du kit fournis
+
+Combien :
+il y a 5 couches au total
