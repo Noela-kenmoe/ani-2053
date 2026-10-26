@@ -1,0 +1,15 @@
+Module : NKMemory ['', 'NKPlatform'],
+Après le projet : ce module contient deux dépendance qui sont : NKCore et NKPlatform
+j'estime qu'il s'agit d'un systèmed'allocation de mémoire qui se base sur les types fondamentaux et les conteneurs de données et la détection de la plateforme.
+Après un programme :
+D'après l"exemple de l'en-tête du fichier d'en-tete du module, qui montre l'utilisation des macros d'allocation avec tracking (NK_MEM_ALLOC,NK_MEM_NEW )
+et un mécnisme de rapport de fuite à la fermeture de l'application (shutdown). J'estime maintenant qu'il s'agit d'un sytème d'allocation mémoire qui est 
+capable  de tracker les allocatios et d'identifier les fuites en fin d'exécution.
+
+Après les en-têtes :
+Les en-têtes montrent que le module offre la possibilité de définir des fonctions de rappel personnalisées (SetLogCallback(MyLogCallback)) pour Redirigerles messages d'alertes de fuites de memoires vers des fichiers de logs ou des sytèmes externes.
+
+L'écart :
+La première porte qui est la porte du projet a fourni les dépendances de base du module.
+La deuxième porte du programme montrer l'existence des macros d'allocations et du que le rapport des fuites,
+Puis la troisième porte qui est la porte des en-têtes a ajouter les mécanismes de journalisation personnalisable des erreurs mémoire.
