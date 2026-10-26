@@ -1,0 +1,16 @@
+Le long : NKCore/NkPlatform.h (1720 lignes)
+Le difficile : NKCanvas/NkRihenLogo.h (79 lignes)
+Ce qu'ils gardent :
+Le fichier long garde des structures de données organisées et des énumérations logiques décrivant l'état du système,
+telles que les types de plateformes (NkPlatformType::NK_WINDOWS), les drapeaux SIMD (hasAVX2, hasSSE2) et la structure
+de localisation du code source (NkSourceLocation)[span_2](start_span)[span_2](end_span). Le fichier difficile garde un
+énorme bloc de données brutes non structurées : la chaîne de caractères SVG complète du logo (contenant des centaines de
+coordonnées de tracés vectoriels comme "M10.7884 0C3.76512..."), ainsi que des valeurs figées comme l'identifiant de texture
+hexadécimal (0x4E4B4C47u)[span_3](start_span)[span_3](end_span).
+
+L'écart :
+La difficulté de lecture ne dépend pas du nombre de lignes mais de la structure et de la nature des données manipulées.
+Le fichier court (520 lignes)[span_4](start_span)[span_4](end_span) résiste parce qu'il noie le lecteur dans un bloc de
+données brutes illisible, comme la macro de texte brut `R"NKLOGO(...)NKLOGO"` remplie de centaines de coordonnées de vecteurs graphiques.
+À l'inverse, le fichier long (1250 lignes)[span_5](start_span)[span_5](end_span) se lit facilement malgré son volume car il est proprement
+organisé en sections logiques bien délimitées (comme les en-têtes, les énumérations et les structures documentées) qui permettent de naviguer logiquement sans se perdre.
