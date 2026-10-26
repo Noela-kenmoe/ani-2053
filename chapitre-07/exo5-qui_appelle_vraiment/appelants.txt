@@ -1,0 +1,20 @@
+Par le texte : 
+Commande utilisée : grep -rn "Draw" include
+Resultats obtenus :
+- Déclaration virtuelle  pure dans NkCanvas/Renderer/Core/NkDrawable.h
+- Surchage dans NkRenderTarget.h et NkRenderer2D.h (exemple : void Draw(const NkDrawable &drawable, const NkRenderStates &states = NkRenderStates::Default()) {
+					drawable.Draw(*this, states);
+				})
+
+Par la pile :
+Cadre de la pile relévés a l'exécution au moment de l'arret dans la méthodes Draw :
+- MonObjetDessiner::Draw(nkentseu::renderer::NkRenderTarget &target, const nkentseu::renderer::NkRenderStates &states) const at [fichier]:12
+- nkentseu::renderer::NkRenderTarget::Draw(const nkentseu::renderer::NkDrawable &drawable, coonst nkentseu::renderer::NkRenderStates &states) (code de la bibliothèque)
+-MonApp::OnRender(nkentseu::rendere::nkentseu::renderer::NkRenderWindow  &target) at [fichier]:28
+-renderer::NkCanvasApp::Run<MonApp>(state) (code de la bibliothèque)
+- nkmain(const nkentseu::NkEntryState &state) at [fichier]:39
+
+Les différences :
+le polymorphisme et la liaison tardive : la recherche textuelle renvoie de nombreux resultat statiques d'autres classe ou en-tête qui n'interviennent pas dans l'exécutionactuelle. a l'inverse, la pile d'appels montre le chemin d'execution dynamique unique, ou le moteur résout l'appel via pour cibler spécifiquement la methode de la classe "MonObjetDessiner"
+Le sens des appels : dans la méthode "onRender", on écrit explicitement "target.Draw(objet)". Cependant, la cible redirige et appelle "Drawable.Draw(*this, states)". La pile d'appels révèle ce renversement (c'est la cible qui demande a l'objet de se dessiner sur elle ).
+Statique contre dynamique : le texte effectue une simple correspondance de chaines de caractères sans notions de flux, alos que la pile retrace l'historique exact des fonctions au moment  de l'exécution
