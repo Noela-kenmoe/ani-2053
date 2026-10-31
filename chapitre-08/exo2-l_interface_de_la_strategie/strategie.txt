@@ -22,6 +22,6 @@ Le comptage se fait en utilisant la commande : grep -rn "override" Canvas/includ
 5. NkVulkanRenderer2D : hérite de NkBatchRenderer2D, redéfinit 15 méthodes (marquées par le mot-clé override).
 Le comptage se fait en utilisant la commande : grep -rn "override" Canvas/include/NKCanvas/Backend/Vulkan/NkVulkanRenderer2D.h 
 
-Le cout :
+Le coût :
 Ajouter un nouveau dorsal est couteux  car l'interface impose de nombreuses règles, chaque nouveau dorsal doit obligatoirement reécrire toutes les 
 méthodes du contrat (comme la préparation, l'affichage et la fermeture du rendu). Plus l'interface contient de fonctions plus le travail pour créer et entretenir un dorsal est grand.
