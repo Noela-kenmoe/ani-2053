@@ -1,0 +1,27 @@
+Virtuelles pures :
+Compte : 31 Methodes sans corps et 15 méthodes avec corps
+Methode de comptage : une recherche en appuiyant sur les touche "crtl+f" et en saisissant le mots clé virtual qui se termine par "= 0;" pour les méthodes sans corps et par "{}" pour les méthodes avec corps  
+Autres méthodes :  grep -rn "virtual " Canvas/include/NKCanvas/Renderer/Core/NkIRenderer2D.h 
+
+Dorsaux :
+- DirectX
+-Metal
+- OpenGL
+- Software
+- Vulkan
+
+Ce que chacun écrit :
+1. NkDX12Renderer2D : hérite de NkBatchRenderer2D, redéfinit 9 méthodes (marquées par le mot-clé override).
+Le comptage se fait en utilisant la commande : grep -rn "override" Canvas/include/NKCanvas/Backend/DirectX/NkDX12Renderer2D.h 
+2. NkMetalRenderer2D : hérite de NkBatchRenderer2D, redéfinit  10 méthodes (marquées par le mot-clé override).
+Le comptage se fait en utilisant la commande : grep -rn "override" Canvas/include/NKCanvas/Backend/Metal/NkMetalRenderer2D.h 
+3. NkOpenGLRenderer2D : hérite de NkIRenderer2D, redéfinit 10 méthodes (marquées par le mot-clé override).
+Le comptage se fait en utilisant la commande : grep -rn "override" Canvas/include/NKCanvas/Backend/OpenGL/NkOpenGLRenderer2D.h 
+4. NkSoftwareRenderer2D : hérite de NkIRenderer2D, redéfinit 10 méthodes (marquées par le mot-clé override).
+Le comptage se fait en utilisant la commande : grep -rn "override" Canvas/include/NKCanvas/Backend/Software/NkSoftwareRenderer2D.h 
+5. NkVulkanRenderer2D : hérite de NkBatchRenderer2D, redéfinit 15 méthodes (marquées par le mot-clé override).
+Le comptage se fait en utilisant la commande : grep -rn "override" Canvas/include/NKCanvas/Backend/Vulkan/NkVulkanRenderer2D.h 
+
+Le cout :
+Ajouter un nouveau dorsal est couteux  car l'interface impose de nombreuses règles, chaque nouveau dorsal doit obligatoirement reécrire toutes les 
+méthodes du contrat (comme la préparation, l'affichage et la fermeture du rendu). Plus l'interface contient de fonctions plus le travail pour créer et entretenir un dorsal est grand.
