@@ -1,0 +1,13 @@
+Recherche :
+Commande : grep -rn "NkOpenGLRenderer2D" Canvas/include
+le terme apparait dans 05 fichiers 
+
+Hors de son dossier :
+-Canvas/include/NKCanvas/Renderer/Core/NkIRenderer2D.h:15, dans un commentaire 
+-Canvas/include/NKCanvas/Renderer/Core/NkRenderer2D.h:19, dans un commentaires
+-Canvas/include/NKCanvas/Renderer/Resources/NkTextureBackend.h:22, dans des commentaires
+-Canvas/include/NKGui/Core/NkGuiDrawListRaster.h:35, dans des commentaires 
+
+Conclusion :
+La fabrique NkRenderer2DFactory rempli correctement son role de d'coupage En effet, bien que le nom de la classe concrète de NkOpenGLRenderer2D apparaissent dans plusieurs fichiersen dehors de son dossier ou il est implémenter, la recherche faite montre  qu'il s'agit uniquement de commentaire, d'exemples ou de documentation.
+Acune ligne de code du reste du programme n'intancie ou ne référencie directement cette classe concrète en dehors de la fabrique et du backend lui-meme. Le choix du dorsale est bien enfermé dans la fabrique, ce qui protège le reste du code et garantit une architecture propre
