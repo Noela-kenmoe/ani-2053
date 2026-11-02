@@ -1,0 +1,34 @@
+Stratégie :
+NKCanvas/Renderer/Core/NkDrawable.h :51
+Virtual void Draw(NkRenderTarget &target, const NkRenderStates &states) const = 0 ;
+
+Fabrique :
+NKCanvas/Renderer/Resources/NkTexture.h :42 
+bool Create(NkIRenderer2D &renderer, uint32 width, uint32 heigh ,const NkColor2D &fillColor = NkColor2D::Transparent);
+
+Façade :
+NKCanvas/Renderer/Targets/NkRenderTarget.h :48
+Class NkRenderTarget {
+
+Patron de méthode :
+NKCanvas/Renderer/Targets/NkRenderTarget.h :111
+Void Draw(const NkDrawable &drawable, const NkRenderStates &states = NkRenderStates ::Default) { drawable.Draw(*this, states) ; }
+
+Observateur :
+NKEvent/NkEvent.h :18
+// le Motif Observateur  est mentionné en commentaire pour la gestion d’evenements et callbacks pour les entrees utilisateur
+
+Singleton :
+NKCanvas/App/NkCanvasApp.h :202
+template <typename T> static int Run(const NkEntryState &state) {
+
+Adaptateur :
+NKCanvas/Renderer/Resources/NkSprite.h :126
+/// Compat : un drawable ancien style (NkIDrawable2D ::Draw(NkRenderer2D&)).
+
+Composite :
+NKCanvas/Renderer/Core/NkDrawable.h :48
+Class NkDrawable {
+
+Commande :
+Ce motif est absent du kit Canvas du 22 octobre 2026. Ce qui s’en approche le plus est la structure d’événement NkEvent (NKCanvas/Event/NkEvent.h :25) qui encapsule une action ou une saisie sous forme de donnée, mais sans fournir les méthodes d’exécution ou d’annulation Execute() / Undo() caractéristiques d’un objet Commande.
