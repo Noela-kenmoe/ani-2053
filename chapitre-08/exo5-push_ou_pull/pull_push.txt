@@ -1,0 +1,19 @@
+
+
+Situations :
+- Le joueur maintient la flèche droite : Pull, car la touche est maintenue dans le durée
+ et nécessite une interrogation continue. Outil : IsKeyPressed, NKEvent/NkEventState.h :463 (remplacer XX par la ligne réelle)
+- Il appuie sur Échap : Push, car l’action est un événement ponctuel qui arrive à un instant précis. 
+Outil : NkKeyPressEvent, NKCanvas/App/NkCanvasApp.h ligne : 80
+- On veut la position de la souris : Pull, car la position de la souris est un état permanent que l’on
+ consulte à la demande. Outil : SetMousePosition, NKWindow/NkWindow.h :316
+- Un fichier est déposé sur la fenêtre : Push, car le dépôt est un événement extérieur imprévisible. 
+Outil : NkDropFileEvent, NkDropEvent.h :373
+- La fenêtre est redimensionnée : Push, car le redimensionnement survient à un instant précis notifié par le système. 
+Outil : OnLayout, NKCanvas/NkCanvasApp.h :291
+- Le joueur double-clique : Push, car le double-clic est un événement ponctuel de la souris. 
+Outil : NkMouseMoveEvent, NKEvent/NkMouseEvent.h :247
+
+Les bogues :
+1. Utiliser le modèle push (événement) pour une touche maintenue (qui demande le pull) provoquerait un mouvement saccadé ou qui s’arrête trop tôt : l’événement « pressé » ne se déclenchant qu’une seule fois à l’enfoncement, le personnage s’arrêterait net au lieu de continuer à avancer tant que la touche est enfoncée.
+2. Utiliser le modèle pull (interrogation) pour un dépôt de fichier (qui demande le push) risquerait de rater complètement l’action si le fichier est déposé entre deux trames d’interrogation, ou obligerait à sonder inutilement le système d’exploitation à chaque image pour un événement extrêmement rare.
