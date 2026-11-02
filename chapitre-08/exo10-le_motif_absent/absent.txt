@@ -1,0 +1,8 @@
+L'endroit :
+NkGraphicsApi.h:13 et NkGraphicsApi.h:35. La valeur de l'énumération NkGraphicsApi fait l'objet d'un swithc(api) répété dans plusieurs fonctions distinctes(NkGraphicsApiName et NkGraphicsApiIsAvailable) pour traiter le comportement spécifique à chaque API graphique (OpenGL, Vulkan, Metal etc..)
+
+Le motif : 
+Méthode de fabrique ou fabrique ebstraite . L'introduction d'une interfacede fabrique spécifiqueà chaque API graphique permet d'encapsuler la création et les propriété de chaque backend derrière un pilymorphisme d'objets, éliminant ainsi les structures conditionnelle switch(api) répétées.
+
+Le coût :
+La mise en place de ce motif nécessite la modification de NkGraphicsApi.h ainsi que la création de classes concrètes pour chaque API supportée (exemple : NkOpenGLContext, NkVulkanContext). Le risque principal de casse se trouve dans la modification des signatures de fonctions globales existantes s'appuyant sur l'énumération brute, nécessitant de mettre à jour le code appelant dans les sous-modules du kit.
