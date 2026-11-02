@@ -1,0 +1,16 @@
+Le premier pont : 
+le fichier NKCanvas/UI/NkGuiCanvasBackend.h (lignes 26 et les suivante) définit la classe NkGuiCanvasBackend. Il reçoit une liste de commande de dessin de l'interface NKGui (via le methode Sunmit prenant un NkGuiDrawList) et appelle les méthodes du moteur de rendu 2D NkIRenderer2D (comme SetClip) pour afficher l'interface.
+
+Le second pont : 
+Au lieu d'utilser NKUICanvasBackend pour afficher l'interface à l'écran ce second pont transformerait les memes commandes de dessin en un fichier image.
+Pour y arriver, il enregistrerait le rendu dans un tableau de pixels en mémoire (une surface hors écran) et exporterait directement sous forme d'image.
+
+Combien de méthode  :
+Le pont nécessite une dizaines de méthodes publiques (environ 10) couvrant l'initialisation du context hors écran, le début et la fin de la capture de frame, les primitives de tracé , la gestion du textures et du découpage( ). 
+Nous avons par exemple : Init,UploadFontGray8, UploadImageRGBA, NkReleveSubmit, Submit etc..
+
+Les données :
+Les données nécessaires comprenent un buffet mémoire alloué pour les pixels(largeur; hauteur, fromat RGBA), l'écran du context de dessin(transformation, couleurs), ainsi qu'une fonction d'encodage pour l'exportation du buffer en fichier image.
+
+Dans le kit :
+Lekit contient la classe de pont NKUICanvasBackend, mais elle sert a réalise un contexte haut niveau(nkui::NKUIContext) au moteur de rendu 2D standard pour l'affichage en temps réel à l'écran, ce qui diffère de notre description puisqu'il ne s'agit pas d'un export direct vers un fichier  image hors écran.
