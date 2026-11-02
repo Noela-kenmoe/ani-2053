@@ -1,0 +1,15 @@
+Tester la version directe :
+Pour tester la version directe qui dépend de `NkInput`, il faudrait initialiser un contexte de fenêtre complet, simuler matériellement ou par injection logicielle des événements système du clavier, et simuler l'horloge du moteur. Ce coût est exorbitant pour tester une simple règle logique booléenne, rendant les tests unitaires automatisés impossibles ou extrêmement lents et fragiles.
+
+La version testable :
+On a extrait la condition liée au matériel pour isoler la logique pure. La fonction testable ne lit plus le singleton `NkInput` ; elle reçoit l'état de la touche sous forme de booléen en paramètre (`bool espaceAppuye`), ce qui permet de tester toutes les combinaisons possibles instantanément, sans dépendance externe.
+
+Le banc :
+- Cas 1 (Sol + Espace) : Succès (Attendu: true, Obtenu: true)
+- Cas 2 (Sol + Pas d'espace) : Succès (Attendu: false, Obtenu: false)
+- Cas 3 (Air + Espace) : Succès (Attendu: false, Obtenu: false)
+- Cas 4 (Air + Pas d'espace) : Succès (Attendu: false, Obtenu: false)
+Code de sortie retourné par OnCommandLine : 0
+
+Sans fenêtre :
+La version directe a retourné false (ou un état indéterminé selon l'initialisation du singleton) car, exécutée depuis `OnCommandLine` avant la création de la fenêtre et du système d'événements, le gestionnaire `NkInput` n'a pas accès au contexte matériel ni aux messages du système d'exploitation pour actualiser l'état des touches.
