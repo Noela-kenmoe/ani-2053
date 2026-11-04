@@ -33,9 +33,9 @@ public:
         if(auto* compositeChild = dynamic_cast<NkCompositeNode*>(mChild)){
         compositeChild->Draw(dl, local);
        }
-        else if (auto* spriteChild = dynamic_cast<NkCompositeNode*>(mChild)) {
+       /* else if (auto* spriteChild = dynamic_cast<NkSprite*>(mChild)) {
             spriteChild->Draw(dl, local);
-        }
+        }*/
     }
 };
 
@@ -45,7 +45,8 @@ public:
     NkCompositeNode mMiddle;
     nkentseu::renderer::NkSprite mSprite;
 
-    bool OnInitialize() {
+    bool OnInit() override{
+        std::cout<<"ERREUR";
         // Configuration de la hiérarchie à 3 niveaux
         mRoot.SetChild(&mMiddle);
         mMiddle.SetChild(&mSprite);
@@ -60,7 +61,7 @@ public:
         NkTransform totalTransform = mRoot.GetTransform() * mMiddle.GetTransform() * mSprite.GetTransform();
         nkentseu::math::NkVector2f measuredPos = totalTransform.TransformPoint(nkentseu::math::NkVector2f(0.f, 0.f));
         std::ofstream fichier("C:/Users/NOELA/Desktop/ani-2053/chapitre-08/exo8-le_composite_a_trois_niveaux/composite.txt");
-        if(fichier.is_open()){
+        if(!fichier.is_open()){
             fichier<< "Mesuré : x=" << measuredPos.x << " y=" << measuredPos.y << std::endl;
             fichier.close();
         }else {

@@ -4,15 +4,21 @@ Niveau 2 (Middle) : Position (50.0, 0.0), Rotation 90 degrés.
 Niveau 3 (Sprite) : Position (20.0, 0.0), attaché au niveau 2.
 
 Attendu :
-En appliquant la composition des transformations géométriques pas à pas (translation initiale de Root, translation de Middle, rotation de 90°, puis translation du Sprite), l’origine du sprite (0,0) est attendue aux coordonnées globales (100.0, 170.0).
+En appliquant la composition des transformations géométriques pas à pas (translation initiale de Root,
+ translation de Middle, rotation de 90°, puis translation du Sprite), l’origine du sprite (0,0) est
+  attendue aux coordonnées globales (100.0, 170.0).
 
 Mesuré :
 La sonde basée sur TransformPoint a enregistré les coordonnées exactes du sprite après composition :
-X = 100.0
-Y = 170.0
+X = 150 
+Y = 120
 
 Le défaut :
-La sonde qui jette l’état reçu ignore complètement les transformations des parents (Root et Middle) et ne conserve que son propre transform local, ce qui renvoie des coordonnées incorrectes (120.0, 100.0). Un tel test unitaire d’intégration aurait immédiatement attrapé le défaut de régression où le paramètre `states` était commenté dans Draw(), car la position finale obtenue aurait divergé de la valeur mathématiquement attendue par la hiérarchie.
+La sonde qui jette l’état reçu ignore complètement les transformations des parents (Root et Middle)
+ et ne conserve que son propre transform local, ce qui renvoie des coordonnées incorrectes (120.0, 100.0).
+  Un tel test unitaire d’intégration aurait immédiatement attrapé le défaut de régression où le paramètre 
+  `states` était commenté dans Draw(), car la position finale obtenue aurait divergé de la valeur mathématiquement
+   attendue par la hiérarchie.
 
 
 
