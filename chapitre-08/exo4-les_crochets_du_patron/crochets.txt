@@ -1,31 +1,246 @@
 Les crochets :
-- OnInit : ligne(), dans NkCanvassApp.h 
-- OnLajourt : ligne () dans NkCanvasApp.h 
-- OnUpdate : ligne () dans NkCanvasApp.h 
-- OnRender : ligne (), dans NkCanvasApp.h 
-- OnShutdown : ligne(), dans NkCanvassApp.h 
+- OnInit : ligne(255), dans NkCanvassApp.h 
+- OnLayout : ligne (291) dans NkCanvasApp.h 
+- OnUpdate : ligne (259) dans NkCanvasApp.h 
+- OnRender : ligne (262), dans NkCanvasApp.h 
+- OnShutdown : ligne(265), dans NkCanvasApp.h 
+- OnPointer : ligne (277), dans NkCanvasApp.h
+- NkCanvasApp.h : ligne(282), dans NkCanvasApp.h
+- OnCommandLine : ligne(249), dans NkCanvasApp.h
+- OnCloseRequested : ligne (314), dans NkCanvasApp.h
+-  OnPause : ligne(321), dans NkCanvasApp.h
+-  OnResume : ligne(323), dans NkCanvasApp.h
 
 L'ordre mesuré :
+construction en debug
 1  - Constructeur   - Frame : 0  - Time : 0
-2  - OnLayout   - Frame : 0  - Time : 0
-3  - OnInit   - Frame : 0  - Frame : 0
-4  - OnUpdate   - Frame : 1  - Time : 1.1e-06
-5- OnRender  - Frame : 1  - Time : 1.1e-06
-6  - OnUpdate   - Frame : 2  - Time : 0.0208076
-7- OnRender  - Frame : 2  - Time : 0.0208076
-8  - OnUpdate   - Frame : 3  - Time : 0.0258377
-10  - OnUpdate   - Frame : 4  - Time : 0.0311094
-11- OnRender  - Frame : 4  - Time : 0.0311094
-12  - OnUpdate   - Frame : 5  - Time : 0.03721
-13- OnRender  - Frame : 5  - Time : 0.03721
-14  - OnShutdown  - Frame : 5  - Time : 0.03721
-15  - Destructeur   - Frame : 5  - Time : 0.03721
-
+2  - OnInit   - Frame : 0  - Frame : 0
+3  - OnLayout   - Frame : 0  - Time : 0
+4  - OnInit   - Frame : 0  - Frame : 0
+5  - OnEvent  - Frame : 0  - Time : 0
+6  - OnEvent  - Frame : 0  - Time : 0
+7  - OnEvent  - Frame : 0  - Time : 0
+8  - OnEvent  - Frame : 0  - Time : 0
+9  - OnEvent  - Frame : 0  - Time : 0
+10  - OnEvent  - Frame : 0  - Time : 0
+11  - OnEvent  - Frame : 0  - Time : 0
+12  - OnEvent  - Frame : 0  - Time : 0
+13  - OnEvent  - Frame : 0  - Time : 0
+14  - OnUpdate   - Frame : 1  - Time : 8e-07
+15- OnRender  - Frame : 1  - Time : 8e-07
+16  - OnUpdate   - Frame : 2  - Time : 0.0163945
+17- OnRender  - Frame : 2  - Time : 0.0163945
+18  - OnEvent  - Frame : 2  - Time : 0.0163945
+19  - OnKeyPress   - Frame : 2  - Frame : 0.0163945
+20  - OnEvent  - Frame : 2  - Time : 0.0163945
+21  - OnUpdate   - Frame : 3  - Time : 0.0339895
+22- OnRender  - Frame : 3  - Time : 0.0339895
+23  - OnUpdate   - Frame : 4  - Time : 0.047584
+24- OnRender  - Frame : 4  - Time : 0.047584
+25  - OnUpdate   - Frame : 5  - Time : 0.0501718
+26- OnRender  - Frame : 5  - Time : 0.0501718
+27  - OnUpdate   - Frame : 6  - Time : 0.0602463
+28  - OnUpdate   - Frame : 7  - Time : 0.0765032
+29  - OnUpdate   - Frame : 8  - Time : 0.0934321
+30  - OnUpdate   - Frame : 9  - Time : 0.107631
+31  - OnUpdate   - Frame : 10  - Time : 0.125634
+32  - OnUpdate   - Frame : 11  - Time : 0.142316
+33  - OnUpdate   - Frame : 12  - Time : 0.158985
+34  - OnUpdate   - Frame : 13  - Time : 0.174686
+35  - OnUpdate   - Frame : 14  - Time : 0.192336
+36  - OnEvent  - Frame : 14  - Time : 0.192336
+37  - OnEvent  - Frame : 14  - Time : 0.192336
+38  - OnUpdate   - Frame : 15  - Time : 0.207776
+39  - OnEvent  - Frame : 15  - Time : 0.207776
+40  - OnEvent  - Frame : 15  - Time : 0.207776
+41  - OnEvent  - Frame : 15  - Time : 0.207776
+42  - OnEvent  - Frame : 15  - Time : 0.207776
+43  - OnEvent  - Frame : 15  - Time : 0.207776
+44  - OnUpdate   - Frame : 16  - Time : 0.225584
+45  - OnEvent  - Frame : 16  - Time : 0.225584
+46  - OnEvent  - Frame : 16  - Time : 0.225584
+47  - OnEvent  - Frame : 16  - Time : 0.225584
+48  - OnEvent  - Frame : 16  - Time : 0.225584
+49  - OnUpdate   - Frame : 17  - Time : 0.247212
+50  - OnEvent  - Frame : 17  - Time : 0.247212
+51  - OnEvent  - Frame : 17  - Time : 0.247212
+52  - OnUpdate   - Frame : 18  - Time : 0.257784
+53  - OnEvent  - Frame : 18  - Time : 0.257784
+54  - OnEvent  - Frame : 18  - Time : 0.257784
+55  - OnEvent  - Frame : 18  - Time : 0.257784
+56  - OnUpdate   - Frame : 19  - Time : 0.275564
+57  - OnEvent  - Frame : 19  - Time : 0.275564
+58  - OnUpdate   - Frame : 20  - Time : 0.296178
+59  - OnEvent  - Frame : 20  - Time : 0.296178
+60  - OnEvent  - Frame : 20  - Time : 0.296178
+61  - OnUpdate   - Frame : 21  - Time : 0.309202
+62  - OnEvent  - Frame : 21  - Time : 0.309202
+63  - OnEvent  - Frame : 21  - Time : 0.309202
+64  - OnUpdate   - Frame : 22  - Time : 0.328962
+65  - OnUpdate   - Frame : 23  - Time : 0.342096
+66  - OnEvent  - Frame : 23  - Time : 0.342096
+67  - OnEvent  - Frame : 23  - Time : 0.342096
+68  - OnEvent  - Frame : 23  - Time : 0.342096
+69  - OnEvent  - Frame : 23  - Time : 0.342096
+70  - OnEvent  - Frame : 23  - Time : 0.342096
+71  - OnUpdate   - Frame : 24  - Time : 0.359407
+72  - OnEvent  - Frame : 24  - Time : 0.359407
+73  - OnUpdate   - Frame : 25  - Time : 0.375592
+74  - OnEvent  - Frame : 25  - Time : 0.375592
+75  - OnUpdate   - Frame : 26  - Time : 0.392116
+76  - OnEvent  - Frame : 26  - Time : 0.392116
+77  - OnEvent  - Frame : 26  - Time : 0.392116
+78  - OnEvent  - Frame : 26  - Time : 0.392116
+79  - OnUpdate   - Frame : 27  - Time : 0.408866
+80  - OnEvent  - Frame : 27  - Time : 0.408866
+81  - OnEvent  - Frame : 27  - Time : 0.408866
+82  - OnUpdate   - Frame : 28  - Time : 0.426982
+83  - OnEvent  - Frame : 28  - Time : 0.426982
+84  - OnEvent  - Frame : 28  - Time : 0.426982
+85  - OnEvent  - Frame : 28  - Time : 0.426982
+86  - OnEvent  - Frame : 28  - Time : 0.426982
+87  - OnUpdate   - Frame : 29  - Time : 0.453488
+88  - OnUpdate   - Frame : 30  - Time : 0.501103
+89  - OnShutdown  - Frame : 30  - Time : 0.501103
+90  - OnPause   - Frame : 30  - Frame : 0.501103
+91  - Destructeur   - Frame : 30  - Time : 0.501103
+construction en release :
+1  - Constructeur   - Frame : 0  - Time : 0
+2  - OnInit   - Frame : 0  - Frame : 0
+3  - OnLayout   - Frame : 0  - Time : 0
+4  - OnInit   - Frame : 0  - Frame : 0
+5  - OnEvent  - Frame : 0  - Time : 0
+6  - OnEvent  - Frame : 0  - Time : 0
+7  - OnEvent  - Frame : 0  - Time : 0
+8  - OnEvent  - Frame : 0  - Time : 0
+9  - OnEvent  - Frame : 0  - Time : 0
+10  - OnEvent  - Frame : 0  - Time : 0
+11  - OnEvent  - Frame : 0  - Time : 0
+12  - OnEvent  - Frame : 0  - Time : 0
+13  - OnEvent  - Frame : 0  - Time : 0
+14  - OnEvent  - Frame : 0  - Time : 0
+15  - OnEvent  - Frame : 0  - Time : 0
+16  - OnEvent  - Frame : 0  - Time : 0
+17  - OnEvent  - Frame : 0  - Time : 0
+18  - OnEvent  - Frame : 0  - Time : 0
+19  - OnEvent  - Frame : 0  - Time : 0
+20  - OnEvent  - Frame : 0  - Time : 0
+21  - OnEvent  - Frame : 0  - Time : 0
+22  - OnEvent  - Frame : 0  - Time : 0
+23  - OnEvent  - Frame : 0  - Time : 0
+24  - OnEvent  - Frame : 0  - Time : 0
+25  - OnEvent  - Frame : 0  - Time : 0
+26  - OnEvent  - Frame : 0  - Time : 0
+27  - OnEvent  - Frame : 0  - Time : 0
+28  - OnEvent  - Frame : 0  - Time : 0
+29  - OnEvent  - Frame : 0  - Time : 0
+30  - OnEvent  - Frame : 0  - Time : 0
+31  - OnEvent  - Frame : 0  - Time : 0
+32  - OnEvent  - Frame : 0  - Time : 0
+33  - OnEvent  - Frame : 0  - Time : 0
+34  - OnEvent  - Frame : 0  - Time : 0
+35  - OnEvent  - Frame : 0  - Time : 0
+36  - OnEvent  - Frame : 0  - Time : 0
+37  - OnEvent  - Frame : 0  - Time : 0
+38  - OnEvent  - Frame : 0  - Time : 0
+39  - OnEvent  - Frame : 0  - Time : 0
+40  - OnEvent  - Frame : 0  - Time : 0
+41  - OnEvent  - Frame : 0  - Time : 0
+42  - OnEvent  - Frame : 0  - Time : 0
+43  - OnEvent  - Frame : 0  - Time : 0
+44  - OnEvent  - Frame : 0  - Time : 0
+45  - OnEvent  - Frame : 0  - Time : 0
+46  - OnEvent  - Frame : 0  - Time : 0
+47  - OnEvent  - Frame : 0  - Time : 0
+48  - OnEvent  - Frame : 0  - Time : 0
+49  - OnUpdate   - Frame : 1  - Time : 1.5e-06
+50- OnRender  - Frame : 1  - Time : 1.5e-06
+51  - OnUpdate   - Frame : 2  - Time : 0.0482468
+52- OnRender  - Frame : 2  - Time : 0.0482468
+53  - OnUpdate   - Frame : 3  - Time : 0.0538286
+54- OnRender  - Frame : 3  - Time : 0.0538286
+55  - OnUpdate   - Frame : 4  - Time : 0.0579005
+56- OnRender  - Frame : 4  - Time : 0.0579005
+57  - OnUpdate   - Frame : 5  - Time : 0.0732896
+58- OnRender  - Frame : 5  - Time : 0.0732896
+59  - OnUpdate   - Frame : 6  - Time : 0.0903607
+60  - OnUpdate   - Frame : 7  - Time : 0.107922
+61  - OnUpdate   - Frame : 8  - Time : 0.124455
+62  - OnUpdate   - Frame : 9  - Time : 0.139865
+63  - OnUpdate   - Frame : 10  - Time : 0.156815
+64  - OnUpdate   - Frame : 11  - Time : 0.173084
+65  - OnUpdate   - Frame : 12  - Time : 0.189785
+66  - OnEvent  - Frame : 12  - Time : 0.189785
+67  - OnKeyPress   - Frame : 12  - Frame : 0.189785
+68  - OnEvent  - Frame : 12  - Time : 0.189785
+69  - OnUpdate   - Frame : 13  - Time : 0.21126
+70  - OnUpdate   - Frame : 14  - Time : 0.226026
+71  - OnUpdate   - Frame : 15  - Time : 0.241696
+72  - OnUpdate   - Frame : 16  - Time : 0.258236
+73  - OnUpdate   - Frame : 17  - Time : 0.274613
+74  - OnUpdate   - Frame : 18  - Time : 0.291363
+75  - OnUpdate   - Frame : 19  - Time : 0.311951
+76  - OnUpdate   - Frame : 20  - Time : 0.324556
+77  - OnEvent  - Frame : 20  - Time : 0.324556
+78  - OnEvent  - Frame : 20  - Time : 0.324556
+79  - OnEvent  - Frame : 20  - Time : 0.324556
+80  - OnEvent  - Frame : 20  - Time : 0.324556
+81  - OnEvent  - Frame : 20  - Time : 0.324556
+82  - OnEvent  - Frame : 20  - Time : 0.324556
+83  - OnEvent  - Frame : 20  - Time : 0.324556
+84  - OnEvent  - Frame : 20  - Time : 0.324556
+85  - OnEvent  - Frame : 20  - Time : 0.324556
+86  - OnEvent  - Frame : 20  - Time : 0.324556
+87  - OnEvent  - Frame : 20  - Time : 0.324556
+88  - OnEvent  - Frame : 20  - Time : 0.324556
+89  - OnEvent  - Frame : 20  - Time : 0.324556
+90  - OnEvent  - Frame : 20  - Time : 0.324556
+91  - OnEvent  - Frame : 20  - Time : 0.324556
+92  - OnEvent  - Frame : 20  - Time : 0.324556
+93  - OnEvent  - Frame : 20  - Time : 0.324556
+94  - OnEvent  - Frame : 20  - Time : 0.324556
+95  - OnEvent  - Frame : 20  - Time : 0.324556
+96  - OnEvent  - Frame : 20  - Time : 0.324556
+97  - OnEvent  - Frame : 20  - Time : 0.324556
+98  - OnEvent  - Frame : 20  - Time : 0.324556
+99  - OnEvent  - Frame : 20  - Time : 0.324556
+100  - OnEvent  - Frame : 20  - Time : 0.324556
+101  - OnEvent  - Frame : 20  - Time : 0.324556
+102  - OnEvent  - Frame : 20  - Time : 0.324556
+103  - OnEvent  - Frame : 20  - Time : 0.324556
+104  - OnEvent  - Frame : 20  - Time : 0.324556
+105  - OnUpdate   - Frame : 21  - Time : 0.348294
+106  - OnEvent  - Frame : 21  - Time : 0.348294
+107  - OnUpdate   - Frame : 22  - Time : 0.364961
+108  - OnUpdate   - Frame : 23  - Time : 0.370233
+109  - OnEvent  - Frame : 23  - Time : 0.370233
+110  - OnEvent  - Frame : 23  - Time : 0.370233
+111  - OnUpdate   - Frame : 24  - Time : 0.374656
+112  - OnUpdate   - Frame : 25  - Time : 0.385747
+113  - OnEvent  - Frame : 25  - Time : 0.385747
+114  - OnEvent  - Frame : 25  - Time : 0.385747
+115  - OnEvent  - Frame : 25  - Time : 0.385747
+116  - OnUpdate   - Frame : 26  - Time : 0.411823
+117  - OnEvent  - Frame : 26  - Time : 0.411823
+118  - OnEvent  - Frame : 26  - Time : 0.411823
+119  - OnUpdate   - Frame : 27  - Time : 0.41828
+120  - OnEvent  - Frame : 27  - Time : 0.41828
+121  - OnEvent  - Frame : 27  - Time : 0.41828
+122  - OnUpdate   - Frame : 28  - Time : 0.438158
+123  - OnUpdate   - Frame : 29  - Time : 0.449061
+124  - OnEvent  - Frame : 29  - Time : 0.449061
+125  - OnEvent  - Frame : 29  - Time : 0.449061
+126  - OnEvent  - Frame : 29  - Time : 0.449061
+127  - OnUpdate   - Frame : 30  - Time : 0.468844
+128  - OnShutdown  - Frame : 30  - Time : 0.468844
+129  - OnPause   - Frame : 30  - Frame : 0.468844
+130  - Destructeur   - Frame : 30  - Time : 0.468844
 Les surprises :
 - Le constructeurs et "OnLayout" s'excutent avant meme "OnInit" a la place de l'initialisation classsique car 
 l'architecture du moteur prépare la fenetre et les dimension avant d'initialiser le contexte utilisateur
 - "OnUpdate" commence directement a la frame :1 avec un temps presque null(2.9e-06), alors que "OnInit" et "OnLayout" se déroule 
 à la frame 0
+- certaines méthodes n'apparaissent pas dans le journal car il nécessite des interaction comme (appuyer sur une touche du clavier, effectuer un clic pour fermer la fenetre etc...)
 
 Debug et Realse
-L'ordre et la suite des appels restent identiques dans la configuration Debug comme dans Release. Par contre, les optimisations du compilateur en mode Release modifient légèrements le temps mesuré par Time() sur certaines trames, assurant une exécution plus fluide et directe des instructions du moteur.
+L'ordre et la suite des appels restent identiques dans la configuration Debug comme dans Release. Par contre, les optimisations du compilateur en mode Release modifient légèrements le temps mesuré par Time() sur certaines trames, assurant une exécution plus fluide et directe des instructions du moteur ce qui rend son rapport est plus logn que celui de Debug 
