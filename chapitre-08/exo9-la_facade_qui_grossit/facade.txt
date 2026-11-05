@@ -3,10 +3,28 @@ NkRenderTarget.h compte au total 25 méthodes publiques, chaque surchage et vers
 Draw(surchage NkDrawable), Draw(surchage NkVertexArray), Draw (surcharge sommets bruts), Draw (surcharge NkIDrawable2D), MapPixelToCoords, MapCoordsToPixel, GetRenderer (non-const), GetRenderer (const), GetRenderer2D (non-const), GetRenderer2D (const), et Capture.
 
 Utiles :
-Ce groupe comprend les méthodes directement exploitées par nos programmes de ce sprint ou par la boucle de rendu de NkCanvasApp pour réaliser le cas nominal (Clear, Display, et les surcharges de Draw pour le rendu des éléments graphiques).
+Ce groupe comprend les méthodes directement exploitées par nos programmes de ce sprint comme celui de l'exercice 8 ou par la boucle de rendu de NkCanvasApp pour réaliser le cas nominal :Clear, Display, et les 04 surcharges
+-void Draw(const NkDrawable &drawable, const NkRenderStates &states = NkRenderStates::Default()) {
+					drawable.Draw(*this, states);
+				}
+-void Draw(const NkVertexArray &va, const NkRenderStates &states = NkRenderStates::Default());
+-virtual void Draw(const NkVertex *vertices, uint32 count, NkPrimitiveType primitive,
+								  const NkRenderStates &states = NkRenderStates::Default()) = 0;
+- void Draw(const NkIDrawable2D &drawable); de Draw pour le rendu des éléments graphiques.
 
 Les autres :
-Ce groupe regroupe les 21 autres méthodes et surcharges spécialisées : la gestion du cycle de vie/destruction (~NkRenderTarget), la gestion des caméras et vues (SetView, GetView, GetDefaultView, ResetView, IsViewCustom), la définition des sous-régions d’affichage (SetViewport, GetViewport), les politiques de redimensionnement et dimensions de référence (SetResizePolicy, GetResizePolicy, GetDesignSize, GetSize), la conversion de coordonnées entre pixels et monde (MapPixelToCoords, MapCoordsToPixel), l’accès aux renderers bas niveau et interopérabilité (GetRenderer, GetRenderer2D), ainsi que la capture d’écran GPU (Capture). Les méthodes de compatibilité avec l’ancienne interface (comme Draw avec NkIDrawable2D) sont explicitement signalées dans les commentaires comme provisoires en attendant la migration complète.
+Ce groupe regroupe les 21 autres méthodes et surcharges spécialisées :
+- Clear(): permet de vider le framebuffer avec une couleur spécifique 
+- Display : présente le rendu et doit etre appelé a la fin du frame-  la gestion du cycle de vie/destruction (~NkRenderTarget), 
+-la gestion des caméras et vues (SetView, GetView, GetDefaultView)
+- ResetView, IsViewCustom : permettent de revenir à la vue par defaut et de désactiver le suivi automatique, 
+-la définition des sous-régions d’affichage (SetViewport, GetViewport), 
+-les politiques de redimensionnement et dimensions de référence (SetResizePolicy, GetResizePolicy,GetDesignSize GetSize) : définissent le comportement de l'image lorsque la cible change de taille, 
+-la conversion de coordonnées entre pixels et monde (MapPixelToCoords, MapCoordsToPixel),
+-GetSize(): retourne les dimensions gobales de la cible en pixels;
+- l’accès aux renderers bas niveau et interopérabilité (GetRenderer, GetRenderer2D) : fourni un accès directe au renderer du nieau inférieur et donne l'accès à la facade orientée utilisateur avec une API simplifiée, 
+-la capture d’écran GPU (Capture) : permet de lire le contenu rendu de la cible et de l'enregister dans un fichierimage. 
+Les méthodes de compatibilité avec l’ancienne interface (comme Draw avec NkIDrawable2D) sont explicitement signalées dans les commentaires comme provisoires en attendant la migration complète.
 
 Le rapport :
-Le rapport entre les méthodes utiles (4) et les autres méthodes spécialisées ou de compatibilité (21) est de 4/21 (soit environ 16% de méthodes courantes pour 84% de méthodes avancées). La façade a considérablement grossi pour s’adapter à des besoins d’interopérabilité, de configuration de vues et de bas-niveau, au point qu’elle ne tient plus pleinement sa promesse initiale d’une interface simple et épurée se limitant au cas nominal.
+Le rapport entre les méthodes utiles (4) et les autres méthodes spécialisées ou de compatibilité (21) est de 4/21 (soit environ 16% de méthodes courantes pour 84% de méthodes avancées). La méthode qui permet de faire sortir la façadeest GetRender() , les 84% représentent aisni la couche de haut niveau et sécurisée orienté client, tandis que les 16% constituent les protes de sorties indispensables pour l’interopérabilité, le débogage .
