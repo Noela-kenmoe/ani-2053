@@ -48,7 +48,7 @@ int main (){
             if (can_be_const[i]) {
                 for (const auto& callee_name : methods[i].calls) {
                     int c_idx = name_to_index[callee_name] ;
-                    if ( !methods[c_idx].is_const && !can_be_const[c_idx]) {
+                    if ( !can_be_const[c_idx]) {
                         can_be_const[i] = false ;
                         changed = true ;
                         break ;
@@ -79,14 +79,14 @@ int main (){
             }
         }
     }
+    int passes = 0;
+if(!pourrait.empty()){
       std::set<std::string> currently_const ;
     for (int i = 0 ; i < N ; ++i) {
         if (methods[i].is_const) {
             currently_const.insert(methods[i].name) ;
         }
     }
-
-    int passes = 0 ;
     std::set<std::string> pourrait_set(pourrait.begin(), pourrait.end()) ;
 
     while ( !pourrait_set.empty()) {
@@ -113,9 +113,10 @@ int main (){
         }
         passes++ ;
     }
+}
      std::cout << "POURRAIT" ;
     if (pourrait.empty()) {
-        std::cout << "AUCUN" ;
+        std::cout << "AUCUN\n" ;
     } else {
         for (const auto& name : pourrait) {
             std::cout << " "  << name ;
@@ -125,7 +126,7 @@ int main (){
 
     std::cout << "RACINES" ;
     if (racines.empty()) {
-        std::cout << "AUCUN" ;
+        std::cout << "AUCUN\n" ;
     } else {
         for (const auto& name : racines) {
             std ::cout << " "  << name ;
