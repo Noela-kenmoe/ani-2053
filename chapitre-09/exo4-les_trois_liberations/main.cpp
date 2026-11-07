@@ -16,12 +16,10 @@ int main() {
 
     std::vector<int> tableau ; // Contient les numéros des textures actuellement dans le tableau
     int total_creees = 0 ;
-    
-    // Suivi du nombre de fois que chaque texture a été libérée (indexée par numéro de texture)
-    // Comme on ne connait pas le max à l’avance, on peut utiliser un vecteur dynamique ou une table.
-    // Une texture de numéro t aura lib_count[t].
     std::vector<int> lib_counts ; // taille = total_creees + 1
-    auto liberer_texture = [&](int texture_id, int op_id, int count, bool& crashed, std::string& crash_msg) {
+    bool crashed = false ;
+    std::string crash_msg = " " ;
+    auto liberer_sequence = [&](int texture_id, int op_id, int count) {
         if (crashed) return ;
         if (texture_id >= (int)lib_counts.size()) {
             lib_counts.resize(texture_id + 1, 0) ;
@@ -40,8 +38,7 @@ int main() {
         }
     } ;
 
-    bool crashed = false ;
-    std::string crash_msg = " " ;
+    
 
     for (int op = 1 ; op <= N ; ++op) {
         std::string cmd ;
@@ -54,30 +51,47 @@ int main() {
             std::cin >> idx ;
             if (idx >= 0 && idx < (int)tableau.size()) {
                 int t_id = tableau[idx] ;
-                liberer_texture(t_id, op, S, crashed, crash_msg) ;
-                if (crashed) break ;
-                tableau.erase(tableau.begin() + idx) ;
+               tableau.erase(tableau.begin() + idx);
+                liberer_sequence(t_id, op, S);
+                if (crashed) break;
             }
         } else if (cmd == "VIDE") {
-            for (int t_id : tableau) {
+            /*for (int t_id : tableau) {
                 liberer_texture(t_id, op, V, crashed, crash_msg) ;
                 if (crashed) break ;
-            }
-            if (crashed) break ;
-            tableau.clear() ;
+            }*/
+           if (!tableau.empty()) {
+                std::vector<int> temp_textures = tableau;
+                tableau.clear();
+                for (int t_id : temp_textures) {
+                    liberer_sequence(t_id, op, V);
+                    if (crashed) break;
+                }
+                if (crashed) break ;
+                 //tableau.clear() ;
+           }
+       }
+    }
+    if (!crashed && !tableau.empty()) {
+        std::vector<int> temp_textures = tableau;
+        tableau.clear();
+        for (int t_id : temp_textures) {
+            liberer_sequence(t_id, -1, F);
+            if (crashed) break;
         }
     }
-    if ( !crashed) {
+    /*if ( !crashed) {
         for (int t_id : tableau) {
             liberer_texture(t_id, -1, F, crashed, crash_msg) ;
             if (crashed) break ;
         }
-    }
+    }*/
 
     if (crashed) {
         std::cout << crash_msg << "\n" ;
         return 0 ;
     }
+
     std::vector<int> perdues ;
     int fuites = 0 ;
     for (int t = 1 ; t <= total_creees ; ++t) {
@@ -101,3 +115,4 @@ int main() {
 
     return 0 ;
 }
+
