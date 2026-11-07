@@ -1,118 +1,134 @@
 #include <iostream>
-#include <string>
 #include <vector>
-#include <algorithm>
-
-
 
 int main() {
-    std::ios_base ::sync_with_stdio(false) ;
-    std::cin.tie(NULL) ;
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(nullptr);
 
-    int S, V, F, N ;
-    if ( !(std::cin >> S >> V >> F)) return 0 ;
+    int S, V, F;
+    std::cin >> S >> V >> F;
 
-    if ( !(std::cin >> N)) return 0 ;
+    int N;
+    std::cin >> N;
 
-    std::vector<int> tableau ; // Contient les numéros des textures actuellement dans le tableau
-    int total_creees = 0 ;
-    std::vector<int> lib_counts ; // taille = total_creees + 1
-    bool crashed = false ;
-    std::string crash_msg = " " ;
-    auto liberer_sequence = [&](int texture_id, int op_id, int count) {
-        if (crashed) return ;
-        if (texture_id >= (int)lib_counts.size()) {
-            lib_counts.resize(texture_id + 1, 0) ;
+    // Tableau contenant les numéros des textures encore présentes
+    std::vector<int> tableau;
+
+    // Indique si chaque texture a déjà été libérée
+    std::vector<bool> liberees(1, false);
+
+    int creees = 0;
+    bool plante = false;
+
+    // Libération d'une texture
+    auto liberer = [&](int texture, int nombre, const std::string& operation) {
+
+        for (int i = 0; i < nombre; ++i) {
+
+            // Une deuxième libération provoque un plantage
+            if (liberees[texture]) {
+                std::cout << "PLANTAGE "
+                          << operation
+                          << " TEXTURE "
+                          << texture << '\n';
+
+                plante = true;
+                return;
+            }
+
+            liberees[texture] = true;
         }
-        for (int c = 0 ; c < count ; ++c) {
-            lib_counts[texture_id]++ ;
-            if (lib_counts[texture_id] > 1) {
-                crashed = true ;
-                if (op_id == -1) {
-                    crash_msg = "PLANTAGE FIN TEXTURE "  + std::to_string(texture_id) ;
-                } else {
-                    crash_msg = "PLANTAGE "  + std::to_string(op_id) +  "TEXTURE "  + std::to_string(texture_id) ;
+    };
+
+    // Lecture des opérations
+    for (int k = 1; k <= N && !plante; ++k) {
+
+        std::string commande;
+        std::cin >> commande;
+
+        if (commande == "AJOUTE") {
+
+            ++creees;
+            tableau.push_back(creees);
+            liberees.push_back(false);
+
+        }
+        else if (commande == "SUPPRIME") {
+
+            int index;
+            std::cin >> index;
+
+            int texture = tableau[index];
+
+            liberer(texture, S, std::to_string(k));
+
+            if (!plante) {
+                tableau.erase(tableau.begin() + index);
+            }
+
+        }
+        else if (commande == "VIDE") {
+
+            // Parcours du premier au dernier élément
+            for (int texture : tableau) {
+
+                liberer(texture, V, std::to_string(k));
+
+                if (plante) {
+                    break;
                 }
-                return ;
             }
-        }
-    } ;
 
-    
-
-    for (int op = 1 ; op <= N ; ++op) {
-        std::string cmd ;
-        std::cin >> cmd ;
-        if (cmd == "AJOUTE") {
-            total_creees++ ;
-            tableau.push_back(total_creees) ;
-        } else if (cmd == "SUPPRIME") {
-            int idx ;
-            std::cin >> idx ;
-            if (idx >= 0 && idx < (int)tableau.size()) {
-                int t_id = tableau[idx] ;
-               tableau.erase(tableau.begin() + idx);
-                liberer_sequence(t_id, op, S);
-                if (crashed) break;
-            }
-        } else if (cmd == "VIDE") {
-            /*for (int t_id : tableau) {
-                liberer_texture(t_id, op, V, crashed, crash_msg) ;
-                if (crashed) break ;
-            }*/
-           if (!tableau.empty()) {
-                std::vector<int> temp_textures = tableau;
+            if (!plante) {
                 tableau.clear();
-                for (int t_id : temp_textures) {
-                    liberer_sequence(t_id, op, V);
-                    if (crashed) break;
-                }
-                if (crashed) break ;
-                 //tableau.clear() ;
-           }
-       }
-    }
-    if (!crashed && !tableau.empty()) {
-        std::vector<int> temp_textures = tableau;
-        tableau.clear();
-        for (int t_id : temp_textures) {
-            liberer_sequence(t_id, -1, F);
-            if (crashed) break;
-        }
-    }
-    /*if ( !crashed) {
-        for (int t_id : tableau) {
-            liberer_texture(t_id, -1, F, crashed, crash_msg) ;
-            if (crashed) break ;
-        }
-    }*/
-
-    if (crashed) {
-        std::cout << crash_msg << "\n" ;
-        return 0 ;
-    }
-
-    std::vector<int> perdues ;
-    int fuites = 0 ;
-    for (int t = 1 ; t <= total_creees ; ++t) {
-        if (t >= (int)lib_counts.size() || lib_counts[t] == 0) {
-            fuites++ ;
-            perdues.push_back(t) ;
+            }
         }
     }
 
-    std::cout << "CREEES "  << total_creees << "\n" ;
-    std::cout << "FUITES "  << fuites << "\n";
-    std::cout << "PERDUES" ;
+    // Arrêt immédiat si un plantage a déjà eu lieu
+    if (plante) {
+        return 0;
+    }
+
+    // Libération à la fin du programme
+    for (int texture : tableau) {
+
+        liberer(texture, F, "FIN");
+
+        if (plante) {
+            return 0;
+        }
+    }
+
+    // Calcul du nombre de textures perdues
+    int fuites = 0;
+
+    std::vector<int> perdues;
+
+    for (int i = 1; i <= creees; ++i) {
+
+        if (!liberees[i]) {
+            ++fuites;
+            perdues.push_back(i);
+        }
+    }
+
+    // Affichage des résultats
+    std::cout << "CREEES " << creees << '\n';
+    std::cout << "FUITES " << fuites << '\n';
+
+    std::cout << "PERDUES";
+
     if (perdues.empty()) {
-        std::cout << "AUCUN\n" ;
-    } else {
-        for (int id : perdues) {
-            std::cout << " "  << id ;
+        std::cout << " AUCUN";
+    }
+    else {
+        for (int texture : perdues) {
+            std::cout << " " << texture;
         }
-        std::cout << "\n";
     }
 
-    return 0 ;
-}
+    std::cout << '\n';
 
+    return 0;
+}
