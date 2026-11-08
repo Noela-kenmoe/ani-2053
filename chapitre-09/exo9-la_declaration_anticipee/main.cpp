@@ -55,11 +55,11 @@ int main() {
     for (const TypeInfo& type : types) {
 
         if (type.inclure) {
-            std::cout << type.nom <<"INCLURE\n" ;
+            std::cout << type.nom <<" INCLURE\n" ;
             nombreInclure++ ;
         }
         else {
-            std::cout << type.nom <<"ANTICIPER\n" ;
+            std::cout << type.nom <<" ANTICIPER\n" ;
             nombreAnticiper++ ;
             if (inclusions.find(type.nom) != inclusions.end()) {
                 inclusionsRetirees++ ;
