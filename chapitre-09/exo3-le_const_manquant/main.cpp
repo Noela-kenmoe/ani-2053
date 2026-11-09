@@ -173,8 +173,8 @@ int main() {
         ++passes ;
     }
 
-    afficherListe("POURRAIT ", pourrait) ;
-    afficherListe("RACINES ", racines) ;
+    afficherListe("POURRAIT", pourrait) ;
+    afficherListe("RACINES", racines) ;
 
     std::cout << "PASSES " << passes << "\n" ;
 
