@@ -67,7 +67,7 @@ int main() {
     std::vector<bool> can_be_const(N, false) ;
 
     for (int i = 0 ; i < N ; ++i) {
-        can_be_const[i] = methods[i].modifies || !methods[i].modifies;
+        can_be_const[i] = methods[i].modifies ;
     }
 
     bool changed = true ;
