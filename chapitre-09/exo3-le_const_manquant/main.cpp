@@ -51,7 +51,7 @@ int main() {
         std::cin >> name >> declaree >> modifies >> k ;
 
         methods[i].name = name ;
-        methods[i].is_const = (declaree == "const ") ;
+        methods[i].is_const = (declaree == "const") ;
         methods[i].modifies = (modifies == 1) ;
 
         for (int j = 0 ; j < k ; ++j) {
