@@ -1,0 +1,15 @@
+La promesse la plus forte :
+La promesse la plus forte est le const final placé à la fin de la signature d'une méthode. En interdisant toute modifications du pointeur, il garanti que l'objet ne sera pas altéré, permettant son utilisationsur dans des contextes partagés,
+
+Le message du compilateur :
+le compilateur refuse de compiler et émet un message : error: 'this' argument to member function 'PanByPixels' has type 'const              ║
+║ nkref::NkRefView', but function is not marked const                                          ║
+║    15 |     vue.PanByPixels(1.0f, 0.0f);                                                     ║
+║       |     ^~~                                                                              ║
+║ C:\Users\NOELA\Desktop\ani-2053\Canvas\include/NkRef/src/NkRef/NkRefView.h:45:9: note:       ║
+║ 'PanByPixels' declared here                                                                  ║
+║    45 |                         void PanByPixels(float32 dxPixels, float32 dyPixels) {
+Cela prouve que le système de type C++ fait respecter strictement l'interdiction d'appeler une méthode non-const sur une instructions constante,
+
+Une promesse que la signature ne dit pas :
+La signature ne promet rien sur la cohérence mathématique ou la validité des valeurs passées en paramètre, commz lz fiat que les coordonnées de pixels ou les facteurs de zoom se trouve dans les plages acceptables.

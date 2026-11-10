@@ -1,0 +1,5 @@
+methode : BeginStroke, promesses : 1
+methode :  PixelToWorld, promesses : 3
+methode : WorldToPixel, promesses : 3
+methode : HasSelection, promesses : 1
+methode : AppendStrokePoint, promesses : 1
