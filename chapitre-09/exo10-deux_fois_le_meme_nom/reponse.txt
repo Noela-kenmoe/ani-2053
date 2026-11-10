@@ -1,4 +1,4 @@
-Le premier mérite-t-il :
+Le premier mérite-t-il le nom:
 La structure Entry dans NkTracker mérite ce nom car elle représente un nœud de liste chainée interne pour un système de suivi d'allocation (bucket de has h table), servant de conteneur de données bas niveau.
 
 le second mérite-t-il le nom :
