@@ -2,89 +2,82 @@
 #include <string>
 #include <vector>
 
-struct Image {
-    int id ;
-    double x ;
-    double y ;
-    double echelle ;
-    double rotation ;
-    double opacite ;
-    int miroirX ;
-    int miroirY ;
-    int largeur ;
-    int hauteur ;
-    int selectionne ;
-    std::string chemin ;
-    long long octets ;
-} ;
+using namespace std;
+
+struct ImageRecord {
+    long long id;
+    double x, y, echelle, rotation, opacite;
+    int miroirX, miroirY, selectionne;
+    long long largeur, hauteur;
+    string chemin;
+    long long octets;
+};
 
 int main() {
-    std::ios::sync_with_stdio(false) ;
-    std::cin.tie(nullptr) ;
+    // Optimisation des flux d'entrées/sorties
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
-    int N ;
-    std::cin >> N ;
-
-    std::vector<Image> images(N) ;
-
-    // Lecture des images
-    for (int i = 0 ; i < N ; i++) {
-        Image& image = images[i] ;
-
-        std::cin >> image.id  >> image.x  >> image.y  >> image.echelle >> image.rotation >> image.opacite >> image.miroirX   >> image.miroirY >> image.largeur  >> image.hauteur >> image.selectionne >> image.chemin >> image.octets ;
+    int N;
+    if (!(cin >> N)) {
+        cout << "RESTENT 0\nCHANGES 0\n";
+        return 0;
     }
 
-    int restent = 0 ;
-    int changements = 0 ;
-
-    // Traitement de chaque image
-    for (int i = 0 ; i < N ; i++) {
-        const Image& image = images[i] ;
-
-        // Une image sans octets est sautée
-        if (image.octets == 0) {
-            std::cout << " ITEM "  << i + 1 <<" SAUTE\n" ;
-            continue ;
-        }
-
-        // Nouvelle position dans la planche
-        restent++ ;
-
-        std::cout << " ITEM "  << i + 1 << " "  << restent ;
-
-        int changementsImage = 0 ;
-
-        // Vérification de l’identifiant
-        if (image.id != 0) {
-            std::cout << " id" ;
-            changementsImage++ ;
-        }
-
-        // Vérification de la sélection
-        if (image.selectionne == 1) {
-            std::cout << " selected" ;
-            changementsImage++ ;
-        }
-
-        // Vérification du chemin source
-        if (image.chemin != "-") {
-         std::cout <<" sourcePath" ;
-            changementsImage++ ;
-        }
-
-        // Aucun champ modifié
-        if (changementsImage == 0) {
-            std::cout <<" AUCUN" ;
-        }
-
-        changements += changementsImage ;
-
-        std::cout << "\n" ;
+    vector<ImageRecord> images(N);
+    for (int i = 0; i < N; ++i) {
+        cin >> images[i].id
+            >> images[i].x
+            >> images[i].y
+            >> images[i].echelle
+            >> images[i].rotation
+            >> images[i].opacite
+            >> images[i].miroirX
+            >> images[i].miroirY
+            >> images[i].largeur
+            >> images[i].hauteur
+            >> images[i].selectionne
+            >> images[i].chemin
+            >> images[i].octets;
     }
 
-    // Affichage du bilan
-    std::cout << "RESTENT "  << restent << "\n";
-    std::cout << "CHANGES "  << changements << "\n" ;
+    int restent = 0;
+    int changes = 0;
+    int current_j = 0;
 
-    return 0 ;
+    for (int k = 0; k < N; ++k) {
+        int item_num = k + 1;
+        if (images[k].octets == 0) {
+            cout << "ITEM " << item_num << " SAUTE\n";
+        } else {
+            current_j++;
+            restent++;
+
+            bool change_id = (images[k].id != 0);
+            bool change_selected = (images[k].selectionne == 1);
+            bool change_path = (images[k].chemin != "-");
+
+            vector<string> changed_fields;
+            if (change_id) changed_fields.push_back("id");
+            if (change_selected) changed_fields.push_back("selected");
+            if (change_path) changed_fields.push_back("sourcePath");
+
+            changes += changed_fields.size();
+
+            cout << "ITEM " << item_num << " " << current_j;
+            if (changed_fields.empty()) {
+                cout << " AUCUN";
+            } else {
+                for (const auto& field : changed_fields) {
+                    cout << " " << field;
+                }
+            }
+            cout << "\n";
+        }
+    }
+
+    cout << "RESTENT " << restent << "\n";
+    cout << "CHANGES " << changes << "\n";
+
+    return 0;
 }
