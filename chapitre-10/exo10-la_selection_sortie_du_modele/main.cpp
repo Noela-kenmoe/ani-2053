@@ -231,7 +231,6 @@ int main() {
     // Comparaison PAR_INDEX vs DANS_ITEM
     if (planche_index != planche_item || sel_index != sel_item) {
         faux_list.push_back("PAR_INDEX");
-    }
     // Comparaison PAR_ID vs DANS_ITEM
     if (planche_id != planche_item || sel_id != sel_item) {
         faux_list.push_back("PAR_ID");
