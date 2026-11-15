@@ -244,8 +244,8 @@ int main() {
             std::cout << " " << f;
         }
     }
-    std::cout << "\n";
+}
+std::cout << "\n";
 
     return 0;
-}
 }
