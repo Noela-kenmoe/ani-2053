@@ -1,0 +1,7 @@
+Ce que possède chaque fichier :
+main.cpp gère le point d'entrée de l'application(nkmain), la configuration de la fenfetre (NkWindowsConfig) l'initailisation de la fenetre graphique, a gestion des entré utilisateurs et la boucle principale du programme. NkRefView.h gère la caméra 2D du canavas infini, les transformations géométriques (zoom panoramique, les coordonnées comme PixelsToWorld(), PanByPixels() et de la grille (GrridSpacing())) et la clacul de la grille adaptative, sa structure principaleest NkRefView. NkRefBoard.h gère le modèle logique de la planche de références(AddItem(), SelectInRect(), RemoveSelected(), RaiseActive()), les structures de données (items et traits) ainsi que les algorithmes métiers purs (sélection, déplacements, regroupement). NkRefFile.h hère la serialisation et la persistance complète de la planche dans un fichier binaire unique.
+La part des fichiers purs :
+Les fichiers purs (NkRefBoard.h et NkRefView.h) représentent  17.193% du code total, soit 457 lignes sur un total de 2658 lignes
+
+Les deux fichiers que je gardais :
+je garderais NkRefBoard.h et NkRefView.h car ils possèddent l'ensemble du modèle de données, de la logique métier et de la géométrie de la vue 2D de manière totalement pur, indépendemment de toute bibliothèque de fenetreou de sérialisation de fichier. De plus ces deux fichiers possèdent l'indication explicite "PUR (aucune dépendance rednu" dans leurs en-tete)

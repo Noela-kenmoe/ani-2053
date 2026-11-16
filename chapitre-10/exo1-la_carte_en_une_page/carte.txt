@@ -1,0 +1,8 @@
+fichier : NkRefFile.h, lignes : 224, includes : #include "NkRef/NkRefBoard.h" #include "NkRef/NkRefView.h"
+fichier : NkRefView.h, lignes : 86, includes : 
+fichier : NkRefBoard.h, lignes : 371, includes :
+fichier : main.cpp, lignes : 1977, includes :  #include "NkRef/NkRefView.h" #include "NkRef/NkRefBoard.h" #include "NkRef/NkRefFile.h"
+commit  : d65eec8
+autres includions : #include "NKGui/NKGui.h", #include "NKCanvas/UI/NkGuiCanvasBackend.h", #include "NKMemory/NkUniquePtr.h"
+#include "NKTime/NkClock.h", #include "NKWindow/Core/NkDialogs.h", #include "NKCore/NkTraits.h",#include "NKContainers/Sequential/NkVector.h", 
+, #include "NKContainers/String/NkString.h", #include "NKMath/NKMath.h", , #include <cstdio> , #include <cstdlib> ,#include <cstring>
