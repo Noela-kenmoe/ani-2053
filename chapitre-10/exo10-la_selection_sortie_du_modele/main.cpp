@@ -2,251 +2,271 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <set>
 #include <sstream>
-#include <algorithm>
 
-// Représentation pour DANS_ITEM
-struct ItemDansItem {
-    std::string nom;
-    bool selected;
-};
+using namespace std ;
 
-// Représentation pour PAR_INDEX (on stocke les index sélectionnés)
-struct EtatParIndex {
-    std::vector<std::string> planche;
-    std::vector<int> selected_indices;
-};
+struct item {
+    string nom ;
+    bool selectionne = false ;
+} ;
 
-// Représentation pour PAR_ID (on stocke les noms sélectionnés)
-struct EtatParID {
-    std::vector<std::string> planche;
-    std::vector<std::string> selected_names;
-};
+struct conception {
+    vector<item> dans_item ;
+    vector<string> par_index ;
+    vector<string> par_id ;
+
+    set<int> index_selectionnes ;
+    set<string> id_selectionnes ;
+} ;
+
+void afficherliste(const vector<string>& liste) {
+    if (liste.empty()) {
+        cout << "AUCUN" ;
+        return ;
+    }
+
+    for (const string& nom : liste) {
+        cout << " " << nom ;
+    }
+}
+
+vector<string> plancheitem(const conception& c) {
+    vector<string> resultat ;
+
+    for (const item& item : c.dans_item)
+        resultat.push_back(item.nom) ;
+
+    return resultat ;
+}
+
+vector<string> plancheindex(const conception& c) {
+    return c.par_index ;
+}
+
+vector<string> plancheid(const conception& c) {
+    return c.par_id ;
+}
+
+vector<string> selectionitem(const conception& c) {
+    vector<string> resultat ;
+
+    for (const item& item : c.dans_item) {
+        if (item.selectionne)
+            resultat.push_back(item.nom) ;
+    }
+
+    return resultat ;
+}
+
+vector<string> selectionindex(const conception& c) {
+    vector<string> resultat ;
+
+    for (int i = 0 ; i < (int)c.par_index.size() ; i++) {
+        if (c.index_selectionnes.count(i))
+            resultat.push_back(c.par_index[i]) ;
+    }
+
+    return resultat ;
+}
+
+vector<string> selectionid(const conception& c) {
+    vector<string> resultat ;
+
+    for (const string& nom : c.par_id) {
+        if (c.id_selectionnes.count(nom))
+            resultat.push_back(nom) ;
+    }
+
+    return resultat ;
+}
+
+void appliqueroperation(conception& c, const string& ligne) {
+    istringstream flux(ligne) ;
+    string operation ;
+
+    flux >> operation ;
+
+    if (operation == "ajoute") {
+        string nom ;
+        flux >> nom ;
+
+        c.dans_item.push_back({nom, false}) ;
+        c.par_index.push_back(nom) ;
+        c.par_id.push_back(nom) ;
+    }
+
+    else if (operation == "clic") {
+        int i ;
+        flux >> i ;
+
+        for (item& item : c.dans_item)
+            item.selectionne = false ;
+
+        c.index_selectionnes.clear() ;
+        c.id_selectionnes.clear() ;
+
+        if (i >= 0 && i < (int)c.dans_item.size())
+            c.dans_item[i].selectionne = true ;
+
+        if (i >= 0 && i < (int)c.par_index.size())
+            c.index_selectionnes.insert(i) ;
+
+        if (i >= 0 && i < (int)c.par_id.size())
+            c.id_selectionnes.insert(c.par_id[i]) ;
+    }
+
+    else if (operation == "ajoute_sel") {
+        int i ;
+        flux >> i ;
+
+        if (i >= 0 && i < (int)c.dans_item.size())
+            c.dans_item[i].selectionne = true ;
+
+        if (i >= 0 && i < (int)c.par_index.size())
+            c.index_selectionnes.insert(i) ;
+
+        if (i >= 0 && i < (int)c.par_id.size())
+            c.id_selectionnes.insert(c.par_id[i]) ;
+    }
+
+    else if (operation == "echange") {
+        int i, j ;
+        flux >> i >> j ;
+
+        if (i >= 0 && j >= 0 &&
+            i < (int)c.dans_item.size() &&
+            j < (int)c.dans_item.size()) {
+            swap(c.dans_item[i], c.dans_item[j]) ;
+        }
+
+        if (i >= 0 && j >= 0 &&
+            i < (int)c.par_index.size() &&
+            j < (int)c.par_index.size()) {
+            swap(c.par_index[i], c.par_index[j]) ;
+        }
+
+        if (i >= 0 && j >= 0 &&
+            i < (int)c.par_id.size() &&
+            j < (int)c.par_id.size()) {
+            swap(c.par_id[i], c.par_id[j]) ;
+        }
+    }
+
+    else if (operation == "retire") {
+        int i ;
+        flux >> i ;
+
+        if (i >= 0 && i < (int)c.dans_item.size())
+            c.dans_item.erase(c.dans_item.begin() + i) ;
+
+        if (i >= 0 && i < (int)c.par_index.size())
+            c.par_index.erase(c.par_index.begin() + i) ;
+
+        if (i >= 0 && i < (int)c.par_id.size())
+            c.par_id.erase(c.par_id.begin() + i) ;
+
+        // les index et les identifiants selectionnes
+        // ne sont volontairement pas mis a jour.
+    }
+
+    else if (operation == "supprime") {
+        vector<item> nouveauxitems ;
+
+        for (const item& item : c.dans_item) {
+            if ( !item.selectionne)
+                nouveauxitems.push_back(item) ;
+        }
+
+        c.dans_item = nouveauxitems ;
+
+        vector<string> nouveauxindex ;
+
+        for (int i = 0 ; i < (int)c.par_index.size() ; i++) {
+            if ( !c.index_selectionnes.count(i))
+                nouveauxindex.push_back(c.par_index[i]) ;
+        }
+
+        c.par_index = nouveauxindex ;
+
+        vector<string> nouveauxid ;
+
+        for (const string& nom : c.par_id) {
+            if ( !c.id_selectionnes.count(nom))
+                nouveauxid.push_back(nom) ;
+        }
+
+        c.par_id = nouveauxid ;
+
+        c.index_selectionnes.clear() ;
+        c.id_selectionnes.clear() ;
+    }
+}
 
 int main() {
-    // Optimisation des flux d'entrées/sorties
-    std::ios::sync_with_stdio(false);
-    std::cin.tie(nullptr);
+    ios ::sync_with_stdio(false) ;
+    cin.tie(nullptr) ;
 
-    std::vector<ItemDansItem> items_item;
-    EtatParIndex state_index;
-    EtatParID state_id;
+    conception c ;
 
-    std::string ligne;
-    while (std::getline(std::cin, ligne)) {
-        if (ligne.empty()) continue;
-        std::stringstream ss(ligne);
-        std::string cmd;
-        ss >> cmd;
+    string ligne ;
 
-        if (cmd == "AJOUTE") {
-            std::string nom;
-            ss >> nom;
-            // 1. DANS_ITEM
-            items_item.push_back({nom, false});
-            // 2. PAR_INDEX
-            state_index.planche.push_back(nom);
-            // 3. PAR_ID
-            state_id.planche.push_back(nom);
-        }
-        else if (cmd == "CLIC") {
-            int i;
-            ss >> i;
-            // 1. DANS_ITEM
-            for (auto& item : items_item) item.selected = false;
-            if (i >= 0 && i < (int)items_item.size()) {
-                items_item[i].selected = true;
-            }
+    while (getline(cin, ligne)) {
+        if (ligne.empty())
+            continue ;
 
-            // 2. PAR_INDEX
-            state_index.selected_indices.clear();
-            if (i >= 0 && i < (int)state_index.planche.size()) {
-                state_index.selected_indices.push_back(i);
-            }
-
-            // 3. PAR_ID
-            state_id.selected_names.clear();
-            if (i >= 0 && i < (int)state_id.planche.size()) {
-                state_id.selected_names.push_back(state_id.planche[i]);
-            }
-        }
-        else if (cmd == "AJOUTE_SEL") {
-            int i;
-            ss >> i;
-            // 1. DANS_ITEM
-            if (i >= 0 && i < (int)items_item.size()) {
-                items_item[i].selected = true;
-            }
-
-            // 2. PAR_INDEX
-            if (i >= 0 && i < (int)state_index.planche.size()) {
-                if (find(state_index.selected_indices.begin(), state_index.selected_indices.end(), i) == state_index.selected_indices.end()) {
-                    state_index.selected_indices.push_back(i);
-                }
-            }
-
-            // 3. PAR_ID
-            if (i >= 0 && i < (int)state_id.planche.size()) {
-                std::string nom = state_id.planche[i];
-                if (find(state_id.selected_names.begin(), state_id.selected_names.end(), nom) == state_id.selected_names.end()) {
-                    state_id.selected_names.push_back(nom);
-                }
-            }
-        }
-        else if (cmd == "ECHANGE") {
-            int i, j;
-            ss >> i >> j;
-            // 1. DANS_ITEM
-            if (i >= 0 && i < (int)items_item.size() && j >= 0 && j < (int)items_item.size()) {
-                std::swap(items_item[i], items_item[j]);
-            }
-
-            // 2. PAR_INDEX (les index gardés ne bougent pas avec l'échange)
-            if (i >= 0 && i < (int)state_index.planche.size() && j >= 0 && j < (int)state_index.planche.size()) {
-                std::swap(state_index.planche[i], state_index.planche[j]);
-            }
-
-            // 3. PAR_ID
-            if (i >= 0 && i < (int)state_id.planche.size() && j >= 0 && j < (int)state_id.planche.size()) {
-                std::swap(state_id.planche[i], state_id.planche[j]);
-            }
-        }
-        else if (cmd == "RETIRE") {
-            int i;
-            ss >> i;
-            // 1. DANS_ITEM
-            if (i >= 0 && i < (int)items_item.size()) {
-                items_item.erase(items_item.begin() + i);
-            }
-
-            // 2. PAR_INDEX (les index pointant sur ou après i bougent ou deviennent obsolètes)
-            if (i >= 0 && i < (int)state_index.planche.size()) {
-                state_index.planche.erase(state_index.planche.begin() + i);
-                std::vector<int> new_indices;
-                for (int idx : state_index.selected_indices) {
-                    if (idx < i) {
-                        new_indices.push_back(idx);
-                    } else if (idx > i) {
-                        new_indices.push_back(idx - 1);
-                    }
-                    // Note: si idx == i, l'élément est retiré de la sélection
-                }
-                state_index.selected_indices = new_indices;
-            }
-
-            // 3. PAR_ID
-            if (i >= 0 && i < (int)state_id.planche.size()) {
-                state_id.planche.erase(state_id.planche.begin() + i);
-            }
-        }
-        else if (cmd == "SUPPRIME") {
-            // 1. DANS_ITEM
-            std::vector<ItemDansItem> new_items_item;
-            for (const auto& item : items_item) {
-                if (!item.selected) {
-                    new_items_item.push_back(item);
-                }
-            }
-            items_item = new_items_item;
-
-            // 2. PAR_INDEX
-            std::vector<std::string> new_planche_index;
-            std::vector<int> new_indices_index;
-            for (int k = 0; k < (int)state_index.planche.size(); ++k) {
-                bool is_selected = (find(state_index.selected_indices.begin(), state_index.selected_indices.end(), k) != state_index.selected_indices.end());
-                if (!is_selected) {
-                    new_planche_index.push_back(state_index.planche[k]);
-                }
-            }
-            state_index.planche = new_planche_index;
-            state_index.selected_indices.clear();
-
-            // 3. PAR_ID
-            std::vector<std::string> new_planche_id;
-            for (const auto& nom : state_id.planche) {
-                bool is_selected = (find(state_id.selected_names.begin(), state_id.selected_names.end(), nom) != state_id.selected_names.end());
-                if (!is_selected) {
-                    new_planche_id.push_back(nom);
-                }
-            }
-            state_id.planche = new_planche_id;
-            state_id.selected_names.clear();
-        }
+        appliqueroperation(c, ligne) ;
     }
 
-    // --- Collecte des résultats ---
-    // 1. DANS_ITEM
-    std::vector<std::string> planche_item, sel_item;
-    for (const auto& it : items_item) {
-        planche_item.push_back(it.nom);
-        if (it.selected) sel_item.push_back(it.nom);
-    }
+    vector<string> p1 = plancheitem(c) ;
+    vector<string> p2 = plancheindex(c) ;
+    vector<string> p3 = plancheid(c) ;
 
-    // 2. PAR_INDEX
-    std::vector<std::string> planche_index = state_index.planche;
-    std::vector<std::string> sel_index;
-    for (int idx : state_index.selected_indices) {
-        if (idx >= 0 && idx < (int)planche_index.size()) {
-            sel_index.push_back(planche_index[idx]);
-        }
-    }
+    vector<string> s1 = selectionitem(c) ;
+    vector<string> s2 = selectionindex(c) ;
+    vector<string> s3 = selectionid(c) ;
 
-    // 3. PAR_ID
-    std::vector<std::string> planche_id = state_id.planche;
-    std::vector<std::string> sel_id;
-    for (const auto& nom : state_id.selected_names) {
-        if (find(planche_id.begin(), planche_id.end(), nom) != planche_id.end()) {
-            sel_id.push_back(nom);
-        }
-    }
+    cout << "DANS_ITEM PLANCHE" ;
+    afficherliste(p1) ;
+    cout << "\n" ;
 
-    // --- Fonction d'affichage d'une liste ---
-    auto print_list = [](const std::string& prefix, const std::vector<std::string>& vec) {
-        std::cout << prefix;
-        if (vec.empty()) {
-            std::cout << " AUCUN";
-        } else {
-            for (const auto& s : vec) {
-                std::cout << " " << s;
-            }
-        }
-        std::cout << "\n";
-    };
+    cout << "DANS_ITEM SELECTION"  ;
+    afficherliste(s1) ;
+    cout << "\n" ;
 
-    // Affichage DANS_ITEM
-    print_list("DANS_ITEM PLANCHE", planche_item);
-    print_list("DANS_ITEM SELECTION", sel_item);
+    cout << "PAR_INDEX PLANCHE" ;
+    afficherliste(p2) ;
+    cout << "\n" ;
 
-    // Affichage PAR_INDEX
-    print_list("PAR_INDEX PLANCHE", planche_index);
-    print_list("PAR_INDEX SELECTION", sel_index);
+    cout << "PAR_INDEX SELECTION " ;
+    afficherliste(s2) ;
+    cout << "\n" ;
 
-    // Affichage PAR_ID
-    print_list("PAR_ID PLANCHE", planche_id);
-    print_list("PAR_ID SELECTION", sel_id);
+    cout << "PAR_ID PLANCHE " ;
+    afficherliste(p3) ;
+    cout << "\n" ;
 
-    // --- Comparaison pour FAUX ---
-    std::vector<std::string> faux_list;
-    
-    // Comparaison PAR_INDEX vs DANS_ITEM
-    if (planche_index != planche_item || sel_index != sel_item) {
-        faux_list.push_back("PAR_INDEX");
-    }
-    // Comparaison PAR_ID vs DANS_ITEM
-    if (planche_id != planche_item || sel_id != sel_item) {
-        faux_list.push_back("PAR_ID");
-    }
+    cout << "PAR_ID SELECTION " ;
+    afficherliste(s3) ;
+    cout << "n" ;
 
-    std::cout << "FAUX";
-    if (faux_list.empty()) {
-        std::cout << " AUCUN";
-    } else {
-        for (const auto& f : faux_list) {
-            std::cout << " " << f;
-        }
-    }
-    std::cout << "\n";
+    cout << "FAUX" ;
 
-    return 0;
+    if (p1 != p2 || s1 != s2)
+        cout << " PAR_INDEX" ;
+
+    if (p1 != p3 || s1 != s3)
+        cout << " PAR_ID" ;
+
+    if (p1 == p2 && s1 == s2 &&
+        p1 == p3 && s1 == s3)
+        cout << " AUCUN" ;
+
+    cout << "\n" ;
+
+    return 0 ;
 }
+
+
 
