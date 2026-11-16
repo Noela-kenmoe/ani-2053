@@ -1,272 +1,319 @@
-
 #include <iostream>
 #include <string>
 #include <vector>
-#include <set>
 #include <sstream>
+#include <algorithm>
+#include <set>
 
-using namespace std ;
+using namespace std;
 
-struct item {
-    string nom ;
-    bool selectionne = false ;
-} ;
+// Representation pour DANS_ITEM
+struct ItemDansItem {
+    string nom;
+    bool selected = false;
+};
 
-struct conception {
-    vector<item> dans_item ;
-    vector<string> par_index ;
-    vector<string> par_id ;
+// Representation pour PAR_INDEX
+struct EtatParIndex {
+    vector<string> planche;
+    set<int> selected_indices;
+};
 
-    set<int> index_selectionnes ;
-    set<string> id_selectionnes ;
-} ;
+// Representation pour PAR_ID
+struct EtatParID {
+    vector<string> planche;
+    set<string> selected_names;
+};
 
-void afficherliste(const vector<string>& liste) {
+// Affichage d'une liste
+void afficherListe(const string& prefix,
+                   const vector<string>& liste) {
+    cout << prefix;
+
     if (liste.empty()) {
-        cout << "AUCUN" ;
-        return ;
-    }
-
-    for (const string& nom : liste) {
-        cout << " " << nom ;
-    }
-}
-
-vector<string> plancheitem(const conception& c) {
-    vector<string> resultat ;
-
-    for (const item& item : c.dans_item)
-        resultat.push_back(item.nom) ;
-
-    return resultat ;
-}
-
-vector<string> plancheindex(const conception& c) {
-    return c.par_index ;
-}
-
-vector<string> plancheid(const conception& c) {
-    return c.par_id ;
-}
-
-vector<string> selectionitem(const conception& c) {
-    vector<string> resultat ;
-
-    for (const item& item : c.dans_item) {
-        if (item.selectionne)
-            resultat.push_back(item.nom) ;
-    }
-
-    return resultat ;
-}
-
-vector<string> selectionindex(const conception& c) {
-    vector<string> resultat ;
-
-    for (int i = 0 ; i < (int)c.par_index.size() ; i++) {
-        if (c.index_selectionnes.count(i))
-            resultat.push_back(c.par_index[i]) ;
-    }
-
-    return resultat ;
-}
-
-vector<string> selectionid(const conception& c) {
-    vector<string> resultat ;
-
-    for (const string& nom : c.par_id) {
-        if (c.id_selectionnes.count(nom))
-            resultat.push_back(nom) ;
-    }
-
-    return resultat ;
-}
-
-void appliqueroperation(conception& c, const string& ligne) {
-    istringstream flux(ligne) ;
-    string operation ;
-
-    flux >> operation ;
-
-    if (operation == "ajoute") {
-        string nom ;
-        flux >> nom ;
-
-        c.dans_item.push_back({nom, false}) ;
-        c.par_index.push_back(nom) ;
-        c.par_id.push_back(nom) ;
-    }
-
-    else if (operation == "clic") {
-        int i ;
-        flux >> i ;
-
-        for (item& item : c.dans_item)
-            item.selectionne = false ;
-
-        c.index_selectionnes.clear() ;
-        c.id_selectionnes.clear() ;
-
-        if (i >= 0 && i < (int)c.dans_item.size())
-            c.dans_item[i].selectionne = true ;
-
-        if (i >= 0 && i < (int)c.par_index.size())
-            c.index_selectionnes.insert(i) ;
-
-        if (i >= 0 && i < (int)c.par_id.size())
-            c.id_selectionnes.insert(c.par_id[i]) ;
-    }
-
-    else if (operation == "ajoute_sel") {
-        int i ;
-        flux >> i ;
-
-        if (i >= 0 && i < (int)c.dans_item.size())
-            c.dans_item[i].selectionne = true ;
-
-        if (i >= 0 && i < (int)c.par_index.size())
-            c.index_selectionnes.insert(i) ;
-
-        if (i >= 0 && i < (int)c.par_id.size())
-            c.id_selectionnes.insert(c.par_id[i]) ;
-    }
-
-    else if (operation == "echange") {
-        int i, j ;
-        flux >> i >> j ;
-
-        if (i >= 0 && j >= 0 &&
-            i < (int)c.dans_item.size() &&
-            j < (int)c.dans_item.size()) {
-            swap(c.dans_item[i], c.dans_item[j]) ;
-        }
-
-        if (i >= 0 && j >= 0 &&
-            i < (int)c.par_index.size() &&
-            j < (int)c.par_index.size()) {
-            swap(c.par_index[i], c.par_index[j]) ;
-        }
-
-        if (i >= 0 && j >= 0 &&
-            i < (int)c.par_id.size() &&
-            j < (int)c.par_id.size()) {
-            swap(c.par_id[i], c.par_id[j]) ;
+        cout << " AUCUN";
+    } else {
+        for (const string& nom : liste) {
+            cout << " " << nom;
         }
     }
 
-    else if (operation == "retire") {
-        int i ;
-        flux >> i ;
-
-        if (i >= 0 && i < (int)c.dans_item.size())
-            c.dans_item.erase(c.dans_item.begin() + i) ;
-
-        if (i >= 0 && i < (int)c.par_index.size())
-            c.par_index.erase(c.par_index.begin() + i) ;
-
-        if (i >= 0 && i < (int)c.par_id.size())
-            c.par_id.erase(c.par_id.begin() + i) ;
-
-        // les index et les identifiants selectionnes
-        // ne sont volontairement pas mis a jour.
-    }
-
-    else if (operation == "supprime") {
-        vector<item> nouveauxitems ;
-
-        for (const item& item : c.dans_item) {
-            if ( !item.selectionne)
-                nouveauxitems.push_back(item) ;
-        }
-
-        c.dans_item = nouveauxitems ;
-
-        vector<string> nouveauxindex ;
-
-        for (int i = 0 ; i < (int)c.par_index.size() ; i++) {
-            if ( !c.index_selectionnes.count(i))
-                nouveauxindex.push_back(c.par_index[i]) ;
-        }
-
-        c.par_index = nouveauxindex ;
-
-        vector<string> nouveauxid ;
-
-        for (const string& nom : c.par_id) {
-            if ( !c.id_selectionnes.count(nom))
-                nouveauxid.push_back(nom) ;
-        }
-
-        c.par_id = nouveauxid ;
-
-        c.index_selectionnes.clear() ;
-        c.id_selectionnes.clear() ;
-    }
+    cout << '\n';
 }
 
 int main() {
-    ios ::sync_with_stdio(false) ;
-    cin.tie(nullptr) ;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
-    conception c ;
+    // Les trois conceptions
+    vector<ItemDansItem> items_item;
+    EtatParIndex state_index;
+    EtatParID state_id;
 
-    string ligne ;
+    string ligne;
 
+    // Lecture des operations
     while (getline(cin, ligne)) {
         if (ligne.empty())
-            continue ;
+            continue;
 
-        appliqueroperation(c, ligne) ;
+        stringstream ss(ligne);
+        string cmd;
+
+        ss >> cmd;
+
+        // AJOUTE
+        if (cmd == "AJOUTE") {
+            string nom;
+            ss >> nom;
+
+            items_item.push_back({nom, false});
+
+            state_index.planche.push_back(nom);
+
+            state_id.planche.push_back(nom);
+        }
+
+        // CLIC
+        else if (cmd == "CLIC") {
+            int i;
+            ss >> i;
+
+            // DANS_ITEM
+            for (auto& item : items_item) {
+                item.selected = false;
+            }
+
+            if (i >= 0 && i < (int)items_item.size()) {
+                items_item[i].selected = true;
+            }
+
+            // PAR_INDEX
+            state_index.selected_indices.clear();
+
+            if (i >= 0 && i < (int)state_index.planche.size()) {
+                state_index.selected_indices.insert(i);
+            }
+
+            // PAR_ID
+            state_id.selected_names.clear();
+
+            if (i >= 0 && i < (int)state_id.planche.size()) {
+                state_id.selected_names.insert(state_id.planche[i]);
+            }
+        }
+
+        // AJOUTE_SEL
+        else if (cmd == "AJOUTE_SEL") {
+            int i;
+            ss >> i;
+
+            // DANS_ITEM
+            if (i >= 0 && i < (int)items_item.size()) {
+                items_item[i].selected = true;
+            }
+
+            // PAR_INDEX
+            if (i >= 0 && i < (int)state_index.planche.size()) {
+                state_index.selected_indices.insert(i);
+            }
+
+            // PAR_ID
+            if (i >= 0 && i < (int)state_id.planche.size()) {
+                state_id.selected_names.insert(state_id.planche[i]);
+            }
+        }
+
+        // ECHANGE
+        else if (cmd == "ECHANGE") {
+            int i, j;
+            ss >> i >> j;
+
+            // DANS_ITEM
+            if (i >= 0 && j >= 0 &&
+                i < (int)items_item.size() &&
+                j < (int)items_item.size()) {
+                swap(items_item[i], items_item[j]);
+            }
+
+            // PAR_INDEX
+            if (i >= 0 && j >= 0 &&
+                i < (int)state_index.planche.size() &&
+                j < (int)state_index.planche.size()) {
+                swap(state_index.planche[i], state_index.planche[j]);
+            }
+
+            // PAR_ID
+            if (i >= 0 && j >= 0 &&
+                i < (int)state_id.planche.size() &&
+                j < (int)state_id.planche.size()) {
+                swap(state_id.planche[i], state_id.planche[j]);
+            }
+
+            // Les selections ne changent pas.
+        }
+
+        // RETIRE
+        else if (cmd == "RETIRE") {
+            int i;
+            ss >> i;
+
+            // DANS_ITEM
+            if (i >= 0 && i < (int)items_item.size()) {
+                items_item.erase(items_item.begin() + i);
+            }
+
+            // PAR_INDEX
+            if (i >= 0 && i < (int)state_index.planche.size()) {
+                state_index.planche.erase(
+                    state_index.planche.begin() + i
+                );
+            }
+
+            // PAR_ID
+            if (i >= 0 && i < (int)state_id.planche.size()) {
+                state_id.planche.erase(
+                    state_id.planche.begin() + i
+                );
+            }
+
+            // IMPORTANT :
+            // On ne modifie ni les index selectionnes
+            // ni les noms selectionnes.
+        }
+
+        // SUPPRIME
+        else if (cmd == "SUPPRIME") {
+
+            // DANS_ITEM
+            vector<ItemDansItem> nouveaux_items;
+
+            for (const auto& item : items_item) {
+                if (!item.selected) {
+                    nouveaux_items.push_back(item);
+                }
+            }
+
+            items_item = nouveaux_items;
+
+            // PAR_INDEX
+            vector<string> nouvelle_planche_index;
+
+            for (int i = 0;
+                 i < (int)state_index.planche.size();
+                 i++) {
+
+                if (state_index.selected_indices.count(i) == 0) {
+                    nouvelle_planche_index.push_back(
+                        state_index.planche[i]
+                    );
+                }
+            }
+
+            state_index.planche = nouvelle_planche_index;
+
+            // PAR_ID
+            vector<string> nouvelle_planche_id;
+
+            for (const string& nom : state_id.planche) {
+                if (state_id.selected_names.count(nom) == 0) {
+                    nouvelle_planche_id.push_back(nom);
+                }
+            }
+
+            state_id.planche = nouvelle_planche_id;
+
+            // Les selections sont videes
+            state_index.selected_indices.clear();
+            state_id.selected_names.clear();
+        }
     }
 
-    vector<string> p1 = plancheitem(c) ;
-    vector<string> p2 = plancheindex(c) ;
-    vector<string> p3 = plancheid(c) ;
+    // =====================================
+    // COLLECTE DES RESULTATS
+    // =====================================
 
-    vector<string> s1 = selectionitem(c) ;
-    vector<string> s2 = selectionindex(c) ;
-    vector<string> s3 = selectionid(c) ;
+    vector<string> planche_item;
+    vector<string> sel_item;
 
-    cout << "DANS_ITEM PLANCHE" ;
-    afficherliste(p1) ;
-    cout << "\n" ;
+    // DANS_ITEM
+    for (const auto& item : items_item) {
+        planche_item.push_back(item.nom);
 
-    cout << "DANS_ITEM SELECTION"  ;
-    afficherliste(s1) ;
-    cout << "\n" ;
+        if (item.selected) {
+            sel_item.push_back(item.nom);
+        }
+    }
 
-    cout << "PAR_INDEX PLANCHE" ;
-    afficherliste(p2) ;
-    cout << "\n" ;
+    // PAR_INDEX
+    vector<string> planche_index = state_index.planche;
+    vector<string> sel_index;
 
-    cout << "PAR_INDEX SELECTION " ;
-    afficherliste(s2) ;
-    cout << "\n" ;
+    // La selection est affichee dans l'ordre
+    // actuel de la planche.
+    for (int i = 0; i < (int)planche_index.size(); i++) {
+        if (state_index.selected_indices.count(i) > 0) {
+            sel_index.push_back(planche_index[i]);
+        }
+    }
 
-    cout << "PAR_ID PLANCHE " ;
-    afficherliste(p3) ;
-    cout << "\n" ;
+    // PAR_ID
+    vector<string> planche_id = state_id.planche;
+    vector<string> sel_id;
 
-    cout << "PAR_ID SELECTION " ;
-    afficherliste(s3) ;
-    cout << "n" ;
+    // La selection est affichee dans l'ordre
+    // actuel de la planche.
+    for (const string& nom : planche_id) {
+        if (state_id.selected_names.count(nom) > 0) {
+            sel_id.push_back(nom);
+        }
+    }
 
-    cout << "FAUX" ;
+    // =====================================
+    // AFFICHAGE DES TROIS CONCEPTIONS
+    // =====================================
 
-    if (p1 != p2 || s1 != s2)
-        cout << " PAR_INDEX" ;
+    afficherListe("DANS_ITEM PLANCHE", planche_item);
+    afficherListe("DANS_ITEM SELECTION", sel_item);
 
-    if (p1 != p3 || s1 != s3)
-        cout << " PAR_ID" ;
+    afficherListe("PAR_INDEX PLANCHE", planche_index);
+    afficherListe("PAR_INDEX SELECTION", sel_index);
 
-    if (p1 == p2 && s1 == s2 &&
-        p1 == p3 && s1 == s3)
-        cout << " AUCUN" ;
+    afficherListe("PAR_ID PLANCHE", planche_id);
+    afficherListe("PAR_ID SELECTION", sel_id);
 
-    cout << "\n" ;
+    // =====================================
+    // COMPARAISON DES CONCEPTIONS
+    // =====================================
 
-    return 0 ;
+    vector<string> faux_list;
+
+    // PAR_INDEX compare a DANS_ITEM
+    if (planche_index != planche_item ||
+        sel_index != sel_item) {
+
+        faux_list.push_back("PAR_INDEX");
+    }
+
+    // PAR_ID compare a DANS_ITEM
+    if (planche_id != planche_item ||
+        sel_id != sel_item) {
+
+        faux_list.push_back("PAR_ID");
+    }
+
+    // Affichage de FAUX
+    cout << "FAUX";
+
+    if (faux_list.empty()) {
+        cout << " AUCUN";
+    } else {
+        for (const string& nom : faux_list) {
+            cout << " " << nom;
+        }
+    }
+
+    cout << '\n';
+
+    return 0;
 }
-
-
-
