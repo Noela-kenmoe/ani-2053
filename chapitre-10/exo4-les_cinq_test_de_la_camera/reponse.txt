@@ -1,0 +1,7 @@
+le signe que j'ai changé : 
+j'ai modifié l'initailisation du zoom dans la méthode Reset() de NkRefView.h, en remplaçcant la valeur 1.0f par -1.0f
+Le test qui est tombé :
+Le test d'origine a changé car après l'appel à Reset(), le zoom attendu étatit de 1.0f alors qu'il est devenue égal à -1.0f à cause de la modification du signe.
+
+Un test qui n'a rien vu :
+Le test grille n'a rien vu car il évalue la monotonie relative de l'espacement de la grille (GridSpacing) lorsque le zoom varie, et non une valeur fixe comme le eoom initial ou le centre par défaut.
